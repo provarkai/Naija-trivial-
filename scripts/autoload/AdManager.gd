@@ -209,16 +209,8 @@ func _on_plugin_rewarded_failed_to_load(_err = null) -> void:
 
 
 func _safe_connect(signal_name: String, handler: Callable) -> void:
-	if _plugin.has_signal(signal_name):
-		_plugin.connect(signal_name, handler)
-	else:
-		print("AdManager: plugin has no signal '%s' — skipping (check plugin version)." % signal_name)
+	NativePluginBridge.safe_connect(_plugin, "AdManager", signal_name, handler)
 
 
 func _call_plugin(method: String, args: Array):
-	if _plugin == null:
-		return null
-	if not _plugin.has_method(method):
-		print("AdManager: plugin has no method '%s' — skipping (check plugin version)." % method)
-		return null
-	return _plugin.callv(method, args)
+	return NativePluginBridge.call_plugin(_plugin, "AdManager", method, args)

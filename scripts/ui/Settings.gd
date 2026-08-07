@@ -42,9 +42,19 @@ func _ready() -> void:
 	var back_button := UIHelpers.add_button(vbox, "Back", 56)
 	back_button.pressed.connect(func(): SceneManager.go_back())
 
+	IAPManager.restore_completed.connect(_on_restore_completed)
+
 
 func _on_restore_pressed() -> void:
-	status_label.text = "Purchases are stored locally for now — nothing to restore from Google Play yet."
+	status_label.text = "Restoring purchases…"
+	IAPManager.restore_purchases()
+
+
+func _on_restore_completed(found_purchases: bool) -> void:
+	if IAPManager.is_plugin_available():
+		status_label.text = "Purchases restored." if found_purchases else "No previous purchases found."
+	else:
+		status_label.text = "Purchases are stored locally for now — nothing to restore from Google Play without Billing connected."
 
 
 func _on_privacy_pressed() -> void:
