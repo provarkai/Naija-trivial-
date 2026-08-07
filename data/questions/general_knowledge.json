@@ -31,6 +31,54 @@
 			"options": ["Land area", "Population size and economy", "Number of states", "Military strength alone"],
 			"correct_index": 1,
 			"difficulty": "medium"
+		},
+		{
+			"question": "What is Nigeria's largest city by population?",
+			"options": ["Abuja", "Lagos", "Kano", "Ibadan"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Which of these countries shares a land border with Nigeria?",
+			"options": ["Ghana", "Benin", "Togo", "Senegal"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is the main language of instruction in Nigerian schools?",
+			"options": ["English", "Hausa", "Yoruba", "Igbo"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What is Nigeria's official long-form country name?",
+			"options": ["Republic of Nigeria", "Federal Republic of Nigeria", "United States of Nigeria", "Democratic Republic of Nigeria"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Which ethnic group is the largest in Northern Nigeria?",
+			"options": ["Yoruba", "Igbo", "Hausa-Fulani", "Tiv"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The Niger Delta is formed where the River Niger meets which body of water?",
+			"options": ["The Atlantic Ocean", "The Mediterranean Sea", "Lake Chad", "The Red Sea"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is the subunit of the Nigerian Naira called?",
+			"options": ["Cent", "Kobo", "Pence", "Paisa"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Lagos is popularly nicknamed the 'Centre of ___'?",
+			"options": ["Commerce", "Excellence", "Culture", "Industry"],
+			"correct_index": 1,
+			"difficulty": "medium"
 		}
 	]
 }

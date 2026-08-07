@@ -61,6 +61,78 @@
 			"options": ["P-Square", "2Baba (2face Idibia)", "Flavour", "9ice"],
 			"correct_index": 1,
 			"difficulty": "easy"
+		},
+		{
+			"question": "Which artist released the 2022 hit song 'Calm Down'?",
+			"options": ["Rema", "Fireboy DML", "Omah Lay", "Joeboy"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "'Johnny' is a popular hit song by which artist?",
+			"options": ["Simi", "Yemi Alade", "Tiwa Savage", "Waje"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "P-Square was a duo made up of twin brothers with which surname?",
+			"options": ["Okoye", "Idibia", "Balogun", "Adeleke"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Davido founded which record label, named after his own initials?",
+			"options": ["DMW (Davido Music Worldwide)", "Mavin Records", "YBNL", "Marlian Music"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What is Wizkid's real full name?",
+			"options": ["Ayodeji Ibrahim Balogun", "Ayo David Balogun", "Damini Ogulu", "Oluwatosin Ajibade"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is Burna Boy's real full name?",
+			"options": ["Damini Ebunoluwa Ogulu", "David Adeleke", "Ayodeji Balogun", "Innocent Idibia"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is Tems' real name?",
+			"options": ["Temilade Openiyi", "Folake Openiyi", "Tolani Shobande", "Simisola Ogunleye"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Flavour N'abania is known for blending Afrobeats with which traditional Igbo-influenced genre?",
+			"options": ["Fuji", "Highlife", "Apala", "Waka"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Patoranking rose to fame blending Afrobeats with which Caribbean-rooted genre?",
+			"options": ["Reggae/Dancehall", "Soca", "Reggaeton", "Zouk"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which Wizkid song features the line 'Ojuelegba', named after a Lagos neighbourhood?",
+			"options": ["Ojuelegba", "Come Closer", "Soco", "Fever"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "'Mr Eazi', known for his laid-back 'Banku music' style, was born with which name?",
+			"options": ["Oluwatosin Ajibade", "Tosin Oyawale", "Ajibade Damini", "Eazi Johnson"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Which artist is popularly nicknamed the 'Baddest' in Nigerian street-hop?",
+			"options": ["Olamide", "Phyno", "Reminisce", "Zlatan"],
+			"correct_index": 0,
+			"difficulty": "medium"
 		}
 	]
 }

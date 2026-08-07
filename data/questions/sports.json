@@ -21,15 +21,57 @@
 			"difficulty": "medium"
 		},
 		{
-			"question": "Which Nigerian sprinter/long jumper became a naturalized British athlete and won Olympic gold for Great Britain?",
-			"options": ["Blessing Okagbare", "Chioma Ajunwa", "Yamile Aldama", "Innocent Egbunike"],
-			"correct_index": 2,
+			"question": "Chioma Ajunwa became the first Nigerian, and first Black African woman, to win an individual Olympic gold medal (Atlanta 1996) — in which event?",
+			"options": ["100m", "Long jump", "High jump", "Javelin"],
+			"correct_index": 1,
 			"difficulty": "hard"
 		},
 		{
 			"question": "Nigeria has won the Africa Cup of Nations football title how many times (as of 2023)?",
 			"options": ["Once", "Twice", "Three times", "Four times"],
 			"correct_index": 2,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What sport is Nigerian athlete Blessing Okagbare best known for?",
+			"options": ["Sprinting/athletics", "Swimming", "Boxing", "Wrestling"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What is the nickname of Nigeria's women's national basketball team?",
+			"options": ["D'Tigress", "The Falconets", "Golden Eaglets", "Super Falcons"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "'Falconets' is the nickname of Nigeria's national team in which category?",
+			"options": ["Men's U-20 football", "Women's U-20 football", "Women's basketball", "Men's handball"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What are the Super Eagles' primary home jersey colours?",
+			"options": ["Green and white", "Red and gold", "Blue and yellow", "Black and white"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Nwankwo Kanu won the African Footballer of the Year award (twice) mainly during which decade?",
+			"options": ["1980s", "1990s", "2000s", "2010s"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is the nickname of Nigeria's senior women's national football team?",
+			"options": ["Super Falcons", "D'Tigress", "Falconets", "Green Amazons"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Former unified heavyweight boxing world champion Anthony Joshua has family roots in which country?",
+			"options": ["Nigeria", "Ghana", "Jamaica", "Kenya"],
+			"correct_index": 0,
 			"difficulty": "medium"
 		}
 	]

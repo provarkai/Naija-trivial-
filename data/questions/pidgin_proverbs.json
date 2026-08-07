@@ -31,6 +31,54 @@
 			"options": ["Cooking a meal", "Emigrating abroad for better opportunities", "Dancing at a party", "Winning a bet"],
 			"correct_index": 1,
 			"difficulty": "medium"
+		},
+		{
+			"question": "In Pidgin, what does 'Wetin dey happen?' mean?",
+			"options": ["Where are you?", "What's going on?", "Who did this?", "When are you coming?"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does 'Chop' mean in Nigerian Pidgin?",
+			"options": ["To eat", "To run", "To sleep", "To argue"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does 'Abeg' mean in Pidgin?",
+			"options": ["Please", "Sorry", "Thank you", "Goodbye"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does 'Waka' mean in Pidgin?",
+			"options": ["To eat", "To walk / go somewhere", "To sleep", "To fight"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does 'Katakata' mean in Pidgin?",
+			"options": ["Celebration", "Trouble / chaos", "Delicious food", "Good news"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The proverb 'Monkey work, baboon chop' means:",
+			"options": ["Everyone shares equally", "Someone else benefits from your hard work", "Animals are smarter than humans", "Hard work always pays off fairly"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Sabi' mean in Pidgin?",
+			"options": ["To know / be skilled at", "To forget", "To borrow", "To refuse"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "The Pidgin advice 'Shine your eye' means:",
+			"options": ["Wear sunglasses", "Be alert and careful", "Go to sleep", "Clean your face"],
+			"correct_index": 1,
+			"difficulty": "medium"
 		}
 	]
 }

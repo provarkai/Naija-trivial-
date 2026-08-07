@@ -31,6 +31,54 @@
 			"options": ["Blockbusters", "Home videos", "Shorts", "Cinema reels"],
 			"correct_index": 1,
 			"difficulty": "easy"
+		},
+		{
+			"question": "Funke Akindele is best known for playing which iconic comedic character?",
+			"options": ["Jenifa", "Mama G", "Aunty Ekwi", "Sisi Eko"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "In the popular comedy duo 'Aki and Pawpaw', which actor plays 'Aki'?",
+			"options": ["Chinedu Ikedieze", "Osita Iheme", "John Okafor", "Nkem Owoh"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Veteran actress Omotola Jalade-Ekeinde is popularly nicknamed what?",
+			"options": ["Omosexy", "Mama G", "Aunty Ngozi", "Omolara"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "By output (number of films produced per year), Nollywood is often ranked as the world's ___ largest film industry.",
+			"options": ["Largest", "Second largest", "Third largest", "Fifth largest"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which Nigerian city is the primary hub of the Nollywood film industry?",
+			"options": ["Abuja", "Lagos", "Kano", "Port Harcourt"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Veteran actor Richard Mofe-Damijo is popularly known by which initials?",
+			"options": ["RMD", "JJC", "OGB", "TBJ"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Veteran actress Patience Ozokwor, known for playing tough matriarch roles, is popularly nicknamed what?",
+			"options": ["Mama G", "Iya Basira", "Aunty Rachel", "Mama Nkechi"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nollywood's modern home-video era is generally considered to have taken off in which decade?",
+			"options": ["1970s", "1980s", "1990s", "2000s"],
+			"correct_index": 2,
+			"difficulty": "medium"
 		}
 	]
 }

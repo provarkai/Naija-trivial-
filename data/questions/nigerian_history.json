@@ -31,6 +31,54 @@
 			"options": ["Ibrahim Babangida", "Sani Abacha", "Olusegun Obasanjo", "Goodluck Jonathan"],
 			"correct_index": 2,
 			"difficulty": "medium"
+		},
+		{
+			"question": "Which European country colonized and administered Nigeria before independence?",
+			"options": ["France", "Britain", "Portugal", "Germany"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "The 1914 merging of the Northern and Southern Protectorates into one Nigeria is known as what?",
+			"options": ["The Federation", "The Amalgamation", "The Unification Act", "The Consolidation"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which British colonial administrator oversaw the 1914 amalgamation of Nigeria?",
+			"options": ["Lord Lugard", "Cecil Rhodes", "Lord Cromer", "Winston Churchill"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "In what year did Nigeria's federal capital move from Lagos to Abuja?",
+			"options": ["1976", "1985", "1991", "1999"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's first military coup, which ended the First Republic, took place in what year?",
+			"options": ["1960", "1963", "1966", "1970"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The Eastern Region declared itself an independent state in 1967 under what name?",
+			"options": ["Biafra", "Niger Delta Republic", "Eastern Nigeria", "Igboland"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's current national anthem, 'Arise, O Compatriots', was adopted in which year?",
+			"options": ["1960", "1978", "1985", "1999"],
+			"correct_index": 1,
+			"difficulty": "hard"
+		},
+		{
+			"question": "General Sani Abacha ruled Nigeria as military head of state mainly during which decade?",
+			"options": ["1970s", "1980s", "1990s", "2000s"],
+			"correct_index": 2,
+			"difficulty": "medium"
 		}
 	]
 }
