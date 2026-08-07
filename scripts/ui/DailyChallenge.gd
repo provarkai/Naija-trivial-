@@ -1,11 +1,9 @@
 extends Control
 ## Daily Challenge Screen — same 10 questions for every player on a given
 ## day (QuestionBank.get_daily_challenge_questions() seeds off the date),
-## with streak info pulled from SaveManager.
-##
-## Leaderboard entry (per the brief's screen list) depends on a
-## local/regional ranking backend that doesn't exist yet — this screen
-## only shows the player's own streak for now.
+## with streak info pulled from SaveManager and a link to today's
+## leaderboard (LeaderboardManager — see docs/LEADERBOARD_SETUP.md for
+## what's needed to actually populate it).
 
 var streak_label: Label
 var status_label: Label
@@ -32,6 +30,9 @@ func _ready() -> void:
 
 	play_button = UIHelpers.add_button(vbox, "Play Today's Challenge", 72)
 	play_button.pressed.connect(_on_play_pressed)
+
+	var leaderboard_button := UIHelpers.add_button(vbox, "View Today's Leaderboard", 56)
+	leaderboard_button.pressed.connect(func(): SceneManager.goto_scene(SceneManager.LEADERBOARD, true))
 
 	var back_button := UIHelpers.add_button(vbox, "Back Home", 56)
 	back_button.pressed.connect(func(): SceneManager.goto_scene(SceneManager.HOME))

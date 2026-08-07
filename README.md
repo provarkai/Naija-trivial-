@@ -13,25 +13,26 @@ Android export (signed `.aab`) requires the Android build template + SDK/keystor
 ## Project structure
 
 ```
-scenes/              One .tscn per screen (Home, Gameplay, Results, DailyChallenge, Store, Settings)
+scenes/              One .tscn per screen (Home, Gameplay, Results, DailyChallenge, Store, Settings, Leaderboard)
 scripts/
-  autoload/           Singletons — GameStateManager, QuestionBank, SaveManager, SceneManager, AdManager, IAPManager, ShareManager
+  autoload/           Singletons — GameStateManager, QuestionBank, SaveManager, SceneManager, AdManager, IAPManager, ShareManager, LeaderboardManager
   ui/                  Screen scripts (one per scene) + UIHelpers, the shared procedural-UI builder
-  systems/             Non-autoload shared systems — currently NativePluginBridge (AdManager/IAPManager/ShareManager's plugin-call guard)
+  systems/             Non-autoload shared systems — currently NativePluginBridge (the plugin-call guard AdManager/IAPManager/ShareManager/LeaderboardManager all share)
 data/
-  categories.json      Category metadata (id, display name, icon, premium flag)
+  categories.json      Category metadata (id, display name, icon, premium flag, unlock_level)
   questions/           One JSON file per category — see SCHEMA.md
 assets/
   icons/ audio/ fonts/ images/   Art & sound (empty for now, .gitkeep placeholders)
 docs/
-  ADMOB_SETUP.md        Manual steps to wire a real AdMob plugin into AdManager
-  PLAY_BILLING_SETUP.md Manual steps to wire a real Play Billing plugin into IAPManager
+  ADMOB_SETUP.md         Manual steps to wire a real AdMob plugin into AdManager
+  PLAY_BILLING_SETUP.md  Manual steps to wire a real Play Billing plugin into IAPManager
   SHARE_SETUP.md         What already works with zero plugins (WhatsApp text share) vs. what needs one (image auto-attach)
+  LEADERBOARD_SETUP.md   Firebase project + GodotFirebase addon setup for LeaderboardManager (lowest-confidence of the four — read this one first)
 ```
 
 ### Why screens are built in code, not the Godot editor
 
-Every `scenes/*.tscn` file is a bare `Control` node with a script attached — the actual UI tree (labels, buttons, containers) is built procedurally in each script's `_ready()`, using the shared helpers in `scripts/ui/UIHelpers.gd`. There's no Godot editor in this workflow to visually lay out and verify `.tscn` node trees, and a procedural tree is far easier to write and review correctly by hand than raw `.tscn` anchor/layout syntax. Nothing about this is permanent: once the project is opened in the actual editor, any screen can be rebuilt visually as a normal editor-authored scene — the autoloads (`GameStateManager`, `QuestionBank`, `SaveManager`, `SceneManager`, `AdManager`, `IAPManager`, `ShareManager`) are what everything depends on, not how a given screen's tree was built.
+Every `scenes/*.tscn` file is a bare `Control` node with a script attached — the actual UI tree (labels, buttons, containers) is built procedurally in each script's `_ready()`, using the shared helpers in `scripts/ui/UIHelpers.gd`. There's no Godot editor in this workflow to visually lay out and verify `.tscn` node trees, and a procedural tree is far easier to write and review correctly by hand than raw `.tscn` anchor/layout syntax. Nothing about this is permanent: once the project is opened in the actual editor, any screen can be rebuilt visually as a normal editor-authored scene — the autoloads (`GameStateManager`, `QuestionBank`, `SaveManager`, `SceneManager`, `AdManager`, `IAPManager`, `ShareManager`, `LeaderboardManager`) are what everything depends on, not how a given screen's tree was built.
 
 ## Core systems (current status)
 
@@ -52,27 +53,32 @@ Numbered per the project brief's build order (v2, which inserted streak tracking
 | 11 | IAP integration (Google Play Billing) | ✅ scaffolded — `scripts/autoload/IAPManager.gd` wraps a native Play Billing plugin (not installed by this repo); Store + Settings wired up, product catalog built from `categories.json`'s premium flags. See `docs/PLAY_BILLING_SETUP.md` |
 | 12 | UI polish (animations, SFX, category icons, editor-authored scenes) | ⬜ not started |
 
-See [Known gaps & open decisions](#known-gaps--open-decisions) below for what the brief asks for that isn't in this numbered list — regional leaderboards, category unlocks via level progression, and the coins/airtime system all need either a backend/architecture decision or (for coins/airtime) legal sign-off the brief itself says to get before building.
+See [Known gaps & open decisions](#known-gaps--open-decisions) below for what's still deliberately deferred — the coins/airtime system and the post-launch roadmap.
 
 ### Screens
 
 | Screen | Scene | Notes |
 |--------|-------|-------|
-| Home / Main Menu | `scenes/Home.tscn` | Category grid, Daily Challenge entry, Remove Ads banner, Settings/Store links |
+| Home / Main Menu | `scenes/Home.tscn` | Category grid, level display, Daily Challenge entry, Remove Ads banner, Settings/Store/Leaderboard links |
 | Gameplay | `scenes/Gameplay.tscn` | Renders whatever round `GameStateManager` currently has in progress — doesn't start rounds itself |
-| Round Results | `scenes/Results.tscn` | Score/streak summary, records high score + daily-streak, Play Again / Back Home |
-| Daily Challenge | `scenes/DailyChallenge.tscn` | Streak display + entry point into the date-seeded question set |
+| Round Results | `scenes/Results.tscn` | Score/streak/level-up summary, Share Score, records progression + submits to the leaderboard, Play Again / Back Home |
+| Daily Challenge | `scenes/DailyChallenge.tscn` | Streak display + entry point into the date-seeded question set, link to today's leaderboard |
+| Leaderboard | `scenes/Leaderboard.tscn` | Today's Daily Challenge rankings + the player's regional rankings, via `LeaderboardManager` |
 | Store | `scenes/Store.tscn` | IAP tiers via `IAPManager`, localized price once the plugin's SKU query resolves |
-| Settings | `scenes/Settings.tscn` | Sound/music toggles, restore purchases + privacy policy stubs |
+| Settings | `scenes/Settings.tscn` | Leaderboard profile (display name/region), sound/music toggles, restore purchases + privacy policy stubs |
 
-Category Select and a Leaderboard screen from the brief aren't separate scenes yet — Home's grid already covers category selection, and there's no ranking backend (local/regional) to back a leaderboard yet (see Known gaps below).
+Category Select from the brief isn't a separate scene — Home's grid already covers category selection (locked/unlocked state, premium indicators, and now level-gate hints all shown right on the button).
 
 ### Retention & Growth
 
-Per the brief's "Player Motivation & Retention Design": the reason to come back daily has to be competence, bragging rights, and streak loss-aversion — ads/IAP monetize players who are already returning for those reasons, not the other way round. Two systems build that:
+Per the brief's "Player Motivation & Retention Design": the reason to come back daily has to be competence, bragging rights, and streak loss-aversion — ads/IAP monetize players who are already returning for those reasons, not the other way round.
 
 - **Streak loss-aversion** — `SaveManager.get_effective_daily_streak()` computes the streak as of *today*, not as of the last save write. The raw stored counter (`current_streak_days`) only gets corrected back to 1 the next time the player completes a Daily Challenge, so reading it directly could show a stale streak for days after it actually lapsed — which defeats the entire point of loss-aversion (it only works if a broken streak reads as broken *the moment* it breaks). Home and the Daily Challenge screen both read the effective value; Daily Challenge also surfaces "🔥 play today to keep your streak" / "you lost your streak" messaging based on it.
 - **Share-score flow** — `ShareManager` (see `docs/SHARE_SETUP.md`) renders a branded score card and opens WhatsApp with the score pre-filled, from a "Share Score" button on Results. The WhatsApp text-share half of this works today with **zero plugins installed** — it's just `OS.shell_open()` on the `whatsapp://send` URL scheme, no addon required. Auto-attaching the rendered score card image to the outgoing message is the one piece that needs a native share-sheet plugin (same no-op-safe pattern as AdMob/Billing); until one's installed, the card is still generated and saved locally.
+- **Progression (level-gated categories)** — `SaveManager.get_player_level()` derives a level from lifetime score across every round ever played (`POINTS_PER_LEVEL`, tunable). Each premium category in `categories.json` has an `unlock_level`; `is_category_unlocked()` now checks *either* the level gate *or* an IAP purchase — per your call on how this should interact with the existing premium packs, leveling and buying open the same door, not a separate free tier. Results shows a "🎉 Level up!" / category-unlocked message whenever a round crosses a level boundary.
+- **Regional + Daily leaderboard** — `LeaderboardManager` (see `docs/LEADERBOARD_SETUP.md`, per your call to build this on Firebase/Firestore) submits to a shared daily leaderboard after every Daily Challenge round, and to a regional leaderboard whenever a round beats the player's all-time best score. Settings gained a "Leaderboard Profile" section (display name + free-text region) to drive it. This is the one system here with no local-only fallback — comparing against other real players needs the backend actually connected, so until Firestore is wired up the Leaderboard screen just says so.
+
+**A confidence note on `LeaderboardManager` specifically:** AdMob and Play Billing are singular, canonical, extremely well-documented plugin targets, so `AdManager`/`IAPManager`'s guessed method names are fairly safe bets. Firebase Firestore's query-builder API (via the community GodotFirebase addon) is less certain from here — `LeaderboardManager` is a structurally-correct sketch (collections, document IDs, data shape, the has_method-guarded call pattern) more than a verified API surface. `docs/LEADERBOARD_SETUP.md` says exactly what to check first.
 
 ### Monetization (ads)
 
@@ -101,6 +107,7 @@ All via `IAPManager` (see `docs/PLAY_BILLING_SETUP.md` to connect a real plugin)
 - **`AdManager`** — wraps a native AdMob plugin singleton (see `docs/ADMOB_SETUP.md`) behind `show_banner()`/`hide_banner()`, `notify_round_completed()` (interstitial every 2-3 rounds), and `show_rewarded(placement, on_reward, on_failed)`. No-ops safely with a console message wherever the plugin isn't installed — including every editor run on desktop — and simulates rewarded-ad rewards in that case so the +5s/revive flow in Gameplay stays testable without a device.
 - **`IAPManager`** — wraps a native Google Play Billing plugin singleton (see `docs/PLAY_BILLING_SETUP.md`) behind `purchase(product_id)`, `restore_purchases()`, and `get_price_string(product_id)`. Same no-op-safe pattern as `AdManager`, via the shared `NativePluginBridge` helper; simulates a successful purchase when no plugin is installed so the Store screen is fully testable from the editor.
 - **`ShareManager`** — builds the share message + score card image and opens WhatsApp (see `docs/SHARE_SETUP.md`) behind `share_score(summary)`. Unlike the other two, its no-plugin fallback (WhatsApp text share) isn't a degraded stand-in — it's the real, shipped mechanism; a share plugin only adds image auto-attach on top of it.
+- **`LeaderboardManager`** — wraps a Firebase Firestore connection (see `docs/LEADERBOARD_SETUP.md`) behind `submit_daily_score()`, `submit_regional_best()`, `get_daily_leaderboard()`, and `get_regional_leaderboard()`. Detected differently from the native-plugin managers above — Firebase installs as ordinary autoloads rather than an engine singleton, so this looks the Firestore node up dynamically by path instead of a static identifier — but funnels every call through the same `NativePluginBridge` guard. No local-only fallback: a leaderboard is inherently about other real players.
 
 ### Question content
 
@@ -108,17 +115,17 @@ Questions live in `data/questions/<category_id>.json`, separate from game logic,
 
 ## Known gaps & open decisions
 
-Things the brief asks for that aren't built, and why — split into "needs a decision" vs. "deliberately not started yet":
-
-**Needs a decision before building:**
-
-- **Regional leaderboard** (state/city rankings). Nothing in this project can rank players against each other without a backend to hold everyone's scores — this is the one system that can't be scaffolded client-side the way ads/IAP/share were, since there's no plugin to wrap, only an architecture to pick (Firebase/Firestore, Google Play Games Services' leaderboards — which don't natively support a "region" dimension, so that'd be layered on top — or a custom REST API). Cost, moderation, and how "region" gets captured (device locale? user-entered state?) all follow from that choice.
-- **Category unlocks tied to level progression.** Right now categories unlock only via the free list or an IAP purchase (`SaveManager.is_category_unlocked()` / `IAPManager`). The brief asks for a second path — unlocking via level-up — which raises a real product question this repo shouldn't answer unilaterally: should a "premium" category (currently sold via IAP) also become free through leveling, or does progression unlock a separate, non-monetized tier of content? That changes what "premium" even means and is worth deciding deliberately rather than defaulting.
+**Resolved:** regional leaderboard backend (Firebase/Firestore) and how category-unlock-via-level interacts with the existing premium packs (same door as IAP, not a separate tier) — both built per your call, see Retention & Growth above.
 
 **Deliberately not started — the brief itself says to wait:**
 
 - **Coins & Airtime Redemption.** The brief explicitly marks this lower priority than the core loop and flags an open legal question (whether flat-rate, performance-decoupled coin earning avoids gaming/lottery classification under Nigerian law) that should be resolved with a lawyer before any of it is built — including the append-only coin ledger, since that's meaningful engineering effort for a system that might need to change shape based on that answer.
 - **Post-Launch Roadmap** (v1.1-v2: head-to-head challenges, achievements, seasonal packs, sponsorships, audio round, web/iOS). The brief says not to start these until v1 has real DAU numbers to validate against — nothing here yet, by design.
+
+**Still open, smaller in scope:**
+
+- **Regional leaderboard security.** As scaffolded, the client writes leaderboard entries directly to Firestore — nothing server-side validates that a submitted score matches an actual completed round. `docs/LEADERBOARD_SETUP.md` has minimum-viable Firestore rules and notes moving to a Cloud Function if the leaderboard starts to matter competitively.
+- **Player identity is anonymous.** `SaveManager.get_player_id()` is a random per-install ID, not a real account — reinstalling or switching devices starts a fresh leaderboard history. Fine for now; swapping in Firebase Auth later is a contained change (see the setup doc).
 
 ## Pre-Build Manual Steps
 

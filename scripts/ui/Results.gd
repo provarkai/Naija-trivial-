@@ -58,7 +58,7 @@ func _ready() -> void:
 
 	extra_label = UIHelpers.add_label(vbox)
 	extra_label.modulate = Color(1, 0.85, 0.3)
-	extra_label.text = "New high score!" if _summary.get("_is_new_high_score", false) else ""
+	extra_label.text = _build_extra_message()
 
 	UIHelpers.add_spacer(vbox)
 
@@ -77,16 +77,52 @@ func _ready() -> void:
 	ShareManager.share_opened.connect(_on_share_opened)
 
 
-## Persists the score/streak-day side effects of finishing a round. Done
+## Persists the score/streak-day/progression side effects of finishing a
+## round, and forwards the score to the leaderboard where relevant. Done
 ## once, here, right as the round's summary is consumed — Gameplay only
 ## emits/forwards the summary, it doesn't know what to do with it.
 func _apply_save_updates() -> void:
 	var category_id: String = _summary.get("category", "")
 	var score: int = _summary.get("score", 0)
+	var is_daily: bool = _summary.get("daily_challenge", false)
+
 	_summary["_is_new_high_score"] = SaveManager.report_score(category_id, score)
 
-	if _summary.get("daily_challenge", false):
+	var level_before := SaveManager.get_player_level()
+	SaveManager.add_lifetime_score(score)
+	if SaveManager.get_player_level() > level_before:
+		_summary["_leveled_up_to"] = SaveManager.get_player_level()
+
+	if is_daily:
 		SaveManager.record_daily_challenge_completion()
+		LeaderboardManager.submit_daily_score(score, _summary.get("correct_count", 0))
+
+	if SaveManager.report_overall_best_score(score):
+		LeaderboardManager.submit_regional_best(score)
+
+
+## Combines high-score and level-up feedback into the one line under the
+## score summary — most rounds trigger neither, some rounds trigger both.
+func _build_extra_message() -> String:
+	var parts: Array = []
+	if _summary.get("_is_new_high_score", false):
+		parts.append("New high score!")
+
+	var leveled_up_to: int = _summary.get("_leveled_up_to", 0)
+	if leveled_up_to > 0:
+		parts.append("🎉 Level up! You're now level %d." % leveled_up_to)
+		var unlocked := _category_unlocked_at_level(leveled_up_to)
+		if not unlocked.is_empty():
+			parts.append("%s unlocked!" % unlocked)
+
+	return "  ".join(parts)
+
+
+func _category_unlocked_at_level(level: int) -> String:
+	for category in QuestionBank.categories:
+		if category.get("unlock_level", 0) == level:
+			return category.get("display_name", category.get("id", ""))
+	return ""
 
 
 func _on_share_pressed() -> void:

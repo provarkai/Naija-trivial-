@@ -18,6 +18,7 @@ const RESULTS := "res://scenes/Results.tscn"
 const DAILY_CHALLENGE := "res://scenes/DailyChallenge.tscn"
 const STORE := "res://scenes/Store.tscn"
 const SETTINGS := "res://scenes/Settings.tscn"
+const LEADERBOARD := "res://scenes/Leaderboard.tscn"
 
 var _back_stack: Array[String] = []
 

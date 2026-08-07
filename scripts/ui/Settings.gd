@@ -1,8 +1,11 @@
 extends Control
-## Settings — sound toggle, restore purchases, privacy policy link.
+## Settings — sound toggle, leaderboard profile (display name/region),
+## restore purchases, privacy policy link.
 
 var sound_toggle: CheckButton
 var music_toggle: CheckButton
+var display_name_field: LineEdit
+var region_field: LineEdit
 var status_label: Label
 
 
@@ -15,6 +18,25 @@ func _ready() -> void:
 	var vbox := UIHelpers.add_screen_vbox(self, 20)
 
 	UIHelpers.add_title(vbox, "Settings", 36)
+
+	UIHelpers.add_title(vbox, "Leaderboard Profile", 22)
+	UIHelpers.add_label(vbox, "Display name (shown on leaderboards)", false)
+	display_name_field = LineEdit.new()
+	display_name_field.text = SaveManager.get_display_name()
+	display_name_field.placeholder_text = "Anonymous Player"
+	display_name_field.text_submitted.connect(func(_t): SaveManager.set_display_name(display_name_field.text))
+	display_name_field.focus_exited.connect(func(): SaveManager.set_display_name(display_name_field.text))
+	vbox.add_child(display_name_field)
+
+	UIHelpers.add_label(vbox, "Region — state or city (for regional rankings)", false)
+	region_field = LineEdit.new()
+	region_field.text = SaveManager.get_region()
+	region_field.placeholder_text = "e.g. Lagos"
+	region_field.text_submitted.connect(func(_t): SaveManager.set_region(region_field.text))
+	region_field.focus_exited.connect(func(): SaveManager.set_region(region_field.text))
+	vbox.add_child(region_field)
+
+	UIHelpers.add_spacer(vbox, 8)
 
 	sound_toggle = CheckButton.new()
 	sound_toggle.text = "Sound effects"

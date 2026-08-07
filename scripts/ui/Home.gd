@@ -11,6 +11,7 @@ extends Control
 ## QuestionBank / SaveManager / SceneManager needs to change for that.
 
 var status_label: Label
+var level_label: Label
 var daily_challenge_button: Button
 var category_grid: GridContainer
 var ads_upsell_button: Button
@@ -26,6 +27,9 @@ func _ready() -> void:
 
 	UIHelpers.add_title(vbox, "Naija Trivia Blitz", 42)
 	UIHelpers.add_label(vbox, "Pick a category to start a round")
+
+	level_label = UIHelpers.add_label(vbox)
+	level_label.modulate = Color(0.7, 0.85, 0.8)
 
 	status_label = UIHelpers.add_label(vbox)
 	status_label.modulate = Color(1, 0.85, 0.3)
@@ -57,6 +61,10 @@ func _ready() -> void:
 	settings_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	settings_button.pressed.connect(func(): SceneManager.goto_scene(SceneManager.SETTINGS, true))
 
+	var leaderboard_button := UIHelpers.add_button(bottom_row, "Leaderboard", 56)
+	leaderboard_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	leaderboard_button.pressed.connect(func(): SceneManager.goto_scene(SceneManager.LEADERBOARD, true))
+
 	# change_scene_to_file() rebuilds this scene from scratch every time the
 	# player returns to it, so a plain _ready()-time refresh is enough to
 	# pick up anything that changed elsewhere (a Store purchase, a new
@@ -64,10 +72,12 @@ func _ready() -> void:
 	_refresh()
 
 
-## Re-applies lock icons/labels and the daily-streak label, and hides the
-## ads banner if it's already been purchased.
+## Re-applies lock icons/labels, the level display, and the daily-streak
+## label, and hides the ads banner if it's already been purchased.
 func _refresh() -> void:
 	ads_upsell_button.visible = not SaveManager.has_ads_removed()
+
+	level_label.text = "Level %d  •  %d lifetime points" % [SaveManager.get_player_level(), SaveManager.get_lifetime_score()]
 
 	var streak: int = SaveManager.get_effective_daily_streak()
 	if streak > 0:
@@ -98,13 +108,22 @@ func _category_by_id(category_id: String) -> Dictionary:
 
 func _category_button_text(category: Dictionary) -> String:
 	var label: String = category.get("display_name", category.get("id", "?"))
-	var unlocked := SaveManager.is_category_unlocked(category.get("id", ""))
-	return label if unlocked else "%s 🔒" % label
+	if SaveManager.is_category_unlocked(category.get("id", "")):
+		return label
+	var unlock_level: int = category.get("unlock_level", 0)
+	if unlock_level > 0:
+		return "%s 🔒 Lvl %d" % [label, unlock_level]
+	return "%s 🔒" % label
 
 
 func _on_category_pressed(category_id: String) -> void:
 	if not SaveManager.is_category_unlocked(category_id):
-		status_label.text = "That category is a premium unlock — visit the Store."
+		var category := _category_by_id(category_id)
+		var unlock_level: int = category.get("unlock_level", 0)
+		if unlock_level > 0:
+			status_label.text = "Unlocks at level %d (you're level %d), or buy it in the Store." % [unlock_level, SaveManager.get_player_level()]
+		else:
+			status_label.text = "That category is a premium unlock — visit the Store."
 		return
 
 	var round_questions := QuestionBank.get_round_questions(category_id, GameStateManager.QUESTIONS_PER_ROUND)

@@ -12,13 +12,24 @@ const SAVE_VERSION := 1
 
 const FREE_CATEGORIES := ["naija_music", "nollywood", "general_knowledge"]
 
+## Lifetime points per player level. A typical round earns roughly
+## 500-1500 points depending on difficulty/streak/speed bonuses (see
+## GameStateManager._score_for_answer), so this is tuned for "a level or
+## so per session," not per round — see categories.json's per-category
+## `unlock_level` for how this gates content.
+const POINTS_PER_LEVEL := 1000
+
 var data: Dictionary = {}
 
 signal save_loaded
 signal save_updated
+signal leveled_up(new_level: int)
 
 
 func _ready() -> void:
+	# Godot's global RNG (randi()/randf()) starts from a fixed seed unless
+	# explicitly randomized — get_player_id() below needs real entropy.
+	randomize()
 	load_game()
 
 
@@ -68,6 +79,15 @@ func _default_data() -> Dictionary:
 			"sound_enabled": true,
 			"music_enabled": true,
 		},
+		"progression": {
+			"lifetime_score": 0, # sum of every round's score, ever — drives get_player_level()
+			"best_score": 0, # best single-round score across any category — feeds the regional leaderboard
+		},
+		"player": {
+			"id": "", # generated on first read via get_player_id(), stable thereafter
+			"display_name": "",
+			"region": "", # free-text state/city, entered in Settings — leaderboard grouping
+		},
 	}
 
 
@@ -75,17 +95,114 @@ func _default_data() -> Dictionary:
 # Categories
 # ---------------------------------------------------------------------------
 
+## True if a category is playable right now, via *any* path: the default
+## free set, an IAP category-pack purchase, Pro Bundle, or — per the
+## brief's progression design — having leveled up past that category's
+## `unlock_level` in categories.json. Leveling and buying unlock the same
+## door; there's no separate "level-only" tier.
 func is_category_unlocked(category_id: String) -> bool:
 	if data["purchases"].get("pro_bundle", false):
 		return true
 	if data["unlocked_categories"].has(category_id):
 		return true
-	return data["purchases"]["category_packs"].has(category_id)
+	if data["purchases"]["category_packs"].has(category_id):
+		return true
+	return get_player_level() >= _category_unlock_level(category_id)
 
 
 func unlock_category(category_id: String) -> void:
 	if not data["unlocked_categories"].has(category_id):
 		data["unlocked_categories"].append(category_id)
+	save_game()
+
+
+## Looks up a category's level-gate from categories.json (via
+## QuestionBank, loaded before SaveManager per project.godot's autoload
+## order). Categories without an explicit `unlock_level` unlock at level
+## 1 — i.e. by whichever *other* path already applies (free list or IAP);
+## leveling isn't what's gating them.
+func _category_unlock_level(category_id: String) -> int:
+	for category in QuestionBank.categories:
+		if category.get("id", "") == category_id:
+			return category.get("unlock_level", 1)
+	return 1
+
+
+# ---------------------------------------------------------------------------
+# Progression (lifetime score -> player level)
+# ---------------------------------------------------------------------------
+
+func get_lifetime_score() -> int:
+	return data.get("progression", {}).get("lifetime_score", 0)
+
+
+func get_player_level() -> int:
+	return int(get_lifetime_score() / POINTS_PER_LEVEL) + 1
+
+
+## Adds `points` to the lifetime total that drives get_player_level(),
+## emitting leveled_up if this crosses a level boundary. Call once per
+## completed round with that round's score (Results._apply_save_updates).
+func add_lifetime_score(points: int) -> void:
+	if points <= 0:
+		return
+	var before := get_player_level()
+	data["progression"]["lifetime_score"] = get_lifetime_score() + points
+	save_game()
+	var after := get_player_level()
+	if after > before:
+		leveled_up.emit(after)
+
+
+func get_overall_best_score() -> int:
+	return data.get("progression", {}).get("best_score", 0)
+
+
+## True if `score` beats the player's all-time best single-round score
+## across any category — kept separate from per-category high scores
+## (report_score) since this is what feeds the regional leaderboard,
+## which ranks players against each other, not each player against their
+## own per-category history.
+func report_overall_best_score(score: int) -> bool:
+	if score > get_overall_best_score():
+		data["progression"]["best_score"] = score
+		save_game()
+		return true
+	return false
+
+
+# ---------------------------------------------------------------------------
+# Player identity (for the regional leaderboard — see LeaderboardManager)
+# ---------------------------------------------------------------------------
+
+## A stable anonymous ID for this install, generated once on first call
+## and persisted thereafter. Good enough to key leaderboard documents
+## without a full auth system; swap for a real Firebase Auth UID if/when
+## one gets wired in (see docs/LEADERBOARD_SETUP.md).
+func get_player_id() -> String:
+	var id: String = data["player"].get("id", "")
+	if id.is_empty():
+		id = (str(Time.get_unix_time_from_system()) + str(randi())).sha256_text().substr(0, 20)
+		data["player"]["id"] = id
+		save_game()
+	return id
+
+
+func get_display_name() -> String:
+	return data["player"].get("display_name", "")
+
+
+func set_display_name(value: String) -> void:
+	data["player"]["display_name"] = value
+	save_game()
+
+
+func get_region() -> String:
+	return data["player"].get("region", "")
+
+
+func set_region(value: String) -> void:
+	data["player"]["region"] = value
 	save_game()
 
 

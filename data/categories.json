@@ -21,6 +21,7 @@
 		"icon": "res://assets/icons/nigerian_history.png",
 		"color": "#2A9D8F",
 		"premium": true,
+		"unlock_level": 3,
 		"description": "From independence to the Nigeria of today."
 	},
 	{
@@ -29,6 +30,7 @@
 		"icon": "res://assets/icons/sports.png",
 		"color": "#264653",
 		"premium": true,
+		"unlock_level": 5,
 		"description": "Super Eagles, D'Tigers, and Nigerian sporting greats."
 	},
 	{
@@ -45,6 +47,7 @@
 		"icon": "res://assets/icons/pidgin_proverbs.png",
 		"color": "#8D5A97",
 		"premium": true,
+		"unlock_level": 7,
 		"description": "Test how well you sabi pidgin and proverbs."
 	}
 ]
