@@ -15,7 +15,7 @@ Android export (signed `.aab`) requires the Android build template + SDK/keystor
 ```
 scenes/              One .tscn per screen (Home, Gameplay, Results, DailyChallenge, Store, Settings)
 scripts/
-  autoload/           Singletons — GameStateManager, QuestionBank, SaveManager, SceneManager
+  autoload/           Singletons — GameStateManager, QuestionBank, SaveManager, SceneManager, AdManager
   ui/                  Screen scripts (one per scene) + UIHelpers, the shared procedural-UI builder
   systems/             Reserved for non-autoload gameplay systems as they're split out
 data/
@@ -23,6 +23,8 @@ data/
   questions/           One JSON file per category — see SCHEMA.md
 assets/
   icons/ audio/ fonts/ images/   Art & sound (empty for now, .gitkeep placeholders)
+docs/
+  ADMOB_SETUP.md        Manual steps to wire a real AdMob plugin into AdManager
 ```
 
 ### Why screens are built in code, not the Godot editor
@@ -40,7 +42,7 @@ Every `scenes/*.tscn` file is a bare `Control` node with a script attached — t
 | 5 | Round flow (10 questions → results) | ✅ `scenes/Results.tscn` |
 | 6 | Save/load (unlocked categories, high scores, streak days) | ✅ `scripts/autoload/SaveManager.gd` |
 | 7 | Daily challenge (deterministic date-seeded question set) | ✅ `scenes/DailyChallenge.tscn`, streak tracked via `SaveManager` |
-| 8 | AdMob integration | ⬜ not started |
+| 8 | AdMob integration | ✅ scaffolded — `scripts/autoload/AdManager.gd` wraps a native AdMob plugin (not installed by this repo); banner/interstitial/rewarded all wired into the screens. See `docs/ADMOB_SETUP.md` |
 | 9 | IAP integration (Google Play Billing) | ⬜ not started — `scenes/Store.tscn` has the UI and calls `SaveManager`'s purchase-state methods directly as dev/test stand-ins until the Play Billing plugin is wired in |
 | 10 | UI polish (animations, SFX, category icons, editor-authored scenes) | ⬜ not started |
 
@@ -57,12 +59,22 @@ Every `scenes/*.tscn` file is a bare `Control` node with a script attached — t
 
 Category Select and a Leaderboard screen from the original brief aren't separate scenes yet — Home's grid already covers category selection, and there's no ranking backend (local/regional) to back a leaderboard yet.
 
+### Monetization (ads)
+
+Wired per the brief's rules, all via `AdManager` (see `docs/ADMOB_SETUP.md` to connect a real plugin):
+
+- **Banner** — Home only. Never shown during gameplay.
+- **Interstitial** — every 2-3 completed rounds, triggered from Results after a round fully ends. Never mid-question.
+- **Rewarded video** — in Gameplay: "Watch Ad for +5s" while a question is active, "Watch Ad to Revive Streak" for ~3.5s after a wrong answer.
+- **Remove Ads** respected by banner + interstitial everywhere; rewarded video stays available regardless (it's opt-in).
+
 ### Autoload singletons
 
 - **`GameStateManager`** — the state of the round currently being played: current question index, score, streak, per-question countdown. Scenes call `start_round()`, `submit_answer()`, `next_question()` and listen to its signals (`question_changed`, `answer_submitted`, `round_completed`, etc.) rather than tracking this themselves. `last_round_summary` caches the most recent `round_completed` payload so the Results screen can read it directly even though it wasn't around to catch the live signal.
 - **`QuestionBank`** — loads and validates every `data/questions/*.json` file at startup, and hands out shuffled round sets (`get_round_questions`) or the deterministic daily set (`get_daily_challenge_questions`).
 - **`SaveManager`** — reads/writes `user://savegame.json`: unlocked categories, high scores per category, daily-challenge streak, purchase entitlements, settings.
 - **`SceneManager`** — scene file path constants + navigation, with a small back-stack for screens reachable from more than one place (Store, Settings).
+- **`AdManager`** — wraps a native AdMob plugin singleton (see `docs/ADMOB_SETUP.md`) behind `show_banner()`/`hide_banner()`, `notify_round_completed()` (interstitial every 2-3 rounds), and `show_rewarded(placement, on_reward, on_failed)`. No-ops safely with a console message wherever the plugin isn't installed — including every editor run on desktop — and simulates rewarded-ad rewards in that case so the +5s/revive flow in Gameplay stays testable without a device.
 
 ### Question content
 

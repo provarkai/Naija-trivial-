@@ -24,6 +24,7 @@ GameStateManager="*res://scripts/autoload/GameStateManager.gd"
 QuestionBank="*res://scripts/autoload/QuestionBank.gd"
 SaveManager="*res://scripts/autoload/SaveManager.gd"
 SceneManager="*res://scripts/autoload/SceneManager.gd"
+AdManager="*res://scripts/autoload/AdManager.gd"
 
 [display]
 

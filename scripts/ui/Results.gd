@@ -27,6 +27,11 @@ func _ready() -> void:
 
 	_apply_save_updates()
 
+	AdManager.hide_banner()
+	# Round is fully over and no question is on screen — the right, and
+	# only, moment for an interstitial per the "never mid-question" rule.
+	AdManager.notify_round_completed()
+
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	UIHelpers.add_background(self)
 

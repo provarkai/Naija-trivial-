@@ -7,6 +7,8 @@ var status_label: Label
 
 
 func _ready() -> void:
+	AdManager.hide_banner()
+
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	UIHelpers.add_background(self)
 

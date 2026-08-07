@@ -11,6 +11,10 @@ const CORRECT_COLOR := Color(0.30, 0.75, 0.35)
 const WRONG_COLOR := Color(0.85, 0.25, 0.25)
 const NEUTRAL_COLOR := Color(1, 1, 1)
 const NEXT_QUESTION_DELAY := 1.1
+const EXTRA_TIME_SECONDS := 5.0
+## Wider window before auto-advancing on a wrong answer, so there's time
+## to notice and tap "Watch Ad to Revive" before the round moves on.
+const REVIVE_WINDOW := 3.5
 
 var score_label: Label
 var streak_label: Label
@@ -18,8 +22,13 @@ var progress_label: Label
 var timer_bar: ProgressBar
 var question_label: Label
 var option_buttons: Array = []
+var extra_time_button: Button
+var revive_button: Button
 
 var _accepting_input := false
+## Guards next_question() from firing twice when both the auto-advance
+## timer and a successful revive try to advance the round.
+var _advanced := false
 
 
 func _ready() -> void:
@@ -29,6 +38,8 @@ func _ready() -> void:
 		# gameplay screen.
 		SceneManager.goto_scene(SceneManager.HOME)
 		return
+
+	AdManager.hide_banner() # never show the banner during gameplay
 
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	UIHelpers.add_background(self)
@@ -46,6 +57,13 @@ func _ready() -> void:
 	timer_bar.custom_minimum_size = Vector2(0, 24)
 	timer_bar.show_percentage = false
 	vbox.add_child(timer_bar)
+
+	extra_time_button = UIHelpers.add_button(vbox, "📺 Watch Ad for +5s", 48)
+	extra_time_button.pressed.connect(_on_extra_time_pressed)
+
+	revive_button = UIHelpers.add_button(vbox, "📺 Watch Ad to Revive Streak", 48)
+	revive_button.visible = false
+	revive_button.pressed.connect(_on_revive_pressed)
 
 	question_label = Label.new()
 	question_label.autowrap_mode = TextServer.AUTOWRAP_WORD
@@ -95,6 +113,11 @@ func _render_question(question: Dictionary, index: int, total: int) -> void:
 	score_label.text = "Score: %d" % GameStateManager.score
 	streak_label.text = "Streak: %d" % GameStateManager.streak
 	_accepting_input = true
+	_advanced = false
+
+	extra_time_button.visible = true
+	extra_time_button.disabled = false
+	revive_button.visible = false
 
 
 func _on_timer_tick(time_remaining: float, time_total: float) -> void:
@@ -112,6 +135,7 @@ func _on_option_pressed(index: int) -> void:
 func _on_answer_submitted(result: Dictionary) -> void:
 	var selected: int = result.get("selected_index", -1)
 	var correct_index: int = result.get("correct_index", -1)
+	var correct: bool = result.get("correct", false)
 
 	for i in range(option_buttons.size()):
 		var button: Button = option_buttons[i]
@@ -124,8 +148,58 @@ func _on_answer_submitted(result: Dictionary) -> void:
 	score_label.text = "Score: %d" % result.get("score", GameStateManager.score)
 	streak_label.text = "Streak: %d" % result.get("streak", GameStateManager.streak)
 
-	await get_tree().create_timer(NEXT_QUESTION_DELAY).timeout
+	extra_time_button.visible = false
+	revive_button.visible = not correct
+	revive_button.disabled = false
+
+	_schedule_auto_advance(REVIVE_WINDOW if not correct else NEXT_QUESTION_DELAY)
+
+
+func _schedule_auto_advance(delay: float) -> void:
+	await get_tree().create_timer(delay).timeout
+	_advance_once()
+
+
+## The single path to advancing past the current question — called by the
+## auto-advance timer and by a successful revive alike, guarded so
+## whichever fires first wins and the other becomes a no-op.
+func _advance_once() -> void:
+	if _advanced:
+		return
+	_advanced = true
+	revive_button.visible = false
 	GameStateManager.next_question()
+
+
+func _on_extra_time_pressed() -> void:
+	extra_time_button.disabled = true
+	AdManager.show_rewarded("extra_time", _on_extra_time_earned, _on_extra_time_failed)
+
+
+## Stays disabled after a successful watch — one +5s bonus per question.
+func _on_extra_time_earned() -> void:
+	GameStateManager.grant_extra_time(EXTRA_TIME_SECONDS)
+
+
+func _on_extra_time_failed() -> void:
+	extra_time_button.disabled = false
+
+
+func _on_revive_pressed() -> void:
+	if _advanced:
+		return
+	revive_button.disabled = true
+	AdManager.show_rewarded("revive", _on_revive_earned, _on_revive_failed)
+
+
+func _on_revive_earned() -> void:
+	GameStateManager.revive()
+	streak_label.text = "Streak: %d" % GameStateManager.streak
+	_advance_once()
+
+
+func _on_revive_failed() -> void:
+	revive_button.disabled = false
 
 
 func _on_round_completed(_summary: Dictionary) -> void:

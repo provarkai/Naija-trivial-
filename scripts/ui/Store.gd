@@ -19,6 +19,8 @@ var pack_buttons: Dictionary = {} # category_id -> Button
 
 
 func _ready() -> void:
+	AdManager.hide_banner()
+
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	UIHelpers.add_background(self)
 

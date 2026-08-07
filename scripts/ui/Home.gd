@@ -17,6 +17,8 @@ var ads_upsell_button: Button
 
 
 func _ready() -> void:
+	AdManager.show_banner() # persistent on Home only, per the monetization brief
+
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	UIHelpers.add_background(self)
 
