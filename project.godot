@@ -13,7 +13,7 @@ config_version=5
 
 config/name="Naija Trivia Blitz"
 config/description="A Nigerian-themed mobile trivia game — Naija Music, Nollywood, History, Sports, General Knowledge, and Pidgin & Proverbs."
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/Home.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 boot_splash/bg_color=Color(0.043137, 0.180392, 0.109804, 1)
 config/icon="res://icon.svg"
@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 GameStateManager="*res://scripts/autoload/GameStateManager.gd"
 QuestionBank="*res://scripts/autoload/QuestionBank.gd"
 SaveManager="*res://scripts/autoload/SaveManager.gd"
+SceneManager="*res://scripts/autoload/SceneManager.gd"
 
 [display]
 

@@ -132,6 +132,16 @@ func get_category_ids() -> Array:
 	return _questions_by_category.keys()
 
 
+## Looks up the human-readable name for a category id from categories.json.
+## Falls back to the id itself (e.g. for the synthetic "Daily Challenge"
+## pseudo-category) so callers never have to null-check this.
+func get_category_display_name(category_id: String) -> String:
+	for category in categories:
+		if category.get("id", "") == category_id:
+			return category.get("display_name", category_id)
+	return category_id
+
+
 func get_question_count(category: String) -> int:
 	return _questions_by_category.get(category, []).size()
 

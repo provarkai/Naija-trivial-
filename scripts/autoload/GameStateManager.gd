@@ -55,6 +55,13 @@ var streak: int = 0
 var longest_streak: int = 0
 var correct_count: int = 0
 
+## Snapshot of the summary dict from the most recent round_completed emission.
+## The Results screen reads this directly on _ready() rather than relying on
+## having been connected in time to catch the live signal (it usually
+## wasn't — the round finishes on the Gameplay scene, which then changes to
+## Results, and by the time Results exists the signal has already fired).
+var last_round_summary: Dictionary = {}
+
 var time_per_question: float = DEFAULT_TIME_PER_QUESTION
 var time_remaining: float = 0.0
 var _round_active: bool = false
@@ -182,6 +189,7 @@ func end_round() -> void:
 		"longest_streak": longest_streak,
 		"answers": answers_given.duplicate(),
 	}
+	last_round_summary = summary
 	round_completed.emit(summary)
 
 
