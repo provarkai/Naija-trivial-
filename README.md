@@ -15,14 +15,15 @@ Android export (signed `.aab`) requires the Android build template + SDK/keystor
 ```
 scenes/              One .tscn per screen (Home, Gameplay, Results, DailyChallenge, Store, Settings, Leaderboard)
 scripts/
-  autoload/           Singletons — GameStateManager, QuestionBank, SaveManager, SceneManager, AdManager, IAPManager, ShareManager, LeaderboardManager
+  autoload/           Singletons — GameStateManager, QuestionBank, SaveManager, SFXManager, SceneManager, AdManager, IAPManager, ShareManager, LeaderboardManager
   ui/                  Screen scripts (one per scene) + UIHelpers, the shared procedural-UI builder
   systems/             Non-autoload shared systems — currently NativePluginBridge (the plugin-call guard AdManager/IAPManager/ShareManager/LeaderboardManager all share)
 data/
   categories.json      Category metadata (id, display name, icon, premium flag, unlock_level)
   questions/           One JSON file per category — see SCHEMA.md
 assets/
-  icons/ audio/ fonts/ images/   Art & sound (empty for now, .gitkeep placeholders)
+  icons/               A placeholder SVG per category (see Polish below)
+  audio/ fonts/ images/  Empty for now, .gitkeep placeholders — SFXManager synthesizes sound in code rather than loading files here
 docs/
   ADMOB_SETUP.md         Manual steps to wire a real AdMob plugin into AdManager
   PLAY_BILLING_SETUP.md  Manual steps to wire a real Play Billing plugin into IAPManager
@@ -32,7 +33,7 @@ docs/
 
 ### Why screens are built in code, not the Godot editor
 
-Every `scenes/*.tscn` file is a bare `Control` node with a script attached — the actual UI tree (labels, buttons, containers) is built procedurally in each script's `_ready()`, using the shared helpers in `scripts/ui/UIHelpers.gd`. There's no Godot editor in this workflow to visually lay out and verify `.tscn` node trees, and a procedural tree is far easier to write and review correctly by hand than raw `.tscn` anchor/layout syntax. Nothing about this is permanent: once the project is opened in the actual editor, any screen can be rebuilt visually as a normal editor-authored scene — the autoloads (`GameStateManager`, `QuestionBank`, `SaveManager`, `SceneManager`, `AdManager`, `IAPManager`, `ShareManager`, `LeaderboardManager`) are what everything depends on, not how a given screen's tree was built.
+Every `scenes/*.tscn` file is a bare `Control` node with a script attached — the actual UI tree (labels, buttons, containers) is built procedurally in each script's `_ready()`, using the shared helpers in `scripts/ui/UIHelpers.gd`. There's no Godot editor in this workflow to visually lay out and verify `.tscn` node trees, and a procedural tree is far easier to write and review correctly by hand than raw `.tscn` anchor/layout syntax. Nothing about this is permanent: once the project is opened in the actual editor, any screen can be rebuilt visually as a normal editor-authored scene — the autoloads (`GameStateManager`, `QuestionBank`, `SaveManager`, `SFXManager`, `SceneManager`, `AdManager`, `IAPManager`, `ShareManager`, `LeaderboardManager`) are what everything depends on, not how a given screen's tree was built.
 
 ## Core systems (current status)
 
@@ -51,7 +52,7 @@ Numbered per the project brief's build order (v2, which inserted streak tracking
 | 9 | Share-score flow (score card + WhatsApp share) | ✅ `scripts/autoload/ShareManager.gd`, wired into Results. See `docs/SHARE_SETUP.md` |
 | 10 | AdMob integration | ✅ scaffolded — `scripts/autoload/AdManager.gd` wraps a native AdMob plugin (not installed by this repo); banner/interstitial/rewarded all wired into the screens. See `docs/ADMOB_SETUP.md` |
 | 11 | IAP integration (Google Play Billing) | ✅ scaffolded — `scripts/autoload/IAPManager.gd` wraps a native Play Billing plugin (not installed by this repo); Store + Settings wired up, product catalog built from `categories.json`'s premium flags. See `docs/PLAY_BILLING_SETUP.md` |
-| 12 | UI polish (animations, SFX, category icons, editor-authored scenes) | ⬜ not started |
+| 12 | UI polish (animations, SFX, category icons, editor-authored scenes) | 🟡 animations/SFX/icons done, see Polish below — editor-authored scenes still need an actual Godot editor in the loop, which this scaffold doesn't have |
 
 See [Known gaps & open decisions](#known-gaps--open-decisions) below for what's still deliberately deferred — the coins/airtime system and the post-launch roadmap.
 
@@ -80,6 +81,15 @@ Per the brief's "Player Motivation & Retention Design": the reason to come back 
 
 **A confidence note on `LeaderboardManager` specifically:** AdMob and Play Billing are singular, canonical, extremely well-documented plugin targets, so `AdManager`/`IAPManager`'s guessed method names are fairly safe bets. Firebase Firestore's query-builder API (via the community GodotFirebase addon) is less certain from here — `LeaderboardManager` is a structurally-correct sketch (collections, document IDs, data shape, the has_method-guarded call pattern) more than a verified API surface. `docs/LEADERBOARD_SETUP.md` says exactly what to check first.
 
+### Polish
+
+The parts of build-order item #12 that don't need a Godot editor in the loop:
+
+- **Category icons** — a small flat SVG per category in `assets/icons/`, referenced by `categories.json`'s `icon` field and loaded via `UIHelpers.load_category_icon()`. They're intentionally simple placeholder glyphs (a music note, a clapperboard, a trophy, ...) matching each category's brand color — swap them for real art by replacing the files; nothing in code needs to change since the path comes from `categories.json`.
+- **Sound effects** — `SFXManager` synthesizes a handful of short tones in code at startup (sine-wave notes into a 16-bit WAV) rather than loading audio files, so there's nothing to source or license for a first playable build. Wired in: a click on every button in the app (via `UIHelpers.add_button`, so every screen gets it for free), correct/wrong/streak-milestone in Gameplay, round-complete/level-up on Results. Respects the existing `sound_enabled` setting. Swap for real SFX later by pointing `SFXManager._build_streams()` at `load()`ed files instead — `play()`'s call sites don't change.
+- **Animations** — a button press "bounce" (also from `UIHelpers.add_button`, so again every button gets it automatically), the Results score counting up from 0 rather than appearing instantly, and a brief fade-to-black between every scene change (owned by `SceneManager`, since it has to persist across the very scene swap it's covering up).
+- **Editor-authored scenes** — still not done, and can't be from here: every screen's UI tree is built in code (see "Why screens are built in code" above) precisely because there's no Godot editor available in this workflow to build and verify `.tscn` node trees visually. This is the one sub-item of #12 that's a straightforward, if tedious, task once someone opens the project in the real editor — rebuild each screen as an editor-authored scene using the same autoloads, no logic changes needed.
+
 ### Monetization (ads)
 
 Wired per the brief's rules, all via `AdManager` (see `docs/ADMOB_SETUP.md` to connect a real plugin):
@@ -102,8 +112,9 @@ All via `IAPManager` (see `docs/PLAY_BILLING_SETUP.md` to connect a real plugin)
 
 - **`GameStateManager`** — the state of the round currently being played: current question index, score, streak, per-question countdown. Scenes call `start_round()`, `submit_answer()`, `next_question()` and listen to its signals (`question_changed`, `answer_submitted`, `round_completed`, etc.) rather than tracking this themselves. `last_round_summary` caches the most recent `round_completed` payload so the Results screen can read it directly even though it wasn't around to catch the live signal.
 - **`QuestionBank`** — loads and validates every `data/questions/*.json` file at startup, and hands out shuffled round sets (`get_round_questions`) or the deterministic daily set (`get_daily_challenge_questions`).
-- **`SaveManager`** — reads/writes `user://savegame.json`: unlocked categories, high scores per category, daily-challenge streak, purchase entitlements, settings.
-- **`SceneManager`** — scene file path constants + navigation, with a small back-stack for screens reachable from more than one place (Store, Settings).
+- **`SaveManager`** — reads/writes `user://savegame.json`: unlocked categories, high scores per category, daily-challenge streak, purchase entitlements, progression, player identity, settings.
+- **`SFXManager`** — a handful of sound effects synthesized in code at startup (see Polish above) behind `play(Sound.CLICK/CORRECT/WRONG/...)`. Respects the `sound_enabled` setting.
+- **`SceneManager`** — scene file path constants + navigation (with the fade transition, see Polish above), and a small back-stack for screens reachable from more than one place (Store, Settings).
 - **`AdManager`** — wraps a native AdMob plugin singleton (see `docs/ADMOB_SETUP.md`) behind `show_banner()`/`hide_banner()`, `notify_round_completed()` (interstitial every 2-3 rounds), and `show_rewarded(placement, on_reward, on_failed)`. No-ops safely with a console message wherever the plugin isn't installed — including every editor run on desktop — and simulates rewarded-ad rewards in that case so the +5s/revive flow in Gameplay stays testable without a device.
 - **`IAPManager`** — wraps a native Google Play Billing plugin singleton (see `docs/PLAY_BILLING_SETUP.md`) behind `purchase(product_id)`, `restore_purchases()`, and `get_price_string(product_id)`. Same no-op-safe pattern as `AdManager`, via the shared `NativePluginBridge` helper; simulates a successful purchase when no plugin is installed so the Store screen is fully testable from the editor.
 - **`ShareManager`** — builds the share message + score card image and opens WhatsApp (see `docs/SHARE_SETUP.md`) behind `share_score(summary)`. Unlike the other two, its no-plugin fallback (WhatsApp text share) isn't a degraded stand-in — it's the real, shipped mechanism; a share plugin only adds image auto-attach on top of it.

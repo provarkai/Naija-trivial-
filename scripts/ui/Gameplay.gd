@@ -148,6 +148,14 @@ func _on_answer_submitted(result: Dictionary) -> void:
 	score_label.text = "Score: %d" % result.get("score", GameStateManager.score)
 	streak_label.text = "Streak: %d" % result.get("streak", GameStateManager.streak)
 
+	var streak: int = result.get("streak", 0)
+	if correct and streak >= 3 and streak % 3 == 0:
+		SFXManager.play(SFXManager.Sound.STREAK) # every 3rd consecutive correct answer
+	elif correct:
+		SFXManager.play(SFXManager.Sound.CORRECT)
+	else:
+		SFXManager.play(SFXManager.Sound.WRONG)
+
 	extra_time_button.visible = false
 	revive_button.visible = not correct
 	revive_button.disabled = false

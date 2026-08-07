@@ -44,6 +44,7 @@ func _ready() -> void:
 	for category_id in _premium_category_ids:
 		var button := UIHelpers.add_button(vbox, "", 64)
 		var product_id := IAPManager.category_pack_product_id(category_id)
+		button.icon = UIHelpers.load_category_icon(_category_by_id(category_id))
 		button.pressed.connect(_on_purchase_pressed.bind(product_id))
 		pack_buttons[category_id] = button
 		_purchase_buttons.append(button)
@@ -66,6 +67,13 @@ func _ready() -> void:
 	IAPManager.prices_updated.connect(_refresh)
 
 	_refresh()
+
+
+func _category_by_id(category_id: String) -> Dictionary:
+	for category in QuestionBank.categories:
+		if category.get("id", "") == category_id:
+			return category
+	return {}
 
 
 func _refresh() -> void:

@@ -95,6 +95,7 @@ func _build_category_buttons() -> void:
 		var category_id: String = category.get("id", "")
 		var button := UIHelpers.add_button(category_grid, _category_button_text(category), 80)
 		button.custom_minimum_size = Vector2(220, 80)
+		button.icon = UIHelpers.load_category_icon(category)
 		button.set_meta("category_id", category_id)
 		button.pressed.connect(_on_category_pressed.bind(category_id))
 

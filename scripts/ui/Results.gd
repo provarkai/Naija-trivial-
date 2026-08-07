@@ -30,6 +30,8 @@ func _ready() -> void:
 
 	_apply_save_updates()
 
+	SFXManager.play(SFXManager.Sound.LEVEL_UP if _summary.get("_leveled_up_to", 0) > 0 else SFXManager.Sound.ROUND_COMPLETE)
+
 	AdManager.hide_banner()
 	# Round is fully over and no question is on screen — the right, and
 	# only, moment for an interstitial per the "never mid-question" rule.
@@ -47,11 +49,7 @@ func _ready() -> void:
 	UIHelpers.add_label(vbox, category_name)
 
 	score_label = UIHelpers.add_label(vbox)
-	score_label.text = "%d / %d correct — %d points" % [
-		_summary.get("correct_count", 0),
-		_summary.get("total_questions", 0),
-		_summary.get("score", 0),
-	]
+	_animate_score_label()
 
 	streak_label = UIHelpers.add_label(vbox)
 	streak_label.text = "Best streak: %d" % _summary.get("longest_streak", 0)
@@ -75,6 +73,27 @@ func _ready() -> void:
 	back_home.pressed.connect(func(): SceneManager.goto_scene(SceneManager.HOME))
 
 	ShareManager.share_opened.connect(_on_share_opened)
+
+
+## Counts the points total up from 0 rather than just printing the final
+## number — "correct / total" is shown immediately since there's nothing
+## to build suspense about there, only the points value animates.
+func _animate_score_label() -> void:
+	var correct_count: int = _summary.get("correct_count", 0)
+	var total_questions: int = _summary.get("total_questions", 0)
+	var final_score: int = _summary.get("score", 0)
+
+	score_label.text = "%d / %d correct — 0 points" % [correct_count, total_questions]
+
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_method(
+		# Untyped on purpose — Tween may hand this a float mid-interpolation
+		# even though `from`/`to` below are ints; int(...) it explicitly
+		# rather than relying on an implicit conversion into a typed param.
+		func(current_score): score_label.text = "%d / %d correct — %d points" % [correct_count, total_questions, int(current_score)],
+		0, final_score, 0.6
+	)
 
 
 ## Persists the score/streak-day/progression side effects of finishing a
