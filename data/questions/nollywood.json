@@ -1,0 +1,36 @@
+{
+	"category": "nollywood",
+	"display_name": "Nollywood",
+	"questions": [
+		{
+			"question": "Nollywood is the film industry of which country?",
+			"options": ["Ghana", "Nigeria", "Kenya", "South Africa"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Which 1992 film is widely credited as the movie that launched the modern Nollywood industry?",
+			"options": ["Living in Bondage", "Glamour Girls", "Nneka the Pretty Serpent", "Rattlesnake"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Genevieve Nnaji directed and starred in which Netflix-acquired Nollywood film?",
+			"options": ["Half of a Yellow Sun", "Lionheart", "76", "October 1"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which actor is popularly nicknamed 'Mr. Ibu'?",
+			"options": ["John Okafor", "Nkem Owoh", "Chinedu Ikedieze", "Osita Iheme"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is the popular term for straight-to-video Nollywood films sold on VCD/DVD?",
+			"options": ["Blockbusters", "Home videos", "Shorts", "Cinema reels"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		}
+	]
+}

@@ -1,0 +1,36 @@
+{
+	"category": "general_knowledge",
+	"display_name": "General Knowledge",
+	"questions": [
+		{
+			"question": "What is the capital city of Nigeria?",
+			"options": ["Lagos", "Abuja", "Kano", "Port Harcourt"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Which river is the longest in Nigeria?",
+			"options": ["River Benue", "River Niger", "River Cross", "River Ogun"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "How many states does Nigeria have?",
+			"options": ["30", "33", "36", "39"],
+			"correct_index": 2,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What is the official currency of Nigeria?",
+			"options": ["Cedi", "Naira", "Franc", "Shilling"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Nigeria is often referred to as the 'Giant of Africa' primarily because of what?",
+			"options": ["Land area", "Population size and economy", "Number of states", "Military strength alone"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		}
+	]
+}

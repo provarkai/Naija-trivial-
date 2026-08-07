@@ -1,0 +1,36 @@
+{
+	"category": "pidgin_proverbs",
+	"display_name": "Pidgin & Proverbs",
+	"questions": [
+		{
+			"question": "In Nigerian Pidgin, what does 'How far?' mean?",
+			"options": ["What is the distance?", "How are you? / What's up?", "How much is it?", "Where are you going?"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does the Pidgin phrase 'No wahala' mean?",
+			"options": ["No problem", "No money", "No food", "No time"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does it mean when someone says 'I dey come' in Pidgin?",
+			"options": ["I have arrived", "I am coming (will be right there)", "I am leaving forever", "I don't know"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The proverb 'Monkey no fine but him mama like am' teaches that:",
+			"options": ["Money buys beauty", "A mother loves her child regardless of appearance", "Monkeys are dangerous", "Looks are everything"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Japa' commonly refer to in modern Nigerian slang?",
+			"options": ["Cooking a meal", "Emigrating abroad for better opportunities", "Dancing at a party", "Winning a bet"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		}
+	]
+}

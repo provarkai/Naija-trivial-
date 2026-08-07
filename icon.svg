@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="24" fill="#0B2E1C"/>
+  <rect y="0" width="128" height="42" fill="#2A9D8F"/>
+  <rect y="43" width="128" height="42" fill="#FFFFFF"/>
+  <rect y="86" width="128" height="42" fill="#2A9D8F"/>
+  <text x="64" y="72" font-family="sans-serif" font-size="34" font-weight="700"
+        fill="#0B2E1C" text-anchor="middle">NTB</text>
+</svg>

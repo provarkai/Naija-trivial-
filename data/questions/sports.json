@@ -1,0 +1,36 @@
+{
+	"category": "sports",
+	"display_name": "Sports",
+	"questions": [
+		{
+			"question": "What is the nickname of the Nigerian men's national football team?",
+			"options": ["The Black Stars", "The Super Eagles", "The Indomitable Lions", "The Elephants"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Nigeria won the gold medal in men's football at which Olympic Games?",
+			"options": ["Atlanta 1996", "Sydney 2000", "Athens 2004", "Beijing 2008"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "What is the nickname of Nigeria's national basketball team?",
+			"options": ["D'Tigers", "The Falcons", "The Golden Eagles", "The Cheetahs"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which Nigerian sprinter/long jumper became a naturalized British athlete and won Olympic gold for Great Britain?",
+			"options": ["Blessing Okagbare", "Chioma Ajunwa", "Yamile Aldama", "Innocent Egbunike"],
+			"correct_index": 2,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Nigeria has won the Africa Cup of Nations football title how many times (as of 2023)?",
+			"options": ["Once", "Twice", "Three times", "Four times"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		}
+	]
+}

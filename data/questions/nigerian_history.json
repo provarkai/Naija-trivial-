@@ -1,0 +1,36 @@
+{
+	"category": "nigerian_history",
+	"display_name": "Nigerian History",
+	"questions": [
+		{
+			"question": "In what year did Nigeria gain independence from British colonial rule?",
+			"options": ["1957", "1960", "1963", "1966"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Who was Nigeria's first Prime Minister after independence?",
+			"options": ["Nnamdi Azikiwe", "Obafemi Awolowo", "Abubakar Tafawa Balewa", "Ahmadu Bello"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		},
+		{
+			"question": "In what year did Nigeria become a republic, with Nnamdi Azikiwe as its first President?",
+			"options": ["1960", "1963", "1966", "1970"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The Nigerian Civil War (Biafran War) began in which year?",
+			"options": ["1966", "1967", "1970", "1975"],
+			"correct_index": 1,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Nigeria returned to civilian democratic rule in 1999 after years of military rule, electing which president?",
+			"options": ["Ibrahim Babangida", "Sani Abacha", "Olusegun Obasanjo", "Goodluck Jonathan"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		}
+	]
+}

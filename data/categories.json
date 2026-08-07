@@ -1,0 +1,50 @@
+[
+	{
+		"id": "naija_music",
+		"display_name": "Naija Music",
+		"icon": "res://assets/icons/naija_music.png",
+		"color": "#E63946",
+		"premium": false,
+		"description": "Afrobeats, highlife, and the artists behind the hits."
+	},
+	{
+		"id": "nollywood",
+		"display_name": "Nollywood",
+		"icon": "res://assets/icons/nollywood.png",
+		"color": "#F4A261",
+		"premium": false,
+		"description": "Movies, actors, and iconic Nollywood moments."
+	},
+	{
+		"id": "nigerian_history",
+		"display_name": "Nigerian History",
+		"icon": "res://assets/icons/nigerian_history.png",
+		"color": "#2A9D8F",
+		"premium": true,
+		"description": "From independence to the Nigeria of today."
+	},
+	{
+		"id": "sports",
+		"display_name": "Sports",
+		"icon": "res://assets/icons/sports.png",
+		"color": "#264653",
+		"premium": true,
+		"description": "Super Eagles, D'Tigers, and Nigerian sporting greats."
+	},
+	{
+		"id": "general_knowledge",
+		"display_name": "General Knowledge",
+		"icon": "res://assets/icons/general_knowledge.png",
+		"color": "#457B9D",
+		"premium": false,
+		"description": "A bit of everything, Naija-flavoured."
+	},
+	{
+		"id": "pidgin_proverbs",
+		"display_name": "Pidgin & Proverbs",
+		"icon": "res://assets/icons/pidgin_proverbs.png",
+		"color": "#8D5A97",
+		"premium": true,
+		"description": "Test how well you sabi pidgin and proverbs."
+	}
+]

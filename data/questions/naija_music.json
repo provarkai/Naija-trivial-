@@ -1,0 +1,66 @@
+{
+	"category": "naija_music",
+	"display_name": "Naija Music",
+	"questions": [
+		{
+			"question": "Which artist released the hit song 'Essence' in 2021?",
+			"options": ["Wizkid", "Burna Boy", "Davido", "Rema"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What genre did Fela Kuti pioneer?",
+			"options": ["Highlife", "Afrobeat", "Juju", "Fuji"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Which Nigerian artist is known as the 'African Giant'?",
+			"options": ["Davido", "Burna Boy", "Olamide", "Phyno"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What is Davido's real first name?",
+			"options": ["David", "Daniel", "Damian", "Daniyu"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which record label did Wizkid, Davido, and Wande Coal all pass through early in their careers?",
+			"options": ["Mavin Records", "Chocolate City", "EME (Empire Mates Entertainment)", "YBNL"],
+			"correct_index": 2,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Which female Afrobeats star is known for the hit 'Ginger Me'?",
+			"options": ["Tiwa Savage", "Yemi Alade", "Niniola", "Simi"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Naira Marley' primarily rap about that gave rise to the 'Marlian' movement?",
+			"options": ["Politics", "Street culture and hustle", "Farming", "Religion"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which Nigerian genre blends traditional Yoruba talking drums with contemporary pop?",
+			"options": ["Fuji", "Apala", "Afro-pop", "Waka"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Who founded Mavin Records?",
+			"options": ["Don Jazzy", "D'banj", "Timaya", "2Baba"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which artist sang the popular hit 'African Queen'?",
+			"options": ["P-Square", "2Baba (2face Idibia)", "Flavour", "9ice"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		}
+	]
+}
