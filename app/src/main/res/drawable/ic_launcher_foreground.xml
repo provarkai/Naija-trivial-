@@ -1,0 +1,20 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Ascending bars (business growth) plus an accent dot, kept inside the
+         adaptive icon safe zone (66dp circle centered on the 108dp canvas). -->
+    <path
+        android:fillColor="#22D3EE"
+        android:pathData="M32,64 L44,64 L44,82 L32,82 Z" />
+    <path
+        android:fillColor="#38BDF8"
+        android:pathData="M48,52 L60,52 L60,82 L48,82 Z" />
+    <path
+        android:fillColor="#818CF8"
+        android:pathData="M64,38 L76,38 L76,82 L64,82 Z" />
+    <path
+        android:fillColor="#F0ABFC"
+        android:pathData="M70,26 m-6,0 a6,6 0 1,1 12,0 a6,6 0 1,1 -12,0" />
+</vector>
