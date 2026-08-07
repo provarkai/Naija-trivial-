@@ -115,6 +115,25 @@ func has_played_daily_today(date_string: String = "") -> bool:
 	return data["daily_challenge"]["last_played_date"] == _today_or(date_string)
 
 
+## The streak as of *today*, not as of the last time it was written.
+## current_streak_days only gets corrected to 1 the next time the player
+## completes a Daily Challenge — read directly, it can go on showing a
+## stale streak for days after it's actually lapsed. Loss-aversion (the
+## brief's core retention lever) only works if a broken streak reads as
+## broken the moment it breaks, so every screen should call this instead
+## of reading current_streak_days off `data` directly.
+func get_effective_daily_streak(date_string: String = "") -> int:
+	var dc: Dictionary = data.get("daily_challenge", {})
+	var last_played: String = dc.get("last_played_date", "")
+	if last_played.is_empty():
+		return 0
+
+	var today := _today_or(date_string)
+	if last_played == today or last_played == _shift_date(today, -1):
+		return dc.get("current_streak_days", 0)
+	return 0 # last played before yesterday — the streak has already lapsed
+
+
 ## Marks today's daily challenge as complete and updates the streak. Streak
 ## continues if the previous completed date was exactly yesterday, resets
 ## to 1 otherwise.

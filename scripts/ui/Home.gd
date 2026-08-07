@@ -69,7 +69,7 @@ func _ready() -> void:
 func _refresh() -> void:
 	ads_upsell_button.visible = not SaveManager.has_ads_removed()
 
-	var streak: int = SaveManager.data.get("daily_challenge", {}).get("current_streak_days", 0)
+	var streak: int = SaveManager.get_effective_daily_streak()
 	if streak > 0:
 		daily_challenge_button.text = "Daily Challenge 🔥 %d day streak" % streak
 	else:

@@ -1,17 +1,20 @@
 extends Control
 ## Round Results Screen — score summary, streak achieved, and options to
-## play again or head back to categories.
+## share the score, play again, or head back to categories.
 ##
-## "Watch ad to continue" isn't wired up here yet — it depends on the
-## AdMob rewarded-video integration (build order item 8). GameStateManager
-## already exposes the hook it would call (grant_extra_time/revive); this
-## screen just doesn't have a rewarded-ad button to trigger it from yet.
-## "Share score" is likewise deferred to the UI-polish pass.
+## "Watch ad to continue" isn't wired up here — GameStateManager already
+## exposes the hook it would call (grant_extra_time/revive), but there's
+## no natural point to offer it once a round is already fully over
+## (revive fits mid-round, right after a wrong answer — see Gameplay.gd,
+## which is where it's actually wired). Kept as a documented gap rather
+## than a half-fit button here.
 
 var title_label: Label
 var score_label: Label
 var streak_label: Label
 var extra_label: Label
+var share_button: Button
+var share_status_label: Label
 
 var _summary: Dictionary
 
@@ -59,11 +62,19 @@ func _ready() -> void:
 
 	UIHelpers.add_spacer(vbox)
 
+	share_button = UIHelpers.add_button(vbox, "📤 Share Score to WhatsApp", 64)
+	share_button.pressed.connect(_on_share_pressed)
+
+	share_status_label = UIHelpers.add_label(vbox)
+	share_status_label.modulate = Color(1, 0.85, 0.3)
+
 	var play_again := UIHelpers.add_button(vbox, "Play Again", 64)
 	play_again.pressed.connect(_on_play_again_pressed)
 
 	var back_home := UIHelpers.add_button(vbox, "Back to Categories", 64)
 	back_home.pressed.connect(func(): SceneManager.goto_scene(SceneManager.HOME))
+
+	ShareManager.share_opened.connect(_on_share_opened)
 
 
 ## Persists the score/streak-day side effects of finishing a round. Done
@@ -76,6 +87,23 @@ func _apply_save_updates() -> void:
 
 	if _summary.get("daily_challenge", false):
 		SaveManager.record_daily_challenge_completion()
+
+
+func _on_share_pressed() -> void:
+	share_button.disabled = true
+	share_status_label.text = "Preparing your score card…"
+	ShareManager.share_score(_summary)
+
+
+func _on_share_opened(method: String) -> void:
+	share_button.disabled = false
+	match method:
+		"plugin", "whatsapp_text":
+			share_status_label.text = "Shared! 🎉"
+		"clipboard_fallback":
+			share_status_label.text = "WhatsApp isn't available here — copied your score to the clipboard instead."
+		_:
+			share_status_label.text = ""
 
 
 func _on_play_again_pressed() -> void:

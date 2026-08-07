@@ -41,12 +41,18 @@ func _ready() -> void:
 
 func _refresh() -> void:
 	var dc: Dictionary = SaveManager.data.get("daily_challenge", {})
-	var current: int = dc.get("current_streak_days", 0)
+	var effective_streak := SaveManager.get_effective_daily_streak()
 	var longest: int = dc.get("longest_streak_days", 0)
-	streak_label.text = "Current streak: %d days   •   Best: %d days" % [current, longest]
+	streak_label.text = "Current streak: %d days   •   Best: %d days" % [effective_streak, longest]
 
 	if SaveManager.has_played_daily_today():
 		status_label.text = "You've already played today — playing again won't change your streak, but you can still beat your score."
+	elif effective_streak > 0:
+		status_label.text = "🔥 Play today to keep your %d-day streak alive!" % effective_streak
+	elif dc.get("current_streak_days", 0) > 0:
+		# current_streak_days is still stale (nonzero) but
+		# get_effective_daily_streak() says it's already lapsed.
+		status_label.text = "You lost your streak — start a new one today."
 	else:
 		status_label.text = ""
 

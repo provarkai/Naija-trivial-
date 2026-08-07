@@ -26,6 +26,7 @@ SaveManager="*res://scripts/autoload/SaveManager.gd"
 SceneManager="*res://scripts/autoload/SceneManager.gd"
 AdManager="*res://scripts/autoload/AdManager.gd"
 IAPManager="*res://scripts/autoload/IAPManager.gd"
+ShareManager="*res://scripts/autoload/ShareManager.gd"
 
 [display]
 
