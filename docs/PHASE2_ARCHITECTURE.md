@@ -140,13 +140,63 @@ track of these):
   transitions, back-gesture handling, and the prefill-on-edit path are
   verified by compilation only, not by running the app on a device.
 
-## 4. Sprint 3 — Workspace screen
+## 4. Sprint 3 — Workspace screen (done)
 
-A new `WorkspaceScreen` (tabs: Documents, Products, Customers, Templates,
-Business Profile) reading/writing the Sprint 1 repositories directly. Add
-search over documents (title/tool type/customer/date/content — a Room
-`LIKE` query is enough at this scale; move to a dedicated search system
-later only if needed).
+One `WorkspaceScreen` (tabs: Documents, Products, Customers, Business
+Profile), reading/writing the Sprint 1 repositories directly, replacing
+the old standalone History screen.
+
+**What got built**, under `ui/workspace/`:
+- `WorkspaceViewModel` — reactive off `workspaceRepository.observeActiveWorkspace()`
+  (`flatMapLatest`, not a one-shot load like Sprint 2's wizard), so it
+  stays correct if multi-workspace switching ever lands later. Each tab's
+  data is `activeWorkspaceId.filterNotNull().flatMapLatest { repo.observeAllByWorkspace(it) }`.
+- `WorkspaceScreen` — `TabRow`+`Tab` for the 4 tabs, `AnimatedContent` for
+  tab-content transitions (not `HorizontalPager` — sticking to a component
+  already proven to compile in this codebase, see the `FlowRow` note
+  below), a `FloatingActionButton` shown only on the Products/Customers
+  tabs. Documents tab reuses the exact card/row layout the old
+  `HistoryScreen` had.
+- `WorkspaceDialogs.kt` — `ProductDialog`/`CustomerDialog`, `AlertDialog`-
+  based add/edit forms. Delete is a per-row icon button, no confirmation
+  — matches the old `HistoryScreen`'s existing convention.
+- `DocumentRepository` gained one delegating method,
+  `observeHistoryByWorkspace(workspaceId)`, calling the DAO method Sprint
+  1 added but nothing used until now.
+
+**Deviations from the original sketch above**:
+- **4 tabs, not 5.** No `Template` entity/DAO/migration exists anywhere —
+  building one would be schema-level scope creep for a sprint about
+  consolidating *existing* data. Deferred to a future increment.
+- **Client-side search, not a Room `LIKE` query.** The DAO has no such
+  query and data volume per workspace is small enough that
+  `WorkspaceViewModel` just combines the document flow with a local
+  `searchQuery` and filters in Kotlin (`title`/`toolTitle`/`content`,
+  case-insensitive `contains`). Revisit only if this becomes a measured
+  problem at real scale.
+- **History fully consolidated, not duplicated.** `ui/history/HistoryScreen.kt`
+  and `HistoryViewModel.kt` are deleted, `Routes.HISTORY` is gone, and
+  `HomeScreen`'s top-bar icon now points at `Routes.WORKSPACE` instead.
+
+**Still deferred, carried forward a third time**: `GeneratedDocument`/
+`GeneratorViewModel` still don't use the real active workspace — every
+document is still written with `workspaceId = WorkspaceDefaults.DEFAULT_WORKSPACE_ID`
+in `DocumentRepository.toEntity()`. `observeHistoryByWorkspace` exists and
+is now used by the Workspace screen, but this only stays correct because
+the app has exactly one workspace today. Must be fixed before any
+multi-workspace UI (Sprint 9 territory) ships.
+
+**Lesson carried from Sprint 2, worth repeating**: a sub-agent claimed
+`FlowRow` needed no experimental opt-in at this project's exact Compose
+version, and the real build proved that wrong. This sprint's design
+deliberately avoided re-risking that by using only long-stable, proven
+Material3 components (`TabRow`, `AlertDialog`, `FloatingActionButton`,
+`AnimatedContent`) — verify any future experimental-API claim by actually
+building, not by inference.
+
+No Android emulator in this sandbox — tab switching, dialog behavior,
+search filtering, and FAB visibility are verified by compilation only,
+matching Sprints 1-2's residual-risk note.
 
 ## 5. Sprints 4-6 — Business Context Engine + AI Assistant
 

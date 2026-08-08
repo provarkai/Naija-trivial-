@@ -7,7 +7,7 @@ object Routes {
     const val HOME = "home"
     const val GENERATOR = "generator/{toolId}"
     const val RESULT = "result/{documentId}"
-    const val HISTORY = "history"
+    const val WORKSPACE = "workspace"
     const val SUBSCRIPTION = "subscription"
     const val PROFILE = "profile"
 

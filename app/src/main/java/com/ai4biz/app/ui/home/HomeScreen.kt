@@ -16,9 +16,9 @@ import androidx.compose.material.icons.automirrored.filled.Assignment
 import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.Campaign
 import androidx.compose.material.icons.filled.Description
-import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Receipt
+import androidx.compose.material.icons.filled.Store
 import androidx.compose.material.icons.filled.WorkspacePremium
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -67,8 +67,8 @@ fun HomeScreen(navController: NavHostController) {
             TopAppBar(
                 title = { Text("Business Edge AI") },
                 actions = {
-                    IconButton(onClick = { navController.navigate(Routes.HISTORY) }) {
-                        Icon(Icons.Filled.History, contentDescription = "History")
+                    IconButton(onClick = { navController.navigate(Routes.WORKSPACE) }) {
+                        Icon(Icons.Filled.Store, contentDescription = "Workspace")
                     }
                     IconButton(onClick = { navController.navigate(Routes.SUBSCRIPTION) }) {
                         Icon(Icons.Filled.WorkspacePremium, contentDescription = "Subscription")

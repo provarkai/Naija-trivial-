@@ -17,6 +17,10 @@ class DocumentRepository(private val dao: GeneratedDocumentDao) {
     fun observeHistory(): Flow<List<GeneratedDocument>> =
         dao.observeAll().map { entities -> entities.map { it.toDomain() } }
 
+    /** Phase 2 Sprint 3 (docs/PHASE2_ARCHITECTURE.md) -- backs the Workspace screen's Documents tab. */
+    fun observeHistoryByWorkspace(workspaceId: String): Flow<List<GeneratedDocument>> =
+        dao.observeAllByWorkspace(workspaceId).map { entities -> entities.map { it.toDomain() } }
+
     fun observeDocument(id: String): Flow<GeneratedDocument?> =
         dao.observeById(id).map { it?.toDomain() }
 
