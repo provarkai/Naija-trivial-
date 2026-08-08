@@ -57,9 +57,28 @@ change** after your first upload, so confirm you're happy with it now.
 Play Console → App content, and fill in:
 
 - **Privacy policy**: the URL from step 2.
-- **App access**: since there's no login wall blocking core features
-  (guest mode works), you can likely mark it as fully accessible; if any
-  reviewer account is needed, note that guest mode requires no credentials.
+- **Sign-in details** (Play Console's current name for what used to be
+  called "App access"): select **"All or some functionality in my app is
+  restricted"** → **No** — i.e. answer that the app does **not** require
+  sign-in to access its functionality. Here's why that's the accurate
+  answer, not just the convenient one: the app does show an auth screen
+  (`AuthScreen.kt`) before Home, but one of its three options is
+  **"Continue as Guest"** (`AuthRepository.signInAsGuest()`), which sets
+  `isSignedIn = true` locally with **no credentials of any kind** — no
+  username, no password, nothing typed in. Every screen (Home, the 5
+  generator tools, History, Result, Subscription) is reachable from there
+  with zero restrictions. So there is no login wall a reviewer could get
+  stuck behind.
+  - If the form insists you pick "restricted" because *an* auth screen
+    exists at all, add this exact instruction in the notes field so the
+    reviewer isn't stuck: *"No account or credentials are required. On
+    the sign-in screen, tap 'Continue as Guest' to reach all app
+    functionality."*
+  - Do **not** enter fake/test username+password fields — there's nothing
+    to authenticate against; email sign-in here is just a locally-stored
+    display name (see `AuthRepository.signInWithEmail`), not a real
+    account system, and "Continue with Google" is a stub that shows a
+    snackbar and goes nowhere yet.
 - **Ads**: This build **does** show ads (AdMob: banner, interstitial,
   rewarded) → declare "Yes, my app contains ads".
 - **Content rating**: fill in the questionnaire — this app has no violence,
