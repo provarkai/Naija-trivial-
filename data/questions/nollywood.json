@@ -127,6 +127,60 @@
 			"options": ["Lagos State House of Assembly member", "Federal Minister of Culture", "Senate President", "State Governor"],
 			"correct_index": 0,
 			"difficulty": "hard"
+		},
+		{
+			"question": "'Oloture' (2019), a Nollywood film about human trafficking, was directed by whom?",
+			"options": ["Kenneth Gyang", "Kunle Afolayan", "Kemi Adetiba", "Jade Osiberu"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "'76' (2016), a Nollywood film about the failed 1976 coup attempt, was directed by whom?",
+			"options": ["Izu Ojukwu", "Kunle Afolayan", "Tunde Kelani", "Genevieve Nnaji"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Which prolific Nollywood producer founded the pan-African media company EbonyLife?",
+			"options": ["Mo Abudu", "Mildred Okwo", "Amaka Igwe", "Emem Isong"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "'King of Boys' (2018), a hit political crime-thriller, was directed by whom?",
+			"options": ["Kemi Adetiba", "Kunle Afolayan", "Niyi Akinmolayan", "Biodun Stephen"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Who plays the lead role of Eniola Salami in 'King of Boys'?",
+			"options": ["Sola Sobowale", "Genevieve Nnaji", "Funke Akindele", "Omotola Jalade-Ekeinde"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Comedian-turned-actor 'Broda Shaggi' first rose to fame through what kind of content?",
+			"options": ["Social media comedy skits", "Radio drama", "Stage plays", "Reality TV"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Kannywood, Nigeria's film industry producing films primarily in Hausa, is centered in which city?",
+			"options": ["Kano", "Kaduna", "Sokoto", "Zaria"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Kannywood is the name for Nigeria's film industry producing films primarily in which language?",
+			"options": ["Igbo", "Hausa", "Yoruba", "Fulfulde"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which language, alongside English, is commonly used in Nollywood films set in South-East Nigeria?",
+			"options": ["Hausa", "Igbo", "Yoruba", "Efik"],
+			"correct_index": 1,
+			"difficulty": "medium"
 		}
 	]
 }

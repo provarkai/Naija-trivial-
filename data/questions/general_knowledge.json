@@ -139,6 +139,60 @@
 			"options": ["Nnamdi Azikiwe International Airport", "Murtala Muhammed International Airport", "Mallam Aminu Kano International Airport", "Port Harcourt International Airport"],
 			"correct_index": 1,
 			"difficulty": "medium"
+		},
+		{
+			"question": "What is Nigeria's most widely spoken indigenous language by number of speakers?",
+			"options": ["Hausa", "Yoruba", "Igbo", "Fulfulde"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which Niger Delta city is known as Nigeria's main oil-industry hub?",
+			"options": ["Warri", "Port Harcourt", "Calabar", "Uyo"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria is a founding member of which West African regional bloc, headquartered in Abuja?",
+			"options": ["ECOWAS", "African Union", "OPEC", "Commonwealth"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "In what year did Nigeria join the United Nations, shortly after independence?",
+			"options": ["1958", "1960", "1963", "1966"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is the name of Nigeria's main stock exchange?",
+			"options": ["Nigerian Exchange (NGX)", "Lagos Commodity Exchange", "West African Securities Board", "Abuja Capital Market"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is Nigeria's international telephone dialing code?",
+			"options": ["+233", "+234", "+254", "+27"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "On which side of the road do vehicles drive in Nigeria?",
+			"options": ["The left-hand side", "The right-hand side", "It varies by state", "The centre lane only"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's official time zone is known as what?",
+			"options": ["East Africa Time", "West Africa Time (WAT)", "Central Africa Time", "Greenwich Mean Time"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria is a member of which international group of oil-producing nations?",
+			"options": ["OPEC", "NATO", "G7", "ASEAN"],
+			"correct_index": 0,
+			"difficulty": "medium"
 		}
 	]
 }

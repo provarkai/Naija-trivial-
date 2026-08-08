@@ -115,6 +115,48 @@
 			"options": ["The Olympics", "The FIBA World Cup", "The Commonwealth Games", "The All-Africa Games"],
 			"correct_index": 0,
 			"difficulty": "medium"
+		},
+		{
+			"question": "The Super Eagles were formerly known by which name before a 1988 rebrand?",
+			"options": ["The Green Eagles", "The Golden Eagles", "The Red Devils", "The Green Warriors"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Segun Odegbami, a star of Nigeria's 1980 AFCON-winning squad, was popularly nicknamed what?",
+			"options": ["Mathematical", "The General", "Baba Eagle", "Thunder"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Nigeria's top domestic football league is commonly abbreviated as what?",
+			"options": ["NPFL", "NFA", "FNL", "NPL"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria co-hosted the 2000 Africa Cup of Nations alongside which country?",
+			"options": ["Ghana", "Cameroon", "Ivory Coast", "South Africa"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Legendary goalkeeper Vincent Enyeama set a notable clean-sheet streak record playing in France for which club?",
+			"options": ["Lille", "Marseille", "Lyon", "Paris Saint-Germain"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Striker Odion Ighalo had a high-profile loan spell in 2020 at which major English Premier League club?",
+			"options": ["Manchester United", "Liverpool", "Chelsea", "Arsenal"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's D'Tigers won the AfroBasket (African basketball championship) title in which year?",
+			"options": ["2011", "2015", "2019", "2021"],
+			"correct_index": 1,
+			"difficulty": "hard"
 		}
 	]
 }

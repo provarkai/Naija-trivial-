@@ -211,6 +211,78 @@
 			"options": ["Davido", "Wizkid", "Burna Boy", "Olamide"],
 			"correct_index": 0,
 			"difficulty": "medium"
+		},
+		{
+			"question": "Tiwa Savage's breakout single, which launched her career, was titled what?",
+			"options": ["Kele Kele Love", "Eminado", "49-99", "All Over"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "D'banj's global breakout hit, released in 2012, was titled what?",
+			"options": ["Fall in Love", "Oliver Twist", "Suddenly", "Igwe"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Falz, known for blending music with comedy, was born with which name?",
+			"options": ["Folarin Falana", "Folorunsho Adebayo", "Femi Falana Jr.", "Farouk Lawal"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Falz is the son of which prominent Nigerian human rights lawyer?",
+			"options": ["Femi Falana", "Gani Fawehinmi", "Femi Otedola", "Wole Soyinka"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "After P-Square split, Peter Okoye adopted which stage name?",
+			"options": ["Mr P", "Rudeboy", "Big P", "P-Kid"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "After P-Square split, Paul Okoye adopted which stage name?",
+			"options": ["Mr P", "Rudeboy", "Big P", "P-Kid"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Iyanya rose to fame after winning which reality TV singing competition?",
+			"options": ["Project Fame West Africa", "Nigerian Idol", "The Voice Nigeria", "Star Quest"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Gospel artist Sinach is known globally for which worship hit song?",
+			"options": ["Way Maker", "Great Are You Lord", "Goodness of God", "This Is Amazing Grace"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "CKay's song 'Love Nwantiti' became a global viral hit around which year?",
+			"options": ["2019", "2021", "2023", "2017"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Wizkid's own record label/imprint, under which he releases music, is called what?",
+			"options": ["Starboy Entertainment", "Wiz Nation", "Superstar Records", "Ayo Music Group"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Niniola is often called Nigeria's 'Queen of' which South African-originated dance genre she blends with Afrobeats?",
+			"options": ["Amapiano", "Gqom", "Kwaito", "Bongo Flava"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Wande Coal is well known for the popular hit song titled what?",
+			"options": ["Ololufe", "Bumper to Bumper", "Turning Point", "Habibi"],
+			"correct_index": 0,
+			"difficulty": "medium"
 		}
 	]
 }

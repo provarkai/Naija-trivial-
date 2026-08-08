@@ -139,6 +139,66 @@
 			"options": ["Umaru Musa Yar'Adua", "Olusegun Obasanjo", "Shehu Shagari", "Ibrahim Babangida"],
 			"correct_index": 0,
 			"difficulty": "medium"
+		},
+		{
+			"question": "The Sokoto Caliphate was founded in the early 19th century by which Islamic reformer?",
+			"options": ["Usman dan Fodio", "Muhammadu Bello", "Al-Kanemi", "Mai Idris Alooma"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "In 1897, British forces launched a 'punitive expedition' that looted artefacts from and ended the independence of which powerful pre-colonial kingdom?",
+			"options": ["The Oyo Empire", "The Benin Kingdom", "The Sokoto Caliphate", "The Kanem-Bornu Empire"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The powerful pre-colonial Oyo Empire was primarily associated with which ethnic group?",
+			"options": ["Hausa", "Igbo", "Yoruba", "Ijaw"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Queen Amina, a legendary warrior queen, is associated with which pre-colonial Hausa city-state?",
+			"options": ["Kano", "Zazzau (Zaria)", "Katsina", "Sokoto"],
+			"correct_index": 1,
+			"difficulty": "hard"
+		},
+		{
+			"question": "The Nigerian Naira replaced which currency as legal tender in 1973?",
+			"options": ["The Nigerian pound", "The West African CFA franc", "The British pound sterling", "The cowrie shell"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "General Yakubu Gowon was overthrown in a bloodless coup in which year?",
+			"options": ["1970", "1975", "1979", "1983"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "General Murtala Mohammed, who took power in 1975, was assassinated in an attempted coup in which year?",
+			"options": ["1975", "1976", "1979", "1980"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Who succeeded Murtala Mohammed after his 1976 assassination, later handing power to a civilian government in 1979?",
+			"options": ["Olusegun Obasanjo", "Shehu Shagari", "Muhammadu Buhari", "Ibrahim Babangida"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's Second Republic (1979-1983) ended following a military coup in which year?",
+			"options": ["1981", "1983", "1985", "1990"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's pre-independence constitutional conferences, which shaped the country's federal structure, were mostly held in which city?",
+			"options": ["Lagos", "London", "Enugu", "Kaduna"],
+			"correct_index": 1,
+			"difficulty": "medium"
 		}
 	]
 }

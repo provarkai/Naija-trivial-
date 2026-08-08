@@ -139,6 +139,66 @@
 			"options": ["Stay right there", "Get out of the way / move", "Drive carefully", "Follow the road"],
 			"correct_index": 1,
 			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Oya' mean in Pidgin?",
+			"options": ["Come on / let's go", "Goodbye forever", "I'm sorry", "Wait here"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does 'Na so' mean in Pidgin?",
+			"options": ["Never again", "That's how it is / it's true", "I doubt it", "Not yet"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "In Pidgin, adding 'jare' to the end of a sentence is typically used for what?",
+			"options": ["To add emphasis or a casual, pleading tone", "To ask a formal question", "To end a conversation politely", "To count something"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does the common interjection 'Ehen' express in Pidgin?",
+			"options": ["Oh I see / go on", "Total disagreement", "Deep sadness", "A formal greeting"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Gan gan' mean when added for emphasis in Pidgin?",
+			"options": ["Maybe", "At all / completely", "Slowly", "Tomorrow"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The Pidgin proverb 'Small small catch monkey' teaches that:",
+			"options": ["Patience and gradual effort lead to success", "Small animals are dangerous", "Big plans always fail", "Monkeys are hard to catch"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Sharp sharp' mean in Pidgin?",
+			"options": ["Quickly / immediately", "Very carefully", "Very expensive", "Late at night"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does the common exclamation 'Na wa o' express?",
+			"options": ["Surprise ('wow')", "Deep anger", "A request for food", "A farewell"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does 'Bros' commonly mean in Nigerian Pidgin?",
+			"options": ["A term for a male friend or brother figure", "A type of food", "A police officer", "A market trader"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "In Nigeria, casually calling someone 'Aunty' or 'Uncle' usually signals what, even without any blood relation?",
+			"options": ["A respectful, friendly term of address", "That they are in trouble", "A formal job title", "That they are a stranger to avoid"],
+			"correct_index": 0,
+			"difficulty": "medium"
 		}
 	]
 }
