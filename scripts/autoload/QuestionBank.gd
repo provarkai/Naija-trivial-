@@ -120,7 +120,7 @@ func _read_json(path: String):
 	if file == null:
 		return null
 	var text := file.get_as_text()
-	var result := JSON.parse_string(text)
+	var result: Variant = JSON.parse_string(text)
 	return result
 
 
