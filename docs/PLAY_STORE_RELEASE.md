@@ -97,17 +97,37 @@ between declared and observed behavior.
 Billing won't work until these exist in Play Console, with these **exact**
 product IDs (hardcoded in `app/src/main/java/com/ai4biz/app/billing/PlanId.kt`):
 
-Play Console → your app → **Monetize → Products**:
+- `ai4biz_monthly` (Subscription, 1 month, ₦4,500)
+- `ai4biz_annual` (Subscription, 1 year, ₦42,000)
+- `ai4biz_lifetime` (In-app product, one-time, ₦180,000)
 
-- **Subscriptions** → Create subscription:
-  - Product ID: `ai4biz_monthly` — set your monthly price, base plan billing period 1 month.
-  - Product ID: `ai4biz_annual` — same, billing period 1 year.
-- **In-app products** → Create product:
-  - Product ID: `ai4biz_lifetime` — one-time purchase, set your price.
+**Option A -- scripted (`server/scripts/setup-billing-products.js`):**
 
-Each needs to be **Activated** (not left as a draft) before purchases work.
-Prices shown in the app come live from what you set here (`BillingManager.priceFor`)
-— there's no price hardcoded in the app.
+1. Grant the service account (the one from "Set up server-side purchase
+   verification" above) write access: Play Console → Setup → **API access**
+   → find the service account → Grant Access → under app permissions grant
+   **"Manage store presence"** (or broader) for this app. Invite/send.
+2. Run:
+   ```bash
+   cd server
+   npm install
+   GOOGLE_SERVICE_ACCOUNT_JSON_PATH=/path/to/key.json node scripts/setup-billing-products.js
+   ```
+   (or `GOOGLE_SERVICE_ACCOUNT_JSON_BASE64=...` the same way `/server` itself uses it).
+   Safe to rerun -- existing products are skipped, not duplicated.
+3. If it fails with an "invalid regions version" error, the error message
+   names the current correct value -- rerun with
+   `REGIONS_VERSION=<that value> node scripts/setup-billing-products.js`.
+
+**Option B -- manual:** Play Console → your app → **Monetize → Products**:
+
+- **Subscriptions** → Create subscription with the product IDs/prices above.
+- **In-app products** → Create product for `ai4biz_lifetime`.
+
+Either way, each product needs to be **Activated** (not left as a draft)
+before purchases work. Prices shown in the app come live from what's set
+here (`BillingManager.priceFor`) — there's no price hardcoded in the app
+itself, only in the setup script/manual entry above.
 
 **Testing purchases without spending real money:** add yourself as a
 [License Tester](https://support.google.com/googleplay/android-developer/answer/6062777)
