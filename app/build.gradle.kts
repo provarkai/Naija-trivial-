@@ -1,7 +1,19 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
+}
+
+// Local-only backend config (never committed -- see local.properties.example).
+// Falls back to empty strings, which makes AppContainer pick the mock
+// generator; set these once you've deployed /server to get real AI output.
+val localProperties = Properties().apply {
+    val localPropsFile = rootProject.file("local.properties")
+    if (localPropsFile.exists()) {
+        localPropsFile.inputStream().use { load(it) }
+    }
 }
 
 android {
@@ -18,6 +30,17 @@ android {
         versionName = "0.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String",
+            "AI4BIZ_BACKEND_URL",
+            "\"${localProperties.getProperty("ai4biz.backend.url", "")}\""
+        )
+        buildConfigField(
+            "String",
+            "AI4BIZ_BACKEND_SECRET",
+            "\"${localProperties.getProperty("ai4biz.backend.secret", "")}\""
+        )
     }
 
     buildTypes {
@@ -41,6 +64,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     composeOptions {
@@ -80,6 +104,7 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")

@@ -1,0 +1,13 @@
+# Copy relevant lines into your own local.properties (gitignored, never committed).
+
+# Required by the Android Gradle Plugin:
+# sdk.dir=/path/to/Android/sdk
+
+# Optional: point the app at your deployed /server (see server/README.md).
+# Leave unset/empty and the app falls back to MockAiGeneratorService with
+# no other changes needed.
+# ai4biz.backend.url=https://your-deployed-server.example.com
+# ai4biz.backend.secret=same-value-as-APP_SHARED_SECRET-on-the-server
+
+# For a server running on your machine, tested from an Android emulator:
+# ai4biz.backend.url=http://10.0.2.2:3000

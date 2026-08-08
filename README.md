@@ -27,7 +27,7 @@ An Android app (Kotlin + Jetpack Compose, Material 3) with:
 ```
 app/src/main/java/com/ai4biz/app/
 ├── model/            ToolType, InputField, GeneratedDocument (pure Kotlin)
-├── ai/                AiGeneratorService interface + MockAiGeneratorService
+├── ai/                AiGeneratorService interface + Mock/Remote implementations
 ├── data/
 │   ├── local/         Room entity/DAO/database (History persistence)
 │   └── repository/    DocumentRepository, AuthRepository (DataStore)
@@ -42,18 +42,39 @@ No DI framework — `AppContainer` (a small hand-rolled container created in
 `Ai4bizApplication`) wires repositories/services and is passed down via a
 `CompositionLocal`.
 
-### Wiring in a real AI backend
+### Real AI backend
 
-`MockAiGeneratorService` currently returns templated text so the app is
-fully usable with zero configuration. To use a real model:
+`AppContainer` auto-selects the generator implementation:
 
-1. Implement `AiGeneratorService` against your own backend.
-2. **Proxy the LLM call through a server you control** — do not embed a
-   model API key in the Android client.
-3. Swap the instance created in `AppContainer.aiGeneratorService`.
+- **No backend configured** → `MockAiGeneratorService` (templated text,
+  zero setup, always works).
+- **Backend configured** → `RemoteAiGeneratorService`, which calls a small
+  Express proxy (`/server`) that in turn calls
+  [OpenRouter](https://openrouter.ai). The OpenRouter API key lives only on
+  that server; the app holds just a lightweight shared secret for the proxy
+  itself.
 
-Everything downstream (forms, history, PDF export) depends only on the
-`AiGeneratorService` interface, so no UI code needs to change.
+```
+Android app --(Bearer APP_SHARED_SECRET)--> /server --(OpenRouter key)--> OpenRouter --> model
+```
+
+To turn it on:
+
+1. `cd server && npm install && cp .env.example .env`, fill in
+   `OPENROUTER_API_KEY` (and pick a model — see `server/README.md`), then
+   `npm start` (or deploy it — Render/Railway/Fly.io all work).
+2. In the Android project's `local.properties` (gitignored — see
+   `local.properties.example`), set:
+   ```
+   ai4biz.backend.url=http://10.0.2.2:3000   # emulator -> local server
+   ai4biz.backend.secret=<same value as APP_SHARED_SECRET>
+   ```
+3. Rebuild. No UI or ViewModel code changes — everything downstream (forms,
+   history, PDF export) depends only on the `AiGeneratorService` interface.
+
+Cleartext HTTP is allowed only to `10.0.2.2`/`localhost` (see
+`network_security_config.xml`) for local dev; a deployed server should be
+HTTPS, which needs no extra config.
 
 ## Building
 
