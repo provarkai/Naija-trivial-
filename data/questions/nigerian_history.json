@@ -319,6 +319,78 @@
 			"options": ["1967", "1976", "1985", "1990"],
 			"correct_index": 1,
 			"difficulty": "hard"
+		},
+		{
+			"question": "The January 1966 coup, Nigeria's first, was led by which army officer?",
+			"options": ["Major Kaduna Nzeogwu", "Yakubu Gowon", "Murtala Mohammed", "Sani Abacha"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Which prominent nationalist and former Western Region premier was imprisoned before later serving as a federal commissioner during the Civil War?",
+			"options": ["Obafemi Awolowo", "Nnamdi Azikiwe", "Ahmadu Bello", "Aminu Kano"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Nigeria's 1954 constitution, which established a federal system of government, is known as which Constitution?",
+			"options": ["The Lyttleton Constitution", "The Richards Constitution", "The Clifford Constitution", "The Macpherson Constitution"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "The Nok culture, one of Africa's earliest known civilizations, is famous for producing which kind of ancient artefacts?",
+			"options": ["Terracotta sculptures", "Bronze coins", "Stone pyramids", "Woven tapestries"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The Nok culture flourished in which part of present-day Nigeria?",
+			"options": ["Central Nigeria (Plateau area)", "The far North", "The Niger Delta", "The South-West coast"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which ancient empire, centered around Lake Chad, was one of the longest-lasting in African history, with territory in present-day northeastern Nigeria?",
+			"options": ["Kanem-Bornu Empire", "Songhai Empire", "Mali Empire", "Ashanti Empire"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Unlike the more centralized Yoruba and Hausa-Fulani kingdoms, traditional Igbo pre-colonial society was generally organized around what?",
+			"options": ["Decentralized village and clan councils", "A single hereditary emperor", "A caste-based monarchy", "Colonial-appointed chiefs"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria became a republic on 1 October 1963 — exactly how many years after independence?",
+			"options": ["One year", "Two years", "Three years", "Five years"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		},
+		{
+			"question": "From independence in 1960 until becoming a republic in 1963, Nigeria's ceremonial head of state was which British monarch?",
+			"options": ["Queen Elizabeth II", "King George VI", "King Edward VIII", "King Charles III"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Before becoming Nigeria's first President in 1963, Nnamdi Azikiwe served in which ceremonial role from 1960?",
+			"options": ["Governor-General", "Prime Minister", "Chief Justice", "Senate President"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The 1957 Willink Commission was set up to investigate the fears and grievances of which groups ahead of independence?",
+			"options": ["Ethnic minorities", "Foreign investors", "Trade unions", "Religious leaders"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Which region of colonial Nigeria was the last to be granted internal self-government, in 1959, shortly before full independence?",
+			"options": ["Northern Region", "Western Region", "Eastern Region", "Lagos Colony"],
+			"correct_index": 0,
+			"difficulty": "hard"
 		}
 	]
 }

@@ -325,6 +325,90 @@
 			"options": ["1 Naira = 10 Kobo", "1 Naira = 100 Kobo", "1 Naira = 1,000 Kobo", "1 Naira = 50 Kobo"],
 			"correct_index": 1,
 			"difficulty": "medium"
+		},
+		{
+			"question": "Chinua Achebe wrote which acclaimed 1958 novel about pre-colonial Igbo society, one of the most widely read African novels?",
+			"options": ["Things Fall Apart", "No Longer at Ease", "Arrow of God", "A Man of the People"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Wole Soyinka became the first African to win which major international award, in 1986?",
+			"options": ["The Nobel Prize in Literature", "The Man Booker Prize", "The Pulitzer Prize", "The Nobel Peace Prize"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which Nigerian author wrote the acclaimed novel 'Half of a Yellow Sun', set during the Biafran War?",
+			"options": ["Chimamanda Ngozi Adichie", "Buchi Emecheta", "Ben Okri", "Wole Soyinka"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Chimamanda Ngozi Adichie delivered a widely viewed TED talk titled 'The Danger of a Single ___'?",
+			"options": ["Story", "Voice", "Truth", "Culture"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The Nike Art Gallery, one of the largest art galleries in West Africa, is located in which city?",
+			"options": ["Lagos", "Abuja", "Ibadan", "Benin City"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Yankari National Park, known for wildlife and warm springs, is located in which Nigerian state?",
+			"options": ["Bauchi", "Plateau", "Taraba", "Adamawa"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Obudu Mountain Resort, a popular highland tourist destination, is located in which Nigerian state?",
+			"options": ["Cross River", "Benue", "Ebonyi", "Akwa Ibom"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Zuma Rock, a massive monolith near Abuja, is popularly nicknamed the 'Gateway to ___'?",
+			"options": ["Abuja", "Nigeria", "The North", "Freedom"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Garri, a Nigerian dietary staple, is made from fermented what?",
+			"options": ["Cassava", "Yam", "Maize", "Plantain"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The friendly 'Jollof Wars' rivalry over whose version of jollof rice is best is famously between Nigeria and which neighbouring country?",
+			"options": ["Ghana", "Benin", "Togo", "Cameroon"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Suya, a popular Nigerian street food, is best described as what?",
+			"options": ["Spiced grilled/skewered meat", "A fried dough snack", "A cold fruit salad", "A rice porridge"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Egusi soup, a popular Nigerian dish, is primarily made from ground what?",
+			"options": ["Melon seeds", "Groundnuts", "Beans", "Rice"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is the highest denomination Nigerian Naira banknote (as of the 2020s)?",
+			"options": ["₦1,000", "₦500", "₦2,000", "₦5,000"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is the minimum voting age in Nigeria?",
+			"options": ["18", "16", "21", "20"],
+			"correct_index": 0,
+			"difficulty": "medium"
 		}
 	]
 }

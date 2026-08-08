@@ -241,6 +241,144 @@
 			"options": ["Africa International Film Festival (AFRIFF)", "Lagos Film Prize", "Nollywood Golden Reel Fest", "Naija Cinema Week"],
 			"correct_index": 0,
 			"difficulty": "hard"
+		},
+		{
+			"question": "'Blood Sisters' (2022), a hit Netflix Nollywood limited series, starred which prominent actress?",
+			"options": ["Ini Edo", "Genevieve Nnaji", "Rita Dominic", "Funke Akindele"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "'Anikulapo' (2022), a Yoruba epic fantasy film, was directed by whom?",
+			"options": ["Kunle Afolayan", "Tunde Kelani", "Niyi Akinmolayan", "Biyi Bandele"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "'The Black Book' (2023), a Nollywood action-thriller, was directed by whom?",
+			"options": ["Editi Effiong", "Kemi Adetiba", "Kunle Afolayan", "Jade Osiberu"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Which veteran actor stars as the lead vigilante father in 'The Black Book' (2023)?",
+			"options": ["Richard Mofe-Damijo", "Ramsey Nouah", "Pete Edochie", "Olu Jacobs"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "'Elesin Oba: The King's Horseman' (2022) is based on a play by which acclaimed Nigerian writer?",
+			"options": ["Wole Soyinka", "Chinua Achebe", "Chimamanda Ngozi Adichie", "Ben Okri"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which actor played Andy Okeke, the lead role in the original 1992 'Living in Bondage'?",
+			"options": ["Kenneth Okonkwo", "John Okafor", "Pete Edochie", "Zack Orji"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Comedian and actor AY Makun is known for founding which major annual comedy show?",
+			"options": ["AY Live", "Nite of a Thousand Laughs", "Basketmouth Uncensored", "Lagos Comedy Fest"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "AMVCA, a major Nigerian film/TV awards ceremony, stands for what?",
+			"options": ["Africa Magic Viewers' Choice Awards", "African Movie Video Council Awards", "Actors and Musicians Voting Council Awards", "African Media and Video Creators Awards"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which pay-TV company organizes the AMVCA (Africa Magic Viewers' Choice Awards)?",
+			"options": ["MultiChoice (DStv/Africa Magic)", "StarTimes", "GOtv Nigeria", "Netflix"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Genevieve Nnaji's 'Lionheart' was controversially disqualified from Oscar consideration for having too much dialogue in which language?",
+			"options": ["English", "Igbo", "French", "Pidgin"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which streaming platform did EbonyLife launch to showcase African content?",
+			"options": ["EbonyLife ON", "EbonyLife Play", "EbonyLife Stream", "EbonyLife Go"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "The 'Merry Men' Nollywood heist-comedy franchise stars Ramsey Nouah, AY Makun, and which other lead actor?",
+			"options": ["Jim Iyke", "Kanayo O. Kanayo", "Chiwetalu Agu", "Zack Orji"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which Nigerian entrepreneur founded IROKOtv, often called an early 'Netflix of Africa' for Nollywood streaming?",
+			"options": ["Jason Njoku", "Mo Abudu", "Charles Okpaleke", "Obi Emelonye"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "'Merry Men' cast member Williams Uchemba is also well known for his career as what?",
+			"options": ["A comedian", "A musician", "A footballer", "A news anchor"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "'King of Boys: The Return of the King' (2021) is a sequel to which 2018 Nollywood hit?",
+			"options": ["King of Boys", "The Wedding Party", "76", "Oloture"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Actress Sola Sobowale, who plays Eniola Salami in 'King of Boys', built her earlier career primarily in which language's Nollywood productions?",
+			"options": ["Yoruba", "Igbo", "Hausa", "French"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Actor Charles Inojie is a regular cast member of which long-running Nigerian television sitcom?",
+			"options": ["The Johnsons", "Papa Ajasco", "Fuji House of Commotion", "Tinsel"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which prominent actor co-starred as the lead in '76' (2016) alongside Rita Dominic?",
+			"options": ["Ramsey Nouah", "Jim Iyke", "Kanayo O. Kanayo", "Olu Jacobs"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nollywood's 'New Nollywood' era, marked by higher production values and cinema-first releases, is generally considered to have taken off around which decade?",
+			"options": ["1990s", "2000s", "2010s", "2020s"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Silverbird Cinemas, one of Nigeria's pioneering modern cinema chains, helped revive cinema-going culture starting in which decade?",
+			"options": ["1980s", "1990s", "2000s", "2010s"],
+			"correct_index": 2,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Stephanie Linus (Okereke) wrote and directed 'Dry' (2014), raising awareness about which health issue linked to child marriage?",
+			"options": ["Vesico-vaginal fistula (VVF)", "Malaria", "Malnutrition", "Tuberculosis"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "'Citation' (2020), a Nollywood film addressing university sexual harassment, was directed by whom?",
+			"options": ["Kunle Afolayan", "Kemi Adetiba", "Editi Effiong", "Jade Osiberu"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nollywood's earliest widely recognized 'epic' filmmaking tradition, featuring elaborate costumes and folklore themes, is most associated with which language's productions?",
+			"options": ["Yoruba", "Igbo", "Hausa", "Pidgin"],
+			"correct_index": 0,
+			"difficulty": "medium"
 		}
 	]
 }

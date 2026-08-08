@@ -129,16 +129,16 @@ All via `IAPManager` (see `docs/PLAY_BILLING_SETUP.md` to connect a real plugin)
 
 Questions live in `data/questions/<category_id>.json`, separate from game logic, so content can be added or edited without touching scripts — see `data/questions/SCHEMA.md` for the schema and content guidelines.
 
-**Current count: 301 questions** — past the 300-500 launch target's floor, though not yet every category at the 50-80/category target:
+**Current count: 400 questions**, comfortably inside the 300-500 launch target, and every category now within or above the 50-80/category range:
 
 | Category | Count |
 |---|---|
-| Naija Music | 55 |
-| Nollywood | 40 |
-| Nigerian History | 53 |
-| Sports | 46 |
-| General Knowledge | 54 |
-| Pidgin & Proverbs | 53 |
+| Naija Music | 70 |
+| Nollywood | 63 |
+| Nigerian History | 65 |
+| Sports | 66 |
+| General Knowledge | 68 |
+| Pidgin & Proverbs | 68 |
 
 Every question here is a fact I'm reasonably confident about from general knowledge, but none of it has been checked against a live source or a domain expert — worth a review pass before shipping, particularly anything with a specific date, award, or record. One factual error caught and fixed while expanding this batch: an earlier sports question misattributed Yamile Aldama (who competed for Sudan, then Cuba, then Great Britain — never Nigeria, and never won Olympic gold) as a Nigerian gold medalist; replaced with a verified Chioma Ajunwa fact. Worth treating as a reminder to spot-check the rest, not just the newly-added questions.
 

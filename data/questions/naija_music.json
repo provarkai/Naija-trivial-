@@ -331,6 +331,96 @@
 			"options": ["Wizkid (Starboy Entertainment)", "Davido (DMW)", "Burna Boy", "Olamide (YBNL)"],
 			"correct_index": 0,
 			"difficulty": "medium"
+		},
+		{
+			"question": "Burna Boy's 2020 album 'Twice as Tall' won which major international award?",
+			"options": ["A Grammy Award (Best Global Music Album)", "An Oscar", "A BRIT Award", "A Golden Globe"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "In which year did Burna Boy win his first Grammy Award?",
+			"options": ["2019", "2021", "2023", "2017"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Wizkid featured on 'Brown Skin Girl', a Grammy-winning song from which Beyoncé-associated project?",
+			"options": ["The Lion King: The Gift", "Homecoming", "Lemonade", "Renaissance"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Tems became the first Nigerian female artist to top the US Billboard Hot 100 as a featured artist, on which 2022 hit?",
+			"options": ["Future & Drake's 'Wait for U'", "Drake's 'One Dance'", "Beyoncé's 'Already'", "Justin Bieber's 'Peaches'"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Rema's 'Calm Down' achieved major global chart success especially after a remix featuring which pop star?",
+			"options": ["Selena Gomez", "Ariana Grande", "Dua Lipa", "Camila Cabello"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which Afrobeats star became the first in the genre to headline and sell out Madison Square Garden?",
+			"options": ["Burna Boy", "Wizkid", "Davido", "Rema"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which 2017 Davido single became one of his biggest global hits?",
+			"options": ["If", "Fall", "Aza", "Risky"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "D'Prince, Don Jazzy's younger brother, co-founded which record label?",
+			"options": ["Mavin Records", "YBNL", "Chocolate City", "EME"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is Rema's real name?",
+			"options": ["Divine Ikubor", "David Adeleke", "Ayodeji Balogun", "Damini Ogulu"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is D'banj's real name?",
+			"options": ["Oladapo Daniel Oyebanjo", "Michael Ajereh", "Folarin Falana", "Gabriel Afolabi"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Yemi Alade is popularly nicknamed 'Mama ___' for her pan-African musical appeal?",
+			"options": ["Africa", "Naija", "Music", "Afrobeat"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Kizz Daniel's viral 2022 hit song was titled what?",
+			"options": ["Buga", "Odo", "Cough (Odo)", "Mama"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Zlatan Ibile is known for popularizing which street-pop dance style?",
+			"options": ["Zanku", "Shaku Shaku", "Gwara Gwara", "Azonto"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The 'Zanku' dance, popularized by Zlatan Ibile, is also popularly known by what other name?",
+			"options": ["Leg Work", "Skelewu", "Alanta", "Etighi"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is Davido's full real name?",
+			"options": ["David Adedeji Adeleke", "David Ayodeji Balogun", "David Damini Ogulu", "David Folarin Falana"],
+			"correct_index": 0,
+			"difficulty": "medium"
 		}
 	]
 }

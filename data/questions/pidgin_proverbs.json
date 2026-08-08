@@ -319,6 +319,96 @@
 			"options": ["Trouble never ends", "Food is always ready", "Money never runs out", "Time moves quickly"],
 			"correct_index": 0,
 			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Guy man' mean in Pidgin?",
+			"options": ["A cool, stylish young man", "A stranger", "A police officer", "A market seller"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Yakata' mean in Pidgin?",
+			"options": ["To fall down / collapse", "To dance", "To laugh loudly", "To run away"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Mumu' mean in Pidgin?",
+			"options": ["A fool / foolish person", "A wise elder", "A close friend", "A wealthy person"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does the common exclamation 'Chai' express?",
+			"options": ["Surprise, frustration, or strong emotion", "A formal greeting", "Agreement only", "A request for food"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "In Pidgin, adding 'abi' to the end of a question is used to mean roughly what?",
+			"options": ["'Isn't it?' / 'right?'", "'Please stop'", "'I'm sorry'", "'Never mind'"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Wetin dey do you' mean?",
+			"options": ["What's wrong with you?", "Where are you going?", "What did you buy?", "Who told you that?"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Padi' mean in Pidgin?",
+			"options": ["A close friend", "An enemy", "A stranger", "A boss"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "In Pidgin, referring to 'my area' means what?",
+			"options": ["One's neighbourhood or local community", "One's job", "One's favourite food", "One's clothing size"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "When used respectfully, 'Baba' refers to what, even toward someone who isn't a blood relative?",
+			"options": ["An older man / father figure", "A young child", "A stranger to avoid", "A government official"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "When used respectfully, 'Mama' refers to what, even toward someone who isn't a blood relative?",
+			"options": ["A respected older woman", "A young girl", "A market seller specifically", "A teacher only"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "The proverb 'No matter how long the night, day must break' teaches that:",
+			"options": ["Hardship is always temporary", "Nights are dangerous", "Time cannot be trusted", "Mornings bring bad luck"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The saying 'You no fit clap with one hand' teaches that:",
+			"options": ["Cooperation and teamwork are necessary", "Music requires practice", "One person is always enough", "Hands should stay busy"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Wetin be your own' mean, often said dismissively?",
+			"options": ["Why does this concern you?", "What is your name?", "What did you buy?", "Where do you live?"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Chop life' mean?",
+			"options": ["To enjoy life / have a good time", "To eat quickly", "To work very hard", "To save money"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does repeating 'Waka waka' suggest?",
+			"options": ["Wandering around aimlessly", "Dancing energetically", "Speaking very fast", "Working overtime"],
+			"correct_index": 0,
+			"difficulty": "medium"
 		}
 	]
 }

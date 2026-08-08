@@ -277,6 +277,126 @@
 			"options": ["Russia", "Turkey", "Ukraine", "Poland"],
 			"correct_index": 0,
 			"difficulty": "medium"
+		},
+		{
+			"question": "The Super Eagles' home matches in recent years have often been played at a stadium in which city?",
+			"options": ["Uyo (Godswill Akpabio International Stadium)", "Kaduna", "Enugu", "Jos"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Blessing Okagbare won an Olympic silver medal in which event at the 2008 Beijing Games?",
+			"options": ["Long jump", "100m", "High jump", "400m"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which Nigerian-American NBA player represented Nigeria's national basketball team internationally?",
+			"options": ["Al-Farouq Aminu", "LeBron James", "Steph Curry", "Kevin Durant"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is the nickname of Nigeria's national under-20 men's football team?",
+			"options": ["Flying Eagles", "Golden Eaglets", "Green Eagles", "Young Falcons"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is the nickname of Nigeria's national under-17 men's football team?",
+			"options": ["Golden Eaglets", "Flying Eagles", "Junior Falcons", "Baby Eagles"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's Golden Eaglets are the most successful national team in the history of which FIFA tournament?",
+			"options": ["FIFA U-17 World Cup", "FIFA U-20 World Cup", "FIFA World Cup", "FIFA Confederations Cup"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's Golden Eaglets won the inaugural FIFA U-17 World Cup in 1985, hosted by which country?",
+			"options": ["China", "Mexico", "Italy", "Japan"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "What is the nickname of Nigeria's national beach soccer team?",
+			"options": ["Super Sand Eagles", "Beach Falcons", "Sand Warriors", "Golden Beach Eagles"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Nigeria's biggest football rivalry is often considered to be with which fellow West African nation?",
+			"options": ["Ghana", "Senegal", "Ivory Coast", "Mali"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Taribo West, a Super Eagles defender known for his distinctive dyed hair braids, played club football for which Italian giant?",
+			"options": ["Inter Milan", "AC Milan", "Juventus", "Roma"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Finidi George, part of Nigeria's 1994 World Cup and 1996 Olympic golden generation, played most of his European club career in which country?",
+			"options": ["Netherlands", "Spain", "Germany", "France"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Sunday Oliseh scored a memorable long-range volley goal against which team at the 1998 World Cup?",
+			"options": ["Spain", "Bulgaria", "Paraguay", "Denmark"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Emmanuel Amuneke scored Nigeria's goals in the final of which tournament Nigeria won in 1994?",
+			"options": ["Africa Cup of Nations", "FIFA World Cup", "Olympic Games", "FIFA Confederations Cup"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Emmanuel Amuneke scored Nigeria's opening goal at the 1994 FIFA World Cup, in a group-stage win over which country?",
+			"options": ["Bulgaria", "Greece", "Argentina", "Italy"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "At the 1994 World Cup, Nigeria's Round of 16 exit came against which country, in extra time?",
+			"options": ["Italy", "Germany", "Brazil", "Netherlands"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which legendary Italian player scored the extra-time winner against Nigeria in the 1994 World Cup Round of 16?",
+			"options": ["Roberto Baggio", "Paolo Maldini", "Franco Baresi", "Alessandro Del Piero"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's 1994 World Cup squad was managed by which Dutch coach?",
+			"options": ["Clemens Westerhof", "Guus Hiddink", "Louis van Gaal", "Frank Rijkaard"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigerian-American Kamaru Usman became a UFC champion in which weight division?",
+			"options": ["Welterweight", "Heavyweight", "Lightweight", "Featherweight"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigerian-born Israel Adesanya became a UFC champion in which weight division?",
+			"options": ["Middleweight", "Welterweight", "Heavyweight", "Bantamweight"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Kamaru Usman and Israel Adesanya, both of Nigerian heritage, became champions in which combat sport organization?",
+			"options": ["UFC (Mixed Martial Arts)", "WWE", "Boxing's WBC", "Bellator"],
+			"correct_index": 0,
+			"difficulty": "medium"
 		}
 	]
 }
