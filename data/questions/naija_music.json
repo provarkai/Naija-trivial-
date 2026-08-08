@@ -283,6 +283,54 @@
 			"options": ["Ololufe", "Bumper to Bumper", "Turning Point", "Habibi"],
 			"correct_index": 0,
 			"difficulty": "medium"
+		},
+		{
+			"question": "'Ye' is a popular hit song by which Nigerian artist?",
+			"options": ["Burna Boy", "Wizkid", "Davido", "Olamide"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "2Baba (2Face Idibia) was originally part of which music group before going solo?",
+			"options": ["Plantashun Boiz", "The Remedies", "Trybesmen", "Da Trybe"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which fellow artist, alongside 2Baba, was part of the group Plantashun Boiz and also had a notable solo career?",
+			"options": ["Faze", "9ice", "Timaya", "Duncan Mighty"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Burna Boy's grandfather, Benson Idonije, managed which legendary Afrobeat pioneer?",
+			"options": ["Fela Kuti", "King Sunny Adé", "Ebenezer Obey", "Sunny Okosun"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Simi's hit song 'Duduke', a lullaby-style tribute, is dedicated to whom?",
+			"options": ["Her son", "Her husband", "Her mother", "Her fans"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Iyanya was signed early in his career to which record label, MMMG?",
+			"options": ["Made Men Music Group", "Kennis Music", "Storm Records", "Slam Team"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Wizkid, Davido, and which other artist are commonly cited as Afrobeats' 'Big 3'?",
+			"options": ["Burna Boy", "Olamide", "Rema", "Fireboy DML"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "'Soco' (2019), a hit posse-cut single featuring Ceeza Milli, Spotless, and Terri, was released by which artist's label?",
+			"options": ["Wizkid (Starboy Entertainment)", "Davido (DMW)", "Burna Boy", "Olamide (YBNL)"],
+			"correct_index": 0,
+			"difficulty": "medium"
 		}
 	]
 }

@@ -193,6 +193,138 @@
 			"options": ["OPEC", "NATO", "G7", "ASEAN"],
 			"correct_index": 0,
 			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's oldest university, established in 1948, is which of the following?",
+			"options": ["University of Ibadan", "University of Lagos", "Ahmadu Bello University", "University of Nigeria, Nsukka"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's federal government is divided into how many arms/branches?",
+			"options": ["Two", "Three", "Four", "Five"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Nigeria's National Assembly is bicameral, consisting of the Senate and which other chamber?",
+			"options": ["House of Representatives", "House of Lords", "House of Commons", "National Council"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "How many members does Nigeria's Senate have (three per state, plus one for the FCT)?",
+			"options": ["99", "109", "119", "129"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which Nigerian city is nicknamed the 'Coal City' due to its historical coal mining industry?",
+			"options": ["Enugu", "Jos", "Makurdi", "Owerri"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which Nigerian city is nicknamed the 'Groundnut Pyramid City' for its historical groundnut trade?",
+			"options": ["Kano", "Sokoto", "Katsina", "Zaria"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's national postal service is known by which abbreviation?",
+			"options": ["NIPOST", "NPS", "FEDPOST", "NGPOST"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's national public television broadcaster is known by which abbreviation?",
+			"options": ["NTA", "FRCN", "NBC", "AIT"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Besides the shield's two horses, which bird appears atop Nigeria's coat of arms?",
+			"options": ["An eagle", "A dove", "A vulture", "A hawk"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria observes Independence Day as a public holiday on which date?",
+			"options": ["October 1st", "January 1st", "May 29th", "June 12th"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Nigeria's Democracy Day is currently observed on which date?",
+			"options": ["May 29th", "June 12th", "October 1st", "April 27th"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Before it was changed to June 12th, Nigeria's Democracy Day was observed on which date?",
+			"options": ["May 1st", "May 29th", "July 4th", "August 15th"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Before British colonial currency, cowrie shells were widely used in pre-colonial Nigeria primarily as what?",
+			"options": ["A form of currency/trade medium", "Building material", "Farming tools", "Religious artefacts only"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria is divided into how many geopolitical zones for administrative purposes?",
+			"options": ["Four", "Five", "Six", "Seven"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which of these is one of Nigeria's six geopolitical zones?",
+			"options": ["South-South", "East Central", "West Central", "North Atlantic"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Abuja (the FCT) is administratively distinct from Nigeria's 36 states because it is officially a...?",
+			"options": ["Federal Capital Territory, not a state", "Special autonomous region", "Federal protectorate", "Joint-state zone"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is the name of Nigeria's sovereign wealth fund, which invests savings from oil revenue?",
+			"options": ["Nigeria Sovereign Investment Authority (NSIA)", "Central Reserve Fund", "National Oil Trust", "Federal Savings Authority"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "The name 'Naira', Nigeria's currency, is derived from which word?",
+			"options": ["'Nigeria' itself", "A Yoruba word for gold", "An Igbo word for wealth", "A Hausa word for trade"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's major stadium in Abuja is officially named after which historical figure?",
+			"options": ["Moshood Abiola", "Nnamdi Azikiwe", "Murtala Mohammed", "Ahmadu Bello"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "What is Nigeria's largest man-made lake, formed by a dam on the River Niger?",
+			"options": ["Lake Kainji", "Lake Chad", "Lake Oguta", "Lake Volta"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The Kainji Dam, which created Lake Kainji, is primarily used to generate what?",
+			"options": ["Hydroelectric power", "Irrigation water only", "Drinking water only", "Fish farming exclusively"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is the exchange relationship between Nigeria's Naira and Kobo?",
+			"options": ["1 Naira = 10 Kobo", "1 Naira = 100 Kobo", "1 Naira = 1,000 Kobo", "1 Naira = 50 Kobo"],
+			"correct_index": 1,
+			"difficulty": "medium"
 		}
 	]
 }

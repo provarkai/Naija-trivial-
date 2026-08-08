@@ -181,6 +181,66 @@
 			"options": ["Hausa", "Igbo", "Yoruba", "Efik"],
 			"correct_index": 1,
 			"difficulty": "medium"
+		},
+		{
+			"question": "Funke Akindele created and stars in which spin-off TV series based on her 'Jenifa' character?",
+			"options": ["Jenifa's Diary", "Aunty Ifeoma", "Journey to Self", "Officer Woro"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The sequel to 'The Wedding Party' was titled what?",
+			"options": ["The Wedding Party 2: Destination Dubai", "The Wedding Party: Reunion", "Another Wedding Party", "The Wedding Party: London"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "'Living in Bondage' (1992) received a modern sequel/remake in 2019 titled what?",
+			"options": ["Living in Bondage: Breaking Free", "Living in Bondage: Reborn", "Bondage Rising", "Beyond Bondage"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Veteran actor Ramsey Nouah made his directorial debut with which 2019 sequel film?",
+			"options": ["Living in Bondage: Breaking Free", "The Wedding Party 2", "King of Boys", "Oloture"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Genevieve Nnaji's 'Lionheart' (2018) made history as Nigeria's first submission for which major international award category?",
+			"options": ["The Academy Awards (Oscars) Best International Feature", "The Golden Globes Best Foreign Film", "The BAFTAs", "The Cannes Palme d'Or"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Veteran actor Pete Edochie is the father of which fellow Nollywood actor?",
+			"options": ["Yul Edochie", "Ramsey Nouah", "Jim Iyke", "Chiwetalu Agu"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Alongside Lagos, which Delta State city is a major secondary hub for Nollywood film production?",
+			"options": ["Asaba", "Warri", "Sapele", "Ughelli"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Veteran actor Kanayo O. Kanayo is popularly known by which initials?",
+			"options": ["KOK", "KAK", "OKO", "NOK"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Renowned Yoruba-language filmmaker Tunde Kelani founded which production company?",
+			"options": ["Mainframe Productions", "Filmhouse Studios", "Corporate World Entertainment", "Royal Arts Academy"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Which major annual Nigerian film festival, held in Lagos, showcases African cinema?",
+			"options": ["Africa International Film Festival (AFRIFF)", "Lagos Film Prize", "Nollywood Golden Reel Fest", "Naija Cinema Week"],
+			"correct_index": 0,
+			"difficulty": "hard"
 		}
 	]
 }

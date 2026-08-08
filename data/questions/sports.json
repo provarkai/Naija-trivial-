@@ -157,6 +157,126 @@
 			"options": ["2011", "2015", "2019", "2021"],
 			"correct_index": 1,
 			"difficulty": "hard"
+		},
+		{
+			"question": "Which Nigerian football club won the CAF Champions League in both 2003 and 2004?",
+			"options": ["Enyimba International", "Enugu Rangers", "Kano Pillars", "Shooting Stars"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which stadium in Lagos is historically Nigeria's most famous football venue?",
+			"options": ["National Stadium, Surulere", "Teslim Balogun Stadium", "Agege Stadium", "Onikan Stadium"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria won its second Africa Cup of Nations title in which year?",
+			"options": ["1988", "1990", "1994", "1998"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's Super Eagles won their third — and, as of 2023, most recent — Africa Cup of Nations title in which year?",
+			"options": ["2008", "2013", "2017", "2021"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "In the 2013 Africa Cup of Nations final, Nigeria defeated which country to win the title?",
+			"options": ["Burkina Faso", "Ghana", "Ivory Coast", "Mali"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which Nigerian coach led the Super Eagles to their 2013 Africa Cup of Nations title?",
+			"options": ["Stephen Keshi", "Clemens Westerhof", "Shuaibu Amodu", "Sunday Oliseh"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Stephen Keshi is notable as the first African to achieve which unique feat in Africa Cup of Nations history?",
+			"options": ["Win it as both a player and a head coach", "Score in three different finals", "Coach two different national teams to the title", "Play in five different tournaments"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's 1996 Olympic 'Dream Team' defeated which country in the football final?",
+			"options": ["Brazil", "Argentina", "Italy", "Portugal"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's 1996 Olympic football team famously staged a comeback against Brazil in which round?",
+			"options": ["Quarter-final", "Semi-final", "Group stage", "Third-place match"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which Nigerian striker scored the golden-goal winner against Brazil in the 1996 Olympic football semi-final?",
+			"options": ["Nwankwo Kanu", "Daniel Amokachi", "Jay-Jay Okocha", "Emmanuel Amuneke"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's most successful Paralympic sport has traditionally been which one?",
+			"options": ["Powerlifting", "Swimming", "Wheelchair basketball", "Archery"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's basketball federation, which oversees the D'Tigers and D'Tigress, is known by which abbreviation?",
+			"options": ["NBBF", "NBF", "FNBA", "NBA-Nigeria"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Nigeria defeated which country in the final to win the 1980 Africa Cup of Nations as hosts?",
+			"options": ["Algeria", "Egypt", "Morocco", "Tunisia"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Daniel Amokachi, part of Nigeria's 1994 World Cup and 1996 Olympic squads, played club football for which English team?",
+			"options": ["Everton", "Liverpool", "Arsenal", "Newcastle United"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Former Super Eagles captain and midfielder Sunday Oliseh later managed the national team during which decade?",
+			"options": ["1990s", "2000s", "2010s", "2020s"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Kelechi Iheanacho, a Super Eagles striker, played for which English Premier League club for much of his career?",
+			"options": ["Leicester City", "West Ham United", "Everton", "Southampton"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Wilfred Ndidi, a Super Eagles defensive midfielder known for tackling, has played for which English Premier League club for most of his career?",
+			"options": ["Leicester City", "Brighton", "Aston Villa", "Crystal Palace"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Victor Osimhen, a prolific Super Eagles striker, plays his club football for which Italian club?",
+			"options": ["Napoli", "AC Milan", "Juventus", "Roma"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Victor Osimhen won which major individual African football award in 2023?",
+			"options": ["African Footballer of the Year (CAF)", "Ballon d'Or", "FIFA Best Player", "Golden Boy Award"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Ahmed Musa, a Super Eagles forward, became notable early in his career for playing in which country's football league (for CSKA Moscow)?",
+			"options": ["Russia", "Turkey", "Ukraine", "Poland"],
+			"correct_index": 0,
+			"difficulty": "medium"
 		}
 	]
 }

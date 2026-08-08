@@ -199,6 +199,126 @@
 			"options": ["Lagos", "London", "Enugu", "Kaduna"],
 			"correct_index": 1,
 			"difficulty": "medium"
+		},
+		{
+			"question": "Which Nigerian coastal city was a major hub of the transatlantic slave trade for centuries?",
+			"options": ["Calabar", "Kano", "Ilorin", "Jos"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's national flag was designed by a student, winner of a national design competition, named who?",
+			"options": ["Michael Taiwo Akinkunmi", "Herbert Macaulay", "Tafawa Balewa", "Anthony Enahoro"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Nigeria's national motto reads 'Unity and Faith, Peace and ___'?",
+			"options": ["Prosperity", "Progress", "Development", "Justice"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The 1884-85 Berlin Conference, which formalized European colonial claims across Africa including Nigeria, was hosted by which country?",
+			"options": ["Britain", "France", "Germany", "Belgium"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Herbert Macaulay, often called the father of Nigerian nationalism, founded which early political party in 1923?",
+			"options": ["Nigerian National Democratic Party (NNDP)", "Action Group", "NCNC", "Northern People's Congress"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Nnamdi Azikiwe founded which influential pro-independence newspaper in 1937?",
+			"options": ["West African Pilot", "Daily Times", "The Guardian", "Vanguard"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Nigeria's 1963 constitution established the country as what type of republic?",
+			"options": ["A federal republic", "A unitary republic", "A constitutional monarchy", "A confederate republic"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "In 1963, the Mid-Western Region — Nigeria's fourth region — was carved out of which existing region?",
+			"options": ["Northern Region", "Western Region", "Eastern Region", "Lagos Colony"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "In 1967, Nigeria's original regions were split into a 12-state structure, replacing how many regions?",
+			"options": ["Three", "Four", "Five", "Six"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's number of states grew from 12 to 19 in which year?",
+			"options": ["1970", "1976", "1983", "1987"],
+			"correct_index": 1,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Nigeria helped found the Organisation of African Unity (OAU), a precursor to today's African Union, in which year?",
+			"options": ["1960", "1963", "1970", "1975"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria led ECOMOG peacekeeping interventions in Liberia and Sierra Leone mainly during which decade?",
+			"options": ["1970s", "1980s", "1990s", "2000s"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's National Youth Service Corps (NYSC) programme was established in which year?",
+			"options": ["1970", "1973", "1979", "1985"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What was the primary purpose of the NYSC programme when established after the Civil War?",
+			"options": ["National unity and reconciliation among ethnic groups", "Military conscription", "Reducing unemployment only", "International diplomacy training"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria hosted the All-Africa Games in 1973 in which city?",
+			"options": ["Lagos", "Kaduna", "Enugu", "Ibadan"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "FESTAC 77, the Second World Black and African Festival of Arts and Culture, was hosted in which Nigerian city?",
+			"options": ["Abuja", "Lagos", "Kano", "Port Harcourt"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's national airline at independence, later liquidated, was called what?",
+			"options": ["Nigeria Airways", "Arik Air", "Air Nigeria", "Bellview Airlines"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which military head of state voluntarily handed power to an elected civilian government (Shehu Shagari) in 1979?",
+			"options": ["Olusegun Obasanjo", "Yakubu Gowon", "Murtala Mohammed", "Ibrahim Babangida"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Who became Nigeria's Second Republic president after taking office in 1979?",
+			"options": ["Shehu Shagari", "Nnamdi Azikiwe", "Obafemi Awolowo", "Aminu Kano"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Abuja was officially designated Nigeria's new Federal Capital Territory in which year, well ahead of the actual 1991 move?",
+			"options": ["1967", "1976", "1985", "1990"],
+			"correct_index": 1,
+			"difficulty": "hard"
 		}
 	]
 }

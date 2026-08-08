@@ -199,6 +199,126 @@
 			"options": ["A respectful, friendly term of address", "That they are in trouble", "A formal job title", "That they are a stranger to avoid"],
 			"correct_index": 0,
 			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Wetin be that?' mean?",
+			"options": ["What is that?", "Where did you go?", "Who is that?", "Why did you leave?"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does 'Na lie' mean?",
+			"options": ["That's true", "That's a lie", "I don't know", "Tell me more"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does 'Wetin concern me' mean?",
+			"options": ["That's not my business / I don't care", "I'm very worried", "Please explain it to me", "I need your help"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'E go better' mean?",
+			"options": ["It will get better", "It's already broken", "It's too late", "It never changes"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "In Nigerian slang, going 'to Jand' refers to travelling to which country?",
+			"options": ["The United Kingdom", "The United States", "Canada", "South Africa"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "'Naija' is an affectionate slang term for which country?",
+			"options": ["Nigeria", "Niger", "Ghana", "Kenya"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does 'Owanbe' refer to in Nigerian culture?",
+			"options": ["A lavish party or celebration", "A type of soup", "A traditional dance style", "A wedding proposal"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does the Pidgin phrase 'yarn dust' mean?",
+			"options": ["To talk nonsense", "To sew clothes", "To clean a room", "To sing loudly"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Palava' mean in Pidgin?",
+			"options": ["Trouble / a problematic argument", "A tasty meal", "A quiet evening", "A long journey"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The proverb 'Ash still dey inside fire' teaches that:",
+			"options": ["Danger or trouble may still be present even if not obvious", "Cooking takes patience", "Old things are useless", "Fire is always dangerous"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The proverb 'One tree no fit make forest' teaches that:",
+			"options": ["Trees grow slowly", "Unity and teamwork are needed to achieve big things", "Forests are dangerous alone", "One person is always enough"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Chop knuckle' mean, a common friendly greeting gesture?",
+			"options": ["A fist bump", "A formal handshake", "A bow", "A hug"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does 'Waka pass' mean?",
+			"options": ["To pass by or ignore someone", "To dance energetically", "To run very fast", "To greet warmly"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Gist' mean in Nigerian Pidgin?",
+			"options": ["Gossip or casual chat/news", "A type of food", "An argument", "A form of payment"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does 'Odogwu' mean, a popular praise term?",
+			"options": ["A boss / big man / champion", "A coward", "A stranger", "A beginner"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Agbaya' mean?",
+			"options": ["A grown adult who behaves childishly", "A wise elder", "A skilled worker", "A wealthy trader"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Ajebutter' refer to?",
+			"options": ["Someone from a wealthy, privileged background", "A type of local bread", "A skilled cook", "A traditional title"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Ajepako', the opposite of 'Ajebutter', refer to?",
+			"options": ["Someone from a poor, underprivileged background", "A wealthy businessman", "A government official", "A famous celebrity"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Make I hear word' mean?",
+			"options": ["Let me hear what you have to say", "I refuse to listen", "Speak more quietly", "Sing me a song"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Wahala no dey finish' mean?",
+			"options": ["Trouble never ends", "Food is always ready", "Money never runs out", "Time moves quickly"],
+			"correct_index": 0,
+			"difficulty": "medium"
 		}
 	]
 }
