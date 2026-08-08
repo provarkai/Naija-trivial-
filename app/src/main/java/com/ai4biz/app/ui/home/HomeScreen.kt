@@ -60,6 +60,7 @@ fun HomeScreen(navController: NavHostController) {
         factory = SimpleViewModelFactory { HomeViewModel(container.authRepository) }
     )
     val authState by viewModel.authState.collectAsStateWithLifecycle()
+    val isPremium by container.billingManager.isPremium.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
@@ -78,7 +79,7 @@ fun HomeScreen(navController: NavHostController) {
                 }
             )
         },
-        bottomBar = { BannerAdView() }
+        bottomBar = { if (!isPremium) BannerAdView() }
     ) { padding ->
         LazyColumn(
             modifier = Modifier

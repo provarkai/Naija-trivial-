@@ -4,6 +4,7 @@ import android.content.Context
 import com.ai4biz.app.ads.InterstitialAdManager
 import com.ai4biz.app.ads.RewardedAdManager
 import com.ai4biz.app.ai.AiGeneratorService
+import com.ai4biz.app.billing.BillingManager
 import com.ai4biz.app.ai.MockAiGeneratorService
 import com.ai4biz.app.ai.RemoteAiGeneratorService
 import com.ai4biz.app.data.local.AppDatabase
@@ -33,4 +34,6 @@ class AppContainer(context: Context) {
 
     val interstitialAdManager = InterstitialAdManager(context.applicationContext).apply { preload() }
     val rewardedAdManager = RewardedAdManager(context.applicationContext).apply { preload() }
+
+    val billingManager = BillingManager(context.applicationContext).apply { startConnection() }
 }

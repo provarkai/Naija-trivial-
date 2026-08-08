@@ -34,12 +34,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.ai4biz.app.ads.findActivity
 import com.ai4biz.app.data.repository.UsageState
 import com.ai4biz.app.model.ToolType
 import com.ai4biz.app.navigation.Routes
 import com.ai4biz.app.ui.LocalAppContainer
 import com.ai4biz.app.ui.SimpleViewModelFactory
+import com.ai4biz.app.util.findActivity
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -63,12 +63,15 @@ fun GeneratorScreen(navController: NavHostController, toolId: String) {
     )
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val usageState by container.usageRepository.usageState.collectAsStateWithLifecycle(initialValue = UsageState())
+    val isPremium by container.billingManager.isPremium.collectAsStateWithLifecycle()
     val inputs = remember { mutableStateMapOf<String, String>() }
 
     LaunchedEffect(uiState) {
         val state = uiState
         if (state is GeneratorUiState.Success) {
-            container.usageRepository.recordGeneration()
+            if (!isPremium) {
+                container.usageRepository.recordGeneration()
+            }
 
             fun proceed() {
                 navController.navigate(Routes.result(state.documentId)) {
@@ -76,7 +79,8 @@ fun GeneratorScreen(navController: NavHostController, toolId: String) {
                 }
             }
 
-            val shouldShowAd = container.interstitialAdManager.registerGenerationAndShouldShow()
+            // Premium subscribers see no ads at all, interstitial included.
+            val shouldShowAd = !isPremium && container.interstitialAdManager.registerGenerationAndShouldShow()
             if (shouldShowAd && activity != null) {
                 container.interstitialAdManager.showIfReady(activity) { proceed() }
             } else {
@@ -129,7 +133,13 @@ fun GeneratorScreen(navController: NavHostController, toolId: String) {
                 )
             }
 
-            if (usageState.canGenerate) {
+            if (isPremium) {
+                Text(
+                    text = "Unlimited generations, no ads (Premium)",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            } else if (usageState.canGenerate) {
                 val bonusSuffix = if (usageState.bonusGenerations > 0) " (+${usageState.bonusGenerations} bonus)" else ""
                 Text(
                     text = "${usageState.remainingFree} free generation${if (usageState.remainingFree == 1) "" else "s"} left today$bonusSuffix",
@@ -175,7 +185,7 @@ fun GeneratorScreen(navController: NavHostController, toolId: String) {
 
             Button(
                 onClick = { viewModel.generate(inputs.toMap()) },
-                enabled = requiredFilled && !isLoading && usageState.canGenerate,
+                enabled = requiredFilled && !isLoading && (isPremium || usageState.canGenerate),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 if (isLoading) {

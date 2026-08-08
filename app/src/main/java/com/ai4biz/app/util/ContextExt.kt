@@ -1,4 +1,4 @@
-package com.ai4biz.app.ads
+package com.ai4biz.app.util
 
 import android.app.Activity
 import android.content.Context

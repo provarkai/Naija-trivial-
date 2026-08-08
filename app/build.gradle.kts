@@ -46,7 +46,7 @@ android {
         // this writing) for new releases -- bump this each year Google
         // raises the bar, matching compileSdk above.
         targetSdk = 35
-        versionCode = 2
+        versionCode = 3
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -164,6 +164,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.google.android.gms:play-services-ads:23.6.0")
+    implementation("com.android.billingclient:billing-ktx:7.1.1")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")

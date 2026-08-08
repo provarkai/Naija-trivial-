@@ -11,8 +11,9 @@
   itself isn't committed to git (build outputs never are); rebuild it
   anytime with `./gradlew bundleRelease` once `keystore.properties` is in
   place locally.
-- ✅ `versionCode`/`versionName` set to `2` / `1.0.0` (bumped from `1` after
-  Play rejected a duplicate version code on the first upload attempt).
+- ✅ `versionCode` bumped to `3` (`1` and `2` were consumed by earlier
+  upload attempts — Play never lets you reuse a version code, even for a
+  rejected/draft upload).
 - ✅ `compileSdk`/`targetSdk` bumped to `35` (Play now requires targeting
   API 35 minimum; the first build targeted 34 and was rejected).
 - ✅ Privacy policy drafted (`docs/PRIVACY_POLICY.md`) — you've already
@@ -23,6 +24,11 @@
   `local.properties` (gitignored); debug builds always use Google's test
   ad IDs regardless, so ads are never accidentally served/clicked during
   development.
+- ✅ Google Play Billing wired in: the Subscription screen now launches
+  real purchase flows (`BillingManager`), and premium subscribers
+  (`BillingManager.isPremium`) skip both ads and the daily free-generation
+  limit entirely — see "Set up billing products" below, since this needs
+  matching products created in Play Console before it can actually work.
 
 ## What only you can do
 
@@ -81,7 +87,28 @@ If you change the AI backend, add analytics, or wire up real billing later,
 **update this form to match** — Play actively checks for mismatches
 between declared and observed behavior.
 
-### 6. Upload the build
+### 6. Set up billing products
+Billing won't work until these exist in Play Console, with these **exact**
+product IDs (hardcoded in `app/src/main/java/com/ai4biz/app/billing/PlanId.kt`):
+
+Play Console → your app → **Monetize → Products**:
+
+- **Subscriptions** → Create subscription:
+  - Product ID: `ai4biz_monthly` — set your monthly price, base plan billing period 1 month.
+  - Product ID: `ai4biz_annual` — same, billing period 1 year.
+- **In-app products** → Create product:
+  - Product ID: `ai4biz_lifetime` — one-time purchase, set your price.
+
+Each needs to be **Activated** (not left as a draft) before purchases work.
+Prices shown in the app come live from what you set here (`BillingManager.priceFor`)
+— there's no price hardcoded in the app.
+
+**Testing purchases without spending real money:** add yourself as a
+[License Tester](https://support.google.com/googleplay/android-developer/answer/6062777)
+in Play Console → Setup → License testing, then buy through the internal
+testing build — you'll see a test payment method, not a real charge.
+
+### 7. Upload the build
 Play Console → your app → **Testing → Internal testing** (start here, not
 straight to Production) → **Create new release** → upload
 `app-release.aab` → fill in release notes → save → review → roll out to
@@ -93,32 +120,33 @@ virtualization available), so this build has been verified by compiling,
 signing, and a jarsigner integrity check, but **not** by actually running
 on a device. Do that before wider rollout.
 
-### 7. Store listing
+### 8. Store listing
 Short description (≤80 chars), full description, app icon (512×512),
 feature graphic (1024×500), and 2+ screenshots. Take screenshots from the
 internal test install.
 
-### 8. Promote to Production
+### 9. Promote to Production
 Once internal testing looks good, Play Console lets you promote the same
 release to Closed testing, Open testing, or Production without
 re-uploading.
 
 ## Known gaps worth fixing before a public (not just internal-test) release
 
-- **Subscription screen** shows real-looking prices with no working
-  purchase flow (just a "coming soon" snackbar) — fine for internal
-  testing, but decide whether to gate it behind a flag or wire up real
-  Play Billing before a public launch, since showing prices with no
-  purchase path can read as broken to reviewers/users.
-- **Google Sign-In** button is a stub — same consideration.
+- **Billing is client-only, no server-side receipt verification.** A
+  determined attacker could patch the app to fake `isPremium`. Fine for
+  launch; add verification via the Play Developer API (Realtime Developer
+  Notifications + a server that checks purchase tokens) once revenue makes
+  that worth the effort.
+- **Billing products must exist in Play Console before purchases work** —
+  see "Set up billing products" above. Until they're created and activated,
+  `priceFor()` returns null and the buttons show "This plan isn't available
+  yet."
+- **Google Sign-In** button is still a stub (email/guest sign-in is the
+  real path) — decide whether that's fine for launch or wire up real OAuth
+  first.
 - No crash reporting is wired in, so you won't hear about crashes from real
   users automatically; consider adding Firebase Crashlytics (or similar)
   before a wide public release.
-- **Ads are unconditional for everyone right now** — the free-tier daily
-  limit (5/day) and ad-gating apply to all users regardless of what the
-  (non-functional) Subscription screen shows. Once real billing exists,
-  wire premium/subscribed users to skip ads and the usage cap entirely
-  (`UsageRepository`/`AppContainer` are where that check would go).
 - **Content rating questionnaire**: answer "Yes" to showing ads when
   asked, and expect a follow-up question about ad content control — AdMob
   serves general-audience ads by default, which is fine for this app's
