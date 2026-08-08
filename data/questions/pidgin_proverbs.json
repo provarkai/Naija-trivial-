@@ -79,6 +79,66 @@
 			"options": ["Wear sunglasses", "Be alert and careful", "Go to sleep", "Clean your face"],
 			"correct_index": 1,
 			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Wahala dey' mean?",
+			"options": ["There is trouble", "There is food", "There is peace", "There is money"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does 'I no send you' mean in Pidgin?",
+			"options": ["I sent someone else instead", "I don't care what you think", "I am waiting for you", "I forgive you"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'Gbege' mean in Pidgin slang?",
+			"options": ["Trouble", "Money", "Food", "Music"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Besides literally meaning 'child', 'Omo' is also commonly used in Pidgin as what?",
+			"options": ["A greeting", "An exclamation of surprise", "A farewell", "An insult"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'No gree' mean in Pidgin?",
+			"options": ["Don't agree / refuse", "Don't worry", "Don't leave", "Don't forget"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does 'Kolo' mean in Pidgin slang?",
+			"options": ["Crazy / mad", "Rich", "Tired", "Hungry"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The proverb 'Na condition make crayfish bend' teaches that:",
+			"options": ["Hardship can force people to adapt", "Seafood is expensive", "Rivers change direction", "Patience is useless"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What does 'E don do' mean in Pidgin?",
+			"options": ["That's enough / it's done", "Do it again", "It's not ready", "Start over"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does 'Wetin dey sup?' mean?",
+			"options": ["What's up?", "What's for dinner?", "Where are you?", "What happened?"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What does 'Comot for road' mean?",
+			"options": ["Stay right there", "Get out of the way / move", "Drive carefully", "Follow the road"],
+			"correct_index": 1,
+			"difficulty": "medium"
 		}
 	]
 }

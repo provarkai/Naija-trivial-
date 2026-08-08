@@ -79,6 +79,54 @@
 			"options": ["1970s", "1980s", "1990s", "2000s"],
 			"correct_index": 2,
 			"difficulty": "medium"
+		},
+		{
+			"question": "'The Figurine' (2009), a notable Nollywood crime-thriller, was directed by whom?",
+			"options": ["Kunle Afolayan", "Tunde Kelani", "Kemi Adetiba", "Jeta Amata"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "'The Wedding Party' (2016), a major Nollywood box-office hit, was directed by whom?",
+			"options": ["Genevieve Nnaji", "Kemi Adetiba", "Mo Abudu", "Funke Akindele"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Alongside Netflix, which other major streaming platform has acquired Nollywood film distribution rights?",
+			"options": ["Amazon Prime Video", "Disney+", "HBO Max", "Hulu"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What are Yoruba-language Nollywood productions commonly called?",
+			"options": ["Yoruba movies", "Epic films", "Talking films", "Village dramas"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Nollywood films are most commonly produced primarily in which language?",
+			"options": ["French", "English", "Portuguese", "Arabic"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Nigeria's annual awards ceremony often called Africa's version of the Oscars is known as what?",
+			"options": ["Africa Movie Academy Awards (AMAA)", "Nigeria Film Prize", "Golden Reel Awards", "Lagos Cinema Awards"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "'October 1' (2014), a Nollywood thriller set around Nigeria's independence, was directed by whom?",
+			"options": ["Kunle Afolayan", "Tunde Kelani", "Izu Ojukwu", "Niyi Akinmolayan"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Besides acting, veteran Nollywood star Desmond Elliot became known for serving in which public role?",
+			"options": ["Lagos State House of Assembly member", "Federal Minister of Culture", "Senate President", "State Governor"],
+			"correct_index": 0,
+			"difficulty": "hard"
 		}
 	]
 }

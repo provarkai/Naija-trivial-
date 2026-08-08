@@ -79,6 +79,66 @@
 			"options": ["1970s", "1980s", "1990s", "2000s"],
 			"correct_index": 2,
 			"difficulty": "medium"
+		},
+		{
+			"question": "Obafemi Awolowo was premier of which region before Nigeria's independence?",
+			"options": ["Northern Region", "Western Region", "Eastern Region", "Mid-Western Region"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Ahmadu Bello was premier of which region before his assassination in the 1966 coup?",
+			"options": ["Western Region", "Eastern Region", "Northern Region", "Mid-Western Region"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Following a counter-coup in 1966, which general became Nigeria's military head of state and led the country through the Civil War?",
+			"options": ["Yakubu Gowon", "Murtala Mohammed", "Olusegun Obasanjo", "Ibrahim Babangida"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "In what year did the Nigerian Civil War formally end?",
+			"options": ["1968", "1969", "1970", "1972"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's oil boom, which transformed the national economy, largely began in which decade?",
+			"options": ["1950s", "1960s", "1970s", "1990s"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		},
+		{
+			"question": "General Muhammadu Buhari first became Nigeria's military head of state via a coup in which year?",
+			"options": ["1979", "1983", "1985", "1993"],
+			"correct_index": 1,
+			"difficulty": "hard"
+		},
+		{
+			"question": "General Ibrahim Babangida controversially annulled the results of a historic presidential election held on which date?",
+			"options": ["June 12, 1993", "October 1, 1993", "January 1, 1994", "May 29, 1993"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "The presumed winner of the annulled June 12, 1993 election was which prominent businessman and politician?",
+			"options": ["Moshood Abiola (MKO Abiola)", "Olusegun Obasanjo", "Bola Tinubu", "Ernest Shonekan"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's current unbroken democratic era, the Fourth Republic, began in which year?",
+			"options": ["1979", "1993", "1999", "2007"],
+			"correct_index": 2,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Goodluck Jonathan became president in 2010 following the death of which sitting president?",
+			"options": ["Umaru Musa Yar'Adua", "Olusegun Obasanjo", "Shehu Shagari", "Ibrahim Babangida"],
+			"correct_index": 0,
+			"difficulty": "medium"
 		}
 	]
 }

@@ -73,6 +73,48 @@
 			"options": ["Nigeria", "Ghana", "Jamaica", "Kenya"],
 			"correct_index": 0,
 			"difficulty": "medium"
+		},
+		{
+			"question": "Which country has won the most Women's Africa Cup of Nations (WAFCON) titles?",
+			"options": ["Nigeria", "Ghana", "Cameroon", "South Africa"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which Nigerian midfielder, nicknamed 'Jay-Jay', was famous for his dazzling dribbling at clubs like Bolton Wanderers?",
+			"options": ["Augustine 'Jay-Jay' Okocha", "Nwankwo Kanu", "John Obi Mikel", "Victor Moses"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Rashidi Yekini is remembered for scoring Nigeria's first-ever goal at which tournament, in 1994?",
+			"options": ["Africa Cup of Nations", "FIFA World Cup", "Olympic Games", "FIFA Confederations Cup"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's Super Eagles qualified for their first-ever FIFA World Cup in which year?",
+			"options": ["1990", "1994", "1998", "2002"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which Nigerian-born NBA Hall of Famer won back-to-back championships with the Houston Rockets?",
+			"options": ["Hakeem Olajuwon", "Dikembe Mutombo", "Luol Deng", "Joel Embiid"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria won its first Africa Cup of Nations title, as host nation, in which year?",
+			"options": ["1980", "1984", "1988", "1994"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's men's basketball team, the D'Tigers, made history by qualifying for which global event in 2012?",
+			"options": ["The Olympics", "The FIBA World Cup", "The Commonwealth Games", "The All-Africa Games"],
+			"correct_index": 0,
+			"difficulty": "medium"
 		}
 	]
 }

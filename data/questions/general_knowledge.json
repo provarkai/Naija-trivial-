@@ -79,6 +79,66 @@
 			"options": ["Commerce", "Excellence", "Culture", "Industry"],
 			"correct_index": 1,
 			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria is the most populous country on which continent?",
+			"options": ["Asia", "Africa", "South America", "Europe"],
+			"correct_index": 1,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What is the largest ethnic group in South-West Nigeria?",
+			"options": ["Hausa", "Igbo", "Yoruba", "Tiv"],
+			"correct_index": 2,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is the largest ethnic group in South-East Nigeria?",
+			"options": ["Yoruba", "Igbo", "Hausa", "Ijaw"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria's highest peak, Chappal Waddi, is located in which state?",
+			"options": ["Plateau", "Taraba", "Adamawa", "Cross River"],
+			"correct_index": 1,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Which shrinking lake lies in Nigeria's northeast, shared with neighbouring countries?",
+			"options": ["Lake Chad", "Lake Kainji", "Lake Oguta", "Lake Volta"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Nigeria is bordered to the south by which body of water?",
+			"options": ["The Red Sea", "The Gulf of Guinea", "The Mediterranean Sea", "The Indian Ocean"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What is the name of Nigeria's central bank?",
+			"options": ["Central Bank of Nigeria", "First Bank of Nigeria", "Federal Reserve of Nigeria", "National Bank of Nigeria"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Nigeria's coat of arms features two of which animal, symbolizing dignity?",
+			"options": ["Eagles", "Horses", "Lions", "Elephants"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What two colours make up the Nigerian national flag?",
+			"options": ["Green and white", "Red and gold", "Green and gold", "Black and white"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "What is the name of Lagos's main international airport?",
+			"options": ["Nnamdi Azikiwe International Airport", "Murtala Muhammed International Airport", "Mallam Aminu Kano International Airport", "Port Harcourt International Airport"],
+			"correct_index": 1,
+			"difficulty": "medium"
 		}
 	]
 }

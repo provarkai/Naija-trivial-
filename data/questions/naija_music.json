@@ -133,6 +133,84 @@
 			"options": ["Olamide", "Phyno", "Reminisce", "Zlatan"],
 			"correct_index": 0,
 			"difficulty": "medium"
+		},
+		{
+			"question": "Fela Kuti's home and commune in Lagos, which he declared independent, was known as what?",
+			"options": ["Kalakuta Republic", "Afrika Shrine", "Freedom House", "Liberty Compound"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Which of Fela Kuti's sons became a famous Afrobeat musician in his own right?",
+			"options": ["Femi Kuti", "Wizkid", "Davido", "2Baba"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "King Sunny Adé is a legendary pioneer of which Yoruba-rooted genre?",
+			"options": ["Fuji", "Juju music", "Apala", "Highlife"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Singer Simi is married to which fellow Nigerian musician?",
+			"options": ["Adekunle Gold", "Falz", "Peruzzi", "Ycee"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "'Fall' and 'Godwin' are hit songs by which artist?",
+			"options": ["Wizkid", "Davido", "Burna Boy", "Kizz Daniel"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Rema is signed to which record label, co-founded by Don Jazzy?",
+			"options": ["YBNL", "Mavin Records", "Chocolate City", "DMW"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Asake rose to mainstream fame signed to which record label associated with Olamide?",
+			"options": ["Mavin Records", "YBNL", "EME", "Marlian Music"],
+			"correct_index": 1,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Fireboy DML is signed to which record label, founded by Olamide?",
+			"options": ["YBNL", "Mavin Records", "Chocolate City", "DMW"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "What are fans and followers of Naira Marley popularly called?",
+			"options": ["Marlians", "Baddos", "Odogwus", "Embers"],
+			"correct_index": 0,
+			"difficulty": "easy"
+		},
+		{
+			"question": "Omah Lay's breakout hit single from his 2020 'Get Layd' EP was titled what?",
+			"options": ["Bad Influence", "Understand", "Attention", "Godly"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "Which Afrobeats star is popularly nicknamed 'Big Wiz'?",
+			"options": ["Wizkid", "Burna Boy", "Olamide", "Phyno"],
+			"correct_index": 0,
+			"difficulty": "medium"
+		},
+		{
+			"question": "Before founding Mavin Records, Don Jazzy co-founded Mo'Hits Records with which artist?",
+			"options": ["D'banj", "2Baba", "9ice", "Timaya"],
+			"correct_index": 0,
+			"difficulty": "hard"
+		},
+		{
+			"question": "'A Good Time' is a studio album released by which Nigerian artist?",
+			"options": ["Davido", "Wizkid", "Burna Boy", "Olamide"],
+			"correct_index": 0,
+			"difficulty": "medium"
 		}
 	]
 }
