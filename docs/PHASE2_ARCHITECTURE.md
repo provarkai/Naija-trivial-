@@ -198,17 +198,59 @@ No Android emulator in this sandbox — tab switching, dialog behavior,
 search filtering, and FAB visibility are verified by compilation only,
 matching Sprints 1-2's residual-risk note.
 
-## 5. Sprints 4-6 — Business Context Engine + AI Assistant
+## 5. Sprint 4 — Business Context Engine (done)
 
-- **`BusinessContextService`**: `suspend fun getContext(workspaceId, contextType): BusinessContext`,
-  reading from the Sprint 1 repositories and returning only what's relevant
-  to the task at hand (a proposal needs business+brand+products+customer;
-  a social post needs business+brand+one product) — never dump the entire
-  business profile into every prompt, for cost, latency, and privacy
-  reasons.
+The AI Assistant/chat half of what was originally sketched as "Sprints
+4-6" is unbundled into Sprints 5-6 below — the Context Engine turned out
+to be a clean, standalone slice on its own, reusing the existing
+5-generator-tool pipeline end to end with **no new schema and no server
+changes**.
+
+**What got built**:
+- `model/BusinessContext.kt` — `data class BusinessContext(businessProfile, brandSettings, products, goals)`.
+- `ai/BusinessContextService.kt` — `suspend fun getContext(): BusinessContext`
+  (one-shot reads scoped by the active workspace, null/empty-safe if the
+  Sprint 2 wizard was skipped) + `fun formatForPrompt(context, toolType): Map<String, String>`,
+  which returns **zero or one** extra entry, filtered per `ToolType`
+  (Business Plan gets target-customers/location/goals; Proposal gets
+  target-customers/product list; Invoice gets contact info/currency/
+  catalog; Social Content gets the product list; WhatsApp Reply gets just
+  the business/brand baseline, kept short since it's a casual-reply tool)
+  — the "never dump the whole profile into every prompt" principle from
+  the original sketch, now actually implemented.
+- `GeneratorViewModel.generate()` merges `contextEntries + inputs` (user's
+  own typed answers win on any key collision) before calling
+  `AiGeneratorService.generate()` — the exact same `inputs: Map<String,String>`
+  seam that already flowed through to `/api/generate` unchanged. Because
+  `server/index.js` already dumps every `inputs` entry into the prompt
+  generically, **the server needed zero changes**.
+- **Key-collision care**: the injected entry uses the key `"Workspace context"`
+  (not `"businessContext"` or `"businessName"`), since `ToolType.kt`'s
+  existing `InputField`s already use those exact camelCase keys on
+  Business Plan/Invoice/WhatsApp Reply — a naming collision there would
+  have silently overwritten a user-typed field.
+- `MockAiGeneratorService` (offline/no-backend mode) is untouched — it
+  ignores the extra map entry since its templates only read specific
+  known keys. A known, low-priority gap: offline mode doesn't get
+  smarter from this sprint, only the real AI path does.
+
+**Noted, not built (a reasonable Sprint 4.5/5 follow-up)**: two of the
+five tools (Business Plan, Invoice) already ask the user to manually
+retype `businessName`/`industry` even though that's now covered by
+injected context — pre-filling those `InputField`s from `BusinessContext`
+instead of just adding a parallel context block would remove that
+redundancy, but touches `GeneratorScreen`'s input-state initialization and
+was left out of this slice to keep it to one clean seam.
+
+## 5a. Sprints 5-6 — AI Assistant (still not built)
+
+Everything below remains exactly as originally sketched — none of it
+exists yet:
+
 - **`BusinessAiAssistant`**: `suspend fun sendMessage(workspaceId, conversationId?, message): AssistantResponse`,
   pipeline: save user message → `IntentRouter` classifies intent → context
-  retrieval → `ToolRegistry` picks a tool → `PromptBuilder` assembles
+  retrieval (now available via `BusinessContextService`, built above) →
+  `ToolRegistry` picks a tool → `PromptBuilder` assembles
   system+context+task+request → `AiGeneratorService` → validate → persist
   → return.
 - **`ToolRegistry`**: this is the natural evolution of `ToolType.kt`, which
@@ -219,6 +261,8 @@ matching Sprints 1-2's residual-risk note.
   (client-driven or server-driven) should replace both.
   New conversation persistence: `ai_conversation`/`ai_message` tables,
   same Room conventions as Sprint 1.
+- New chat UI (`ui/assistant/`), new backend endpoint
+  (`/api/v1/assistant/message`, per Sprint 8 notes below).
 
 ## 6. Sprint 7 — Structured AI responses
 

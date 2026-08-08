@@ -58,7 +58,7 @@ fun GeneratorScreen(navController: NavHostController, toolId: String) {
 
     val viewModel: GeneratorViewModel = viewModel(
         factory = SimpleViewModelFactory {
-            GeneratorViewModel(tool, container.aiGeneratorService, container.documentRepository)
+            GeneratorViewModel(tool, container.aiGeneratorService, container.documentRepository, container.businessContextService)
         }
     )
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()

@@ -4,6 +4,7 @@ import android.content.Context
 import com.ai4biz.app.ads.InterstitialAdManager
 import com.ai4biz.app.ads.RewardedAdManager
 import com.ai4biz.app.ai.AiGeneratorService
+import com.ai4biz.app.ai.BusinessContextService
 import com.ai4biz.app.ai.MockAiGeneratorService
 import com.ai4biz.app.ai.RemoteAiGeneratorService
 import com.ai4biz.app.billing.BillingManager
@@ -54,6 +55,17 @@ class AppContainer(context: Context) {
     // Phase 2 Sprint 2 (docs/PHASE2_ARCHITECTURE.md) -- tracks whether the
     // user has been through the Business Setup wizard (finished or skipped).
     val onboardingRepository = OnboardingRepository(context)
+
+    // Phase 2 Sprint 4 (docs/PHASE2_ARCHITECTURE.md) -- assembles workspace
+    // business data into AI-prompt-ready text for the existing 5 generator
+    // tools. Consumed by GeneratorViewModel.
+    val businessContextService = BusinessContextService(
+        workspaceRepository,
+        businessProfileRepository,
+        brandSettingsRepository,
+        productServiceRepository,
+        businessGoalRepository
+    )
 
     val aiGeneratorService: AiGeneratorService =
         if (BuildConfig.AI4BIZ_BACKEND_URL.isNotBlank()) {
