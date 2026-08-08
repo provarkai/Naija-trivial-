@@ -11,3 +11,9 @@ local.properties
 app/build/
 app/release/
 *.hprof
+
+# Release signing -- never commit the upload key or its passwords.
+keystore.properties
+keystore/
+*.jks
+*.keystore
