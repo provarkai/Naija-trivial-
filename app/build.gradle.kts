@@ -31,14 +31,17 @@ val hasReleaseSigning = keystoreProperties.getProperty("storeFile")
 
 android {
     namespace = "com.ai4biz.app"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.ai4biz.app"
         // Adaptive icons only ship for API 26+ in this scaffold; bump this down
         // once legacy raster launcher icons are added for older devices.
         minSdk = 26
-        targetSdk = 34
+        // Play Console requires targeting the current API level (35 as of
+        // this writing) for new releases -- bump this each year Google
+        // raises the bar, matching compileSdk above.
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0.0"
 
