@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.ai4biz.app.ads.BannerAdView
 import com.ai4biz.app.model.ToolType
 import com.ai4biz.app.navigation.Routes
 import com.ai4biz.app.ui.LocalAppContainer
@@ -76,7 +77,8 @@ fun HomeScreen(navController: NavHostController) {
                     }
                 }
             )
-        }
+        },
+        bottomBar = { BannerAdView() }
     ) { padding ->
         LazyColumn(
             modifier = Modifier

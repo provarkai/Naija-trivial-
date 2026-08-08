@@ -33,23 +33,36 @@ your device (not on our servers) and are visible only to you within the
 app. You can delete any saved document at any time from the History
 screen; deleting the app removes all of them.
 
+**Ads.** This app shows ads via Google AdMob (banner, interstitial, and
+rewarded ad formats) to support the free tier. AdMob collects your
+advertising ID and some device/usage information to select and measure
+ads; see [Google's Privacy & Terms](https://policies.google.com/privacy)
+and [How Google uses information from sites or apps that use our
+services](https://policies.google.com/technologies/partner-sites). You can
+reset or opt out of ad personalization for your advertising ID in your
+device's Android Settings → Privacy → Ads.
+
 **What we don't collect.** No location data, no contacts, no camera or
-microphone access, no advertising identifiers, no analytics or crash
-reporting SDKs are integrated in this version of the app.
+microphone access, no analytics or crash reporting SDKs are integrated in
+this version of the app.
 
 ## How we use it
 
 - To generate the documents you ask for.
 - To keep you signed in between app launches.
-- We do not sell your data, and we do not use it for advertising.
+- To show ads (see "Ads" above) that support the app's free tier.
+- We do not sell your data.
 
 ## Third parties
 
 - **OpenRouter** (and, transitively, the AI model it routes your request
   to) processes the text you submit to each generator tool, solely to
   return a response to that request.
+- **Google AdMob** serves the ads in this app and, in doing so, processes
+  your advertising ID and related device/usage data per Google's own
+  privacy policy (linked above).
 - We do not use any other third-party service in this version of the app
-  (no analytics, ads, or crash reporting).
+  (no analytics or crash reporting).
 
 ## Data retention and deletion
 

@@ -25,6 +25,13 @@
             </intent-filter>
         </activity>
 
+        <!-- Value comes from manifestPlaceholders["admobAppId"] in
+             app/build.gradle.kts (real ID if configured, Google's public
+             test ID otherwise). -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="${admobAppId}" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

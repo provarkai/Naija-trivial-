@@ -11,9 +11,18 @@
   itself isn't committed to git (build outputs never are); rebuild it
   anytime with `./gradlew bundleRelease` once `keystore.properties` is in
   place locally.
-- ✅ `versionCode`/`versionName` set to `1` / `1.0.0` for a first release.
-- ✅ Privacy policy drafted (`docs/PRIVACY_POLICY.md`) — needs your contact
-  info filled in and a public URL before you can use it in Play Console.
+- ✅ `versionCode`/`versionName` set to `2` / `1.0.0` (bumped from `1` after
+  Play rejected a duplicate version code on the first upload attempt).
+- ✅ `compileSdk`/`targetSdk` bumped to `35` (Play now requires targeting
+  API 35 minimum; the first build targeted 34 and was rejected).
+- ✅ Privacy policy drafted (`docs/PRIVACY_POLICY.md`) — you've already
+  filled in the date and contact email.
+- ✅ AdMob wired in: banner ad on Home, an interstitial shown every 3rd
+  generation, and a rewarded ad to unlock +1 generation once the daily free
+  limit (5/day) is hit. Real AdMob IDs are configured via
+  `local.properties` (gitignored); debug builds always use Google's test
+  ad IDs regardless, so ads are never accidentally served/clicked during
+  development.
 
 ## What only you can do
 
@@ -39,7 +48,8 @@ Play Console → App content, and fill in:
 - **App access**: since there's no login wall blocking core features
   (guest mode works), you can likely mark it as fully accessible; if any
   reviewer account is needed, note that guest mode requires no credentials.
-- **Ads**: No ads in this build → declare "No ads".
+- **Ads**: This build **does** show ads (AdMob: banner, interstitial,
+  rewarded) → declare "Yes, my app contains ads".
 - **Content rating**: fill in the questionnaire — this app has no violence,
   no user-generated content shared *between* users (it's private,
   per-device AI output), no gambling. Should land on the lowest rating tier
@@ -56,8 +66,9 @@ Based on what the app's code actually does today:
 |---|---|---|---|---|
 | Email address | Yes, *optional* | No | Account management | Only if user picks "Continue with Email"; stored on-device only, never transmitted |
 | User-generated content (text you type into a generator form) | Yes | **Yes** — sent to OpenRouter to generate the response | App functionality | Not stored server-side after the response is returned |
-| App activity / crash logs | No | — | — | No analytics or crash reporting SDK is integrated |
-| Location, contacts, photos, identifiers | No | — | — | Not requested/accessed |
+| Advertising ID | Yes | **Yes** — Google AdMob | Advertising, analytics | Standard for any app showing AdMob ads; Play auto-detects this from the AdMob SDK, so leaving it undeclared will fail Play's automated check |
+| App activity / crash logs | No | — | — | No analytics or crash reporting SDK is integrated (AdMob's own ad performance analytics are separate from this) |
+| Location, contacts, photos | No | — | — | Not requested/accessed |
 
 Also answer:
 - **Is data encrypted in transit?** Yes (HTTPS to the backend and to
@@ -103,3 +114,12 @@ re-uploading.
 - No crash reporting is wired in, so you won't hear about crashes from real
   users automatically; consider adding Firebase Crashlytics (or similar)
   before a wide public release.
+- **Ads are unconditional for everyone right now** — the free-tier daily
+  limit (5/day) and ad-gating apply to all users regardless of what the
+  (non-functional) Subscription screen shows. Once real billing exists,
+  wire premium/subscribed users to skip ads and the usage cap entirely
+  (`UsageRepository`/`AppContainer` are where that check would go).
+- **Content rating questionnaire**: answer "Yes" to showing ads when
+  asked, and expect a follow-up question about ad content control — AdMob
+  serves general-audience ads by default, which is fine for this app's
+  target audience.

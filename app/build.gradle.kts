@@ -29,6 +29,10 @@ val keystoreProperties = Properties().apply {
 val hasReleaseSigning = keystoreProperties.getProperty("storeFile")
     ?.let { rootProject.file(it).exists() } == true
 
+// Google's published test AdMob App ID -- safe to use as a fallback in any
+// build, never serves real ads. See https://developers.google.com/admob/android/test-ads
+val GOOGLE_TEST_ADMOB_APP_ID = "ca-app-pub-3940256099942544~3347511713"
+
 android {
     namespace = "com.ai4biz.app"
     compileSdk = 35
@@ -42,7 +46,7 @@ android {
         // this writing) for new releases -- bump this each year Google
         // raises the bar, matching compileSdk above.
         targetSdk = 35
-        versionCode = 1
+        versionCode = 2
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -56,6 +60,29 @@ android {
             "String",
             "AI4BIZ_BACKEND_SECRET",
             "\"${localProperties.getProperty("ai4biz.backend.secret", "")}\""
+        )
+
+        // AdMob. Google's public test IDs are used as the fallback for
+        // *everything* here (app ID and all three ad unit IDs) so the app
+        // never ships with a blank/invalid ad config -- see ads/AdsConfig.kt
+        // for how debug builds always use test IDs regardless of what's
+        // configured here.
+        val admobAppId = localProperties.getProperty("admob.app_id", GOOGLE_TEST_ADMOB_APP_ID)
+        manifestPlaceholders["admobAppId"] = admobAppId
+        buildConfigField(
+            "String",
+            "ADMOB_BANNER_UNIT_ID",
+            "\"${localProperties.getProperty("admob.banner_unit_id", "")}\""
+        )
+        buildConfigField(
+            "String",
+            "ADMOB_INTERSTITIAL_UNIT_ID",
+            "\"${localProperties.getProperty("admob.interstitial_unit_id", "")}\""
+        )
+        buildConfigField(
+            "String",
+            "ADMOB_REWARDED_UNIT_ID",
+            "\"${localProperties.getProperty("admob.rewarded_unit_id", "")}\""
         )
     }
 
@@ -136,6 +163,7 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.google.android.gms:play-services-ads:23.6.0")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
