@@ -26,3 +26,7 @@ android/
 # working files for the review step, never committed directly; approved
 # questions get merged into data/questions/<category>.json instead.
 data/questions/drafts/
+
+# Python bytecode cache (tools/)
+__pycache__/
+*.pyc
