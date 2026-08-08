@@ -5,7 +5,8 @@ import { TOOLS } from "./tools.js";
 
 const PORT = process.env.PORT || 3000;
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
-const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL || "anthropic/claude-3.5-sonnet";
+const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL || "anthropic/claude-sonnet-5";
+const OPENROUTER_MAX_TOKENS = Number(process.env.OPENROUTER_MAX_TOKENS) || 2000;
 const APP_SHARED_SECRET = process.env.APP_SHARED_SECRET || "";
 const OPENROUTER_SITE_URL = process.env.OPENROUTER_SITE_URL || "";
 const OPENROUTER_SITE_NAME = process.env.OPENROUTER_SITE_NAME || "Business Edge AI";
@@ -74,6 +75,7 @@ app.post("/api/generate", async (req, res) => {
       },
       body: JSON.stringify({
         model: OPENROUTER_MODEL,
+        max_tokens: OPENROUTER_MAX_TOKENS,
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: userPrompt }
