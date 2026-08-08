@@ -1,0 +1,14 @@
+<resources>
+    <!-- Base application theme. UI itself is rendered entirely in Jetpack Compose
+         (see ui/theme/Theme.kt); this XML theme only covers window chrome. -->
+    <style name="Theme.Ai4biz" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/ic_launcher_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="Theme.Ai4biz.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/ic_launcher_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="postSplashScreenTheme">@style/Theme.Ai4biz</item>
+    </style>
+</resources>
