@@ -29,6 +29,7 @@ import androidx.navigation.NavHostController
 import com.ai4biz.app.navigation.Routes
 import com.ai4biz.app.ui.LocalAppContainer
 import com.ai4biz.app.ui.SimpleViewModelFactory
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 @Composable
@@ -41,9 +42,17 @@ fun AuthScreen(navController: NavHostController) {
     val scope = rememberCoroutineScope()
     var email by remember { mutableStateOf("") }
 
+    // Phase 2 Sprint 2 (docs/PHASE2_ARCHITECTURE.md): first-time sign-ins go
+    // through the Business Setup wizard once; repeat sign-ins skip straight
+    // to Home like before. Either way this is still the app's one point of
+    // no return -- Onboarding+Auth are popped off the back stack here.
     fun goHome() {
-        navController.navigate(Routes.HOME) {
-            popUpTo(Routes.ONBOARDING) { inclusive = true }
+        scope.launch {
+            val hasSetUpBusiness = container.onboardingRepository.hasCompletedBusinessSetup.first()
+            val destination = if (hasSetUpBusiness) Routes.HOME else Routes.BUSINESS_SETUP
+            navController.navigate(destination) {
+                popUpTo(Routes.ONBOARDING) { inclusive = true }
+            }
         }
     }
 

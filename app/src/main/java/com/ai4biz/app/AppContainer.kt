@@ -19,6 +19,7 @@ import com.ai4biz.app.data.repository.CustomerRepository
 import com.ai4biz.app.data.repository.DeviceIdentityRepository
 import com.ai4biz.app.data.repository.DocumentRepository
 import com.ai4biz.app.data.repository.EntitlementRepository
+import com.ai4biz.app.data.repository.OnboardingRepository
 import com.ai4biz.app.data.repository.ProductServiceRepository
 import com.ai4biz.app.data.repository.UsageRepository
 import com.ai4biz.app.data.repository.WorkspaceRepository
@@ -49,6 +50,10 @@ class AppContainer(context: Context) {
     val productServiceRepository = ProductServiceRepository(database.productServiceDao())
     val businessGoalRepository = BusinessGoalRepository(database.businessGoalDao())
     val customerRepository = CustomerRepository(database.customerDao())
+
+    // Phase 2 Sprint 2 (docs/PHASE2_ARCHITECTURE.md) -- tracks whether the
+    // user has been through the Business Setup wizard (finished or skipped).
+    val onboardingRepository = OnboardingRepository(context)
 
     val aiGeneratorService: AiGeneratorService =
         if (BuildConfig.AI4BIZ_BACKEND_URL.isNotBlank()) {

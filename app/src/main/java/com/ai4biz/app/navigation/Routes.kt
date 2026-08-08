@@ -3,6 +3,7 @@ package com.ai4biz.app.navigation
 object Routes {
     const val ONBOARDING = "onboarding"
     const val AUTH = "auth"
+    const val BUSINESS_SETUP = "business_setup"
     const val HOME = "home"
     const val GENERATOR = "generator/{toolId}"
     const val RESULT = "result/{documentId}"

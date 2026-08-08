@@ -83,22 +83,62 @@ framework introduced.
   migration low-risk. Add real indices together with their matching
   migration once Sprint 2+'s actual query patterns are known.
 
-## 3. Sprint 2 — Business Setup wizard
+## 3. Sprint 2 — Business Setup wizard (done)
 
-A multi-step onboarding flow (business name/type, industry, products sold,
-target customers, location, brand personality, goals, contact info) that
-writes into the Sprint 1 repositories (`WorkspaceRepository.save`,
-`BusinessProfileRepository.save`, `ProductServiceRepository.save`,
-`BrandSettingsRepository.save`, `BusinessGoalRepository.save`). New
-`navigation/Routes.kt` entries (e.g. `business_setup/{step}`), new
-ViewModels, new screens under a new `ui/businesssetup/` package. The
-existing `GeneratorScreen`'s pattern of rendering fields from a metadata
-list (`ToolType.fields: List<InputField>`) is the closest existing idiom
-to imitate for data-driven step rendering — but the step/page mechanics
-(progress indicator, next/back, partial-save, skip) don't exist anywhere
-yet and need to be built new. Should allow "Skip for now" — onboarding
-abandonment is a real risk. Must include: extend `GeneratedDocument` /
-`GeneratorViewModel` to use the real workspace (see Sprint 1 notes above).
+An 8-step onboarding flow (Business Basics, Industry, Products/Services,
+Target Customers, Location, Brand Personality, Goals, Contact Info) that
+writes into the Sprint 1 repositories, shown once right after sign-in.
+
+**What got built**, under `ui/businesssetup/`:
+- `BusinessSetupViewModel` — one ViewModel for the whole flow, holding all
+  8 steps' in-progress state as plain Compose `mutableStateOf`/
+  `mutableStateListOf` fields (not `StateFlow` — nothing here is async
+  except the initial prefill load and the final save). `loadExisting()`
+  one-shot-prefills from any already-saved `BusinessProfile`/
+  `BrandSettings`/`ProductService` list/`BusinessGoal` list so re-entry
+  (see below) edits real data instead of starting blank. `finish()` writes
+  everything in one pass (profile → brand → products → goals → updates
+  `Workspace.businessProfileId` → marks the onboarding-seen flag);
+  `skip()` only marks the flag. Nothing is persisted progressively per
+  step, so an abandoned wizard never leaves a half-valid row behind.
+- `BusinessSetupScreen` — single route (`Routes.BUSINESS_SETUP`), internal
+  `currentStep: Int` dispatches via `AnimatedContent` to the step
+  composables in `ui/businesssetup/steps/BusinessSetupSteps.kt`.
+  `LinearProgressIndicator` for step progress, `FilterChip`+`FlowRow` for
+  all single/multi-select fields, `BackHandler` moves one step back
+  instead of leaving the route. Zero new Gradle dependencies.
+- **Deviation from the original sketch above**: a single flat route with
+  internal step state, **not** `business_setup/{step}` as first sketched —
+  per-step routes would have re-scoped a fresh `viewModel()` per
+  back-stack entry, losing shared wizard state on Next/Back.
+- New `OnboardingRepository` (DataStore, same convention as
+  `AuthRepository`) tracks a `has_completed_business_setup` flag so a
+  returning user never sees the wizard again — `AuthScreen.goHome()` now
+  gates on it (first-time → wizard, already-seen → straight to Home,
+  exactly like before).
+- Re-entry for editing: "Edit Business Profile" button on `ProfileScreen`
+  (Sprint 3's real editing UI doesn't exist yet) navigates to the same
+  route; the wizard's default exit action tries `popBackStack()` first
+  (returns to Profile) and only falls back to navigating Home if that
+  fails (the fresh-sign-in case, where the stack is just `[BUSINESS_SETUP]`).
+
+**Explicitly deferred, not done in this sprint** (carried over, don't lose
+track of these):
+- Extending `GeneratedDocument`/`GeneratorViewModel` to use the real active
+  workspace — still flagged from Sprint 1, still not done. Pick this up in
+  Sprint 3 or a small standalone follow-up.
+- `businessType`/`industry` are populated from fixed UI-layer option lists
+  (`BUSINESS_TYPE_OPTIONS`/`INDUSTRY_OPTIONS` in `BusinessSetupSteps.kt`),
+  not enums — matches the Sprint 1 schema (`BusinessProfile.businessType`/
+  `industry: String`) exactly, so no new migration was needed.
+- `BusinessProfile.taxNumber` and `BrandSettings.primaryColor`/
+  `secondaryColor`/`defaultLanguage`/`logoUri` have no wizard-step UI —
+  new records get sane defaults (`"#4F46E5"`/`"#0EA5E9"`/`"en"`/`null`,
+  matching the app's own theme colors), edited records keep their existing
+  values untouched.
+- No Android emulator in this sandbox — the wizard's rendering, step
+  transitions, back-gesture handling, and the prefill-on-edit path are
+  verified by compilation only, not by running the app on a device.
 
 ## 4. Sprint 3 — Workspace screen
 
