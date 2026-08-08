@@ -195,10 +195,10 @@
 			"difficulty": "medium"
 		},
 		{
-			"question": "Stephen Keshi is notable as the first African to achieve which unique feat in Africa Cup of Nations history?",
-			"options": ["Win it as both a player and a head coach", "Score in three different finals", "Coach two different national teams to the title", "Play in five different tournaments"],
+			"question": "Stephen Keshi is one of only two people in history to win the Africa Cup of Nations as both a player and a head coach — who was the other, an Egyptian who achieved it first?",
+			"options": ["Mahmoud El-Gohary", "Hassan Shehata", "Ahmed Hassan", "Hossam Hassan"],
 			"correct_index": 0,
-			"difficulty": "medium"
+			"difficulty": "hard"
 		},
 		{
 			"question": "Nigeria's 1996 Olympic 'Dream Team' defeated which country in the football final?",
@@ -357,7 +357,7 @@
 			"difficulty": "medium"
 		},
 		{
-			"question": "Emmanuel Amuneke scored Nigeria's opening goal at the 1994 FIFA World Cup, in a group-stage win over which country?",
+			"question": "Emmanuel Amuneke also struck at the 1994 World Cup itself, scoring in Nigeria's 3-0 group-stage win over which country?",
 			"options": ["Bulgaria", "Greece", "Argentina", "Italy"],
 			"correct_index": 0,
 			"difficulty": "medium"

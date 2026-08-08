@@ -27,10 +27,10 @@
 			"difficulty": "medium"
 		},
 		{
-			"question": "Which record label did Wizkid, Davido, and Wande Coal all pass through early in their careers?",
+			"question": "Wizkid became a breakout star early in his career signed to which Banky W co-founded record label?",
 			"options": ["Mavin Records", "Chocolate City", "EME (Empire Mates Entertainment)", "YBNL"],
 			"correct_index": 2,
-			"difficulty": "hard"
+			"difficulty": "medium"
 		},
 		{
 			"question": "Which female Afrobeats star is known for the hit 'Ginger Me'?",
@@ -375,10 +375,10 @@
 			"difficulty": "medium"
 		},
 		{
-			"question": "D'Prince, Don Jazzy's younger brother, co-founded which record label?",
-			"options": ["Mavin Records", "YBNL", "Chocolate City", "EME"],
+			"question": "D'Prince, Don Jazzy's younger brother and an early Mavin Records artist, later founded which record label of his own in 2019?",
+			"options": ["Jonzing World", "YBNL", "Chocolate City", "EME"],
 			"correct_index": 0,
-			"difficulty": "medium"
+			"difficulty": "hard"
 		},
 		{
 			"question": "What is Rema's real name?",
