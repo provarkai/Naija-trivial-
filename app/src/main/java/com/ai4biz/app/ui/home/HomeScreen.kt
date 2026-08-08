@@ -60,7 +60,7 @@ fun HomeScreen(navController: NavHostController) {
         factory = SimpleViewModelFactory { HomeViewModel(container.authRepository) }
     )
     val authState by viewModel.authState.collectAsStateWithLifecycle()
-    val isPremium by container.billingManager.isPremium.collectAsStateWithLifecycle()
+    val isPremium by container.billingManager.isPremium.collectAsStateWithLifecycle(initialValue = false)
 
     Scaffold(
         topBar = {

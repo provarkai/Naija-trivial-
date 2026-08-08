@@ -46,7 +46,7 @@ android {
         // this writing) for new releases -- bump this each year Google
         // raises the bar, matching compileSdk above.
         targetSdk = 35
-        versionCode = 3
+        versionCode = 4
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

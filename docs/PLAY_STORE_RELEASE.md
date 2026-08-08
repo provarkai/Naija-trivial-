@@ -11,8 +11,8 @@
   itself isn't committed to git (build outputs never are); rebuild it
   anytime with `./gradlew bundleRelease` once `keystore.properties` is in
   place locally.
-- ✅ `versionCode` bumped to `3` (`1` and `2` were consumed by earlier
-  upload attempts — Play never lets you reuse a version code, even for a
+- ✅ `versionCode` bumped to `4` (`1`–`3` were consumed by earlier upload
+  attempts — Play never lets you reuse a version code, even for a
   rejected/draft upload).
 - ✅ `compileSdk`/`targetSdk` bumped to `35` (Play now requires targeting
   API 35 minimum; the first build targeted 34 and was rejected).
@@ -29,6 +29,12 @@
   (`BillingManager.isPremium`) skip both ads and the daily free-generation
   limit entirely — see "Set up billing products" below, since this needs
   matching products created in Play Console before it can actually work.
+- ✅ Server-side purchase verification wired in (`/server`'s
+  `/api/verify-purchase`, backed by the Google Play Developer API) — every
+  purchase is checked against Google before `isPremium` is trusted, so a
+  patched client can no longer fake premium status just by lying to
+  `BillingClient`. Needs a Google Cloud service account granted access in
+  Play Console — see "Set up server-side purchase verification" below.
 
 ## What only you can do
 
@@ -108,7 +114,43 @@ Prices shown in the app come live from what you set here (`BillingManager.priceF
 in Play Console → Setup → License testing, then buy through the internal
 testing build — you'll see a test payment method, not a real charge.
 
-### 7. Upload the build
+### 7. Set up server-side purchase verification
+
+Without this, `/api/verify-purchase` always fails and the app quietly
+falls back to trusting Play Billing's client-side result only (see
+`ClientOnlyPurchaseVerifier`) — purchases still work, they're just not
+protected against a patched client. To turn on the real check:
+
+1. **Link a Google Cloud project to Play Console** (if you haven't):
+   Play Console → Setup → **API access** → follow the prompt to create/link
+   a Google Cloud project.
+2. **Create a service account**: on that same API access page, click
+   "Create new service account" — it walks you to Google Cloud Console with
+   the project pre-selected. In Cloud Console: IAM & Admin → Service
+   Accounts → Create. No project-level role is needed there; access is
+   granted back in Play Console (next step).
+3. **Create a JSON key** for that service account: Cloud Console → your
+   service account → Keys → Add Key → JSON. This downloads a file — treat
+   it like a password, it's a credential.
+4. **Grant it access in Play Console**: back on the API access page, find
+   the new service account → Grant Access. Under app permissions, grant at
+   least **"View financial data, orders, and cancellation survey
+   responses"** for this app (that's what `purchases.subscriptions.get`
+   and `purchases.products.get` need). Invite/send.
+5. **Give the key to your server**, base64-encoded so it survives as a
+   single-line env var:
+   ```bash
+   base64 -w0 path/to/service-account-key.json
+   ```
+   Set the result as `GOOGLE_SERVICE_ACCOUNT_JSON_BASE64` on your server
+   host (Fly: `fly secrets set GOOGLE_SERVICE_ACCOUNT_JSON_BASE64=...`).
+   Never commit the raw JSON file or this env var value.
+6. Redeploy `/server`. Test with `curl -X POST .../api/verify-purchase`
+   (see `server/README.md`) using a real purchase token from a test
+   purchase (step 6 above, License Testers) — you should get back
+   `{"valid":true,...}` instead of an error.
+
+### 8. Upload the build
 Play Console → your app → **Testing → Internal testing** (start here, not
 straight to Production) → **Create new release** → upload
 `app-release.aab` → fill in release notes → save → review → roll out to
@@ -120,23 +162,29 @@ virtualization available), so this build has been verified by compiling,
 signing, and a jarsigner integrity check, but **not** by actually running
 on a device. Do that before wider rollout.
 
-### 8. Store listing
+### 9. Store listing
 Short description (≤80 chars), full description, app icon (512×512),
 feature graphic (1024×500), and 2+ screenshots. Take screenshots from the
 internal test install.
 
-### 9. Promote to Production
+### 10. Promote to Production
 Once internal testing looks good, Play Console lets you promote the same
 release to Closed testing, Open testing, or Production without
 re-uploading.
 
 ## Known gaps worth fixing before a public (not just internal-test) release
 
-- **Billing is client-only, no server-side receipt verification.** A
-  determined attacker could patch the app to fake `isPremium`. Fine for
-  launch; add verification via the Play Developer API (Realtime Developer
-  Notifications + a server that checks purchase tokens) once revenue makes
-  that worth the effort.
+- **Billing verification degrades silently if misconfigured.** If
+  `GOOGLE_SERVICE_ACCOUNT_JSON_BASE64` is never set, the server always
+  fails verification and `isPremium` falls back to trusting Play Billing's
+  client-side result alone (`ClientOnlyPurchaseVerifier`) — purchases still
+  work, just without the anti-tampering check. Not dangerous, just worth
+  knowing: check `/server`'s logs for "GOOGLE_SERVICE_ACCOUNT_JSON" errors
+  if you expect verification to be active. Consider also adding [Real-time
+  Developer
+  Notifications](https://developer.android.com/google/play/billing/rtdn-reference)
+  so cancellations/refunds revoke access immediately rather than waiting
+  for the next app-open refresh.
 - **Billing products must exist in Play Console before purchases work** —
   see "Set up billing products" above. Until they're created and activated,
   `priceFor()` returns null and the buttons show "This plan isn't available

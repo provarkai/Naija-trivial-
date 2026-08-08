@@ -63,7 +63,7 @@ fun GeneratorScreen(navController: NavHostController, toolId: String) {
     )
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val usageState by container.usageRepository.usageState.collectAsStateWithLifecycle(initialValue = UsageState())
-    val isPremium by container.billingManager.isPremium.collectAsStateWithLifecycle()
+    val isPremium by container.billingManager.isPremium.collectAsStateWithLifecycle(initialValue = false)
     val inputs = remember { mutableStateMapOf<String, String>() }
 
     LaunchedEffect(uiState) {

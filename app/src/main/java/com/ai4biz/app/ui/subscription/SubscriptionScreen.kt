@@ -58,8 +58,8 @@ fun SubscriptionScreen(navController: NavHostController) {
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
-    val isPremium by container.billingManager.isPremium.collectAsStateWithLifecycle()
-    val activePlan by container.billingManager.activePlan.collectAsStateWithLifecycle()
+    val isPremium by container.billingManager.isPremium.collectAsStateWithLifecycle(initialValue = false)
+    val activePlan by container.billingManager.activePlan.collectAsStateWithLifecycle(initialValue = null)
 
     // Purchases can complete/update while this screen isn't visible (e.g.
     // Play's own payment sheet); re-check on return.

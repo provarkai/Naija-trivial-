@@ -2,6 +2,14 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { TOOLS } from "./tools.js";
+import { verifySubscription, verifyProduct } from "./billing.js";
+
+// Must match app/src/main/java/com/ai4biz/app/billing/PlanId.kt exactly.
+const KNOWN_PRODUCTS = {
+  ai4biz_monthly: { isSubscription: true },
+  ai4biz_annual: { isSubscription: true },
+  ai4biz_lifetime: { isSubscription: false }
+};
 
 const PORT = process.env.PORT || 3000;
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
@@ -99,6 +107,35 @@ app.post("/api/generate", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.post("/api/verify-purchase", async (req, res) => {
+  try {
+    const { productId, purchaseToken } = req.body ?? {};
+    const product = KNOWN_PRODUCTS[productId];
+
+    if (!product) {
+      return res.status(400).json({ error: `Unknown productId: ${productId}` });
+    }
+    if (!purchaseToken || typeof purchaseToken !== "string") {
+      return res.status(400).json({ error: "purchaseToken is required" });
+    }
+
+    const result = product.isSubscription
+      ? await verifySubscription(productId, purchaseToken)
+      : await verifyProduct(productId, purchaseToken);
+
+    res.json(result);
+  } catch (err) {
+    // A malformed/replayed/fake token surfaces here as a Google API error
+    // (typically 400/404) -- that's a real "not valid" signal, not a
+    // server bug, so it's reported as valid:false rather than a 5xx.
+    console.error("verify-purchase error", err?.response?.data || err.message);
+    if (err.message?.includes("GOOGLE_SERVICE_ACCOUNT_JSON")) {
+      return res.status(500).json({ error: "Server misconfigured: " + err.message });
+    }
+    res.json({ valid: false });
   }
 });
 

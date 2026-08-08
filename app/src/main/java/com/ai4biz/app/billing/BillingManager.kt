@@ -2,6 +2,7 @@ package com.ai4biz.app.billing
 
 import android.app.Activity
 import android.content.Context
+import com.ai4biz.app.data.repository.EntitlementRepository
 import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
@@ -18,31 +19,34 @@ import com.android.billingclient.api.queryProductDetails
 import com.android.billingclient.api.queryPurchasesAsync
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 /**
  * Thin wrapper around Google Play Billing. [isPremium] is the single source
- * of truth the rest of the app (ads, usage limits) checks to decide whether
- * to treat the current user as a paying subscriber.
+ * of truth the rest of the app (ads, usage limits) checks -- but it's
+ * backed by [EntitlementRepository], not Play Billing's own in-memory
+ * purchase list directly. The distinction matters: Play Billing tells us
+ * "does this device currently see a purchase"; [PurchaseVerifier] confirms
+ * server-side that the purchase is real (not spoofed by a patched app) and
+ * still active, and only that confirmed result is persisted and trusted.
  *
- * This is a client-only check (no server-side receipt verification), which
- * is the standard trade-off for a scaffold: fine for legitimate users,
- * not resistant to a determined attacker patching the app. Add server-side
- * verification via the Play Developer API before this matters for revenue
- * at scale.
+ * A transient verification failure (network blip, server hiccup) leaves
+ * the last-known-good entitlement in place rather than revoking access;
+ * only an explicit "not valid" from the verifier, or Play Billing itself
+ * reporting no purchase, clears it.
  */
-class BillingManager(private val context: Context) : PurchasesUpdatedListener {
+class BillingManager(
+    private val context: Context,
+    private val purchaseVerifier: PurchaseVerifier,
+    private val entitlementRepository: EntitlementRepository
+) : PurchasesUpdatedListener {
 
     private val scope = CoroutineScope(Dispatchers.Main)
 
-    private val _isPremium = MutableStateFlow(false)
-    val isPremium: StateFlow<Boolean> = _isPremium.asStateFlow()
-
-    private val _activePlan = MutableStateFlow<PlanId?>(null)
-    val activePlan: StateFlow<PlanId?> = _activePlan.asStateFlow()
+    val isPremium: Flow<Boolean> = entitlementRepository.isPremium
+    val activePlan: Flow<PlanId?> = entitlementRepository.planId.map { id -> PlanId.entries.find { it.productId == id } }
 
     private var productDetailsMap: Map<String, ProductDetails> = emptyMap()
 
@@ -105,20 +109,24 @@ class BillingManager(private val context: Context) : PurchasesUpdatedListener {
             val inApp = billingClient.queryPurchasesAsync(
                 QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.INAPP).build()
             )
-            handlePurchases(subs.purchasesList + inApp.purchasesList)
+            // Only act on a query that actually succeeded -- a failed query
+            // is not evidence of "no purchase", so leave entitlement as-is.
+            if (subs.billingResult.responseCode == BillingClient.BillingResponseCode.OK &&
+                inApp.billingResult.responseCode == BillingClient.BillingResponseCode.OK
+            ) {
+                handlePurchases(subs.purchasesList + inApp.purchasesList)
+            }
         }
     }
 
     private fun handlePurchases(purchases: List<Purchase>) {
         val active = purchases.firstOrNull { it.purchaseState == Purchase.PurchaseState.PURCHASED }
         if (active == null) {
-            _isPremium.value = false
-            _activePlan.value = null
+            scope.launch { entitlementRepository.setVerified(isPremium = false, planId = null) }
             return
         }
 
-        _isPremium.value = true
-        _activePlan.value = PlanId.entries.find { plan -> active.products.contains(plan.productId) }
+        val plan = PlanId.entries.find { p -> active.products.contains(p.productId) }
 
         if (!active.isAcknowledged) {
             scope.launch {
@@ -128,6 +136,19 @@ class BillingManager(private val context: Context) : PurchasesUpdatedListener {
                         .build()
                 )
             }
+        }
+
+        if (plan == null) return // Unrecognized product; nothing to verify against.
+
+        scope.launch {
+            purchaseVerifier.verify(plan.productId, active.purchaseToken, plan.isSubscription)
+                .onSuccess { valid ->
+                    entitlementRepository.setVerified(isPremium = valid, planId = if (valid) plan.productId else null)
+                }
+                .onFailure {
+                    // Network/server error -- keep whatever was last
+                    // verified rather than revoking on a transient failure.
+                }
         }
     }
 
