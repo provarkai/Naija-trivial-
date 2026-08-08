@@ -12,9 +12,16 @@ import com.ai4biz.app.billing.PurchaseVerifier
 import com.ai4biz.app.billing.RemotePurchaseVerifier
 import com.ai4biz.app.data.local.AppDatabase
 import com.ai4biz.app.data.repository.AuthRepository
+import com.ai4biz.app.data.repository.BrandSettingsRepository
+import com.ai4biz.app.data.repository.BusinessGoalRepository
+import com.ai4biz.app.data.repository.BusinessProfileRepository
+import com.ai4biz.app.data.repository.CustomerRepository
+import com.ai4biz.app.data.repository.DeviceIdentityRepository
 import com.ai4biz.app.data.repository.DocumentRepository
 import com.ai4biz.app.data.repository.EntitlementRepository
+import com.ai4biz.app.data.repository.ProductServiceRepository
 import com.ai4biz.app.data.repository.UsageRepository
+import com.ai4biz.app.data.repository.WorkspaceRepository
 
 /**
  * Minimal hand-rolled DI container -- no Hilt/Dagger dependency for this
@@ -30,6 +37,18 @@ class AppContainer(context: Context) {
     val authRepository = AuthRepository(context)
     val usageRepository = UsageRepository(context)
     val entitlementRepository = EntitlementRepository(context.applicationContext)
+
+    // Phase 2 Sprint 1 (docs/PHASE2_ARCHITECTURE.md) -- Business Workspace
+    // data foundation. Not yet used by any UI (that's Sprint 2+); wired here
+    // so the repositories exist and the default workspace bootstrap
+    // (Ai4bizApplication.onCreate) has something to call.
+    val deviceIdentityRepository = DeviceIdentityRepository(context)
+    val workspaceRepository = WorkspaceRepository(database.workspaceDao(), deviceIdentityRepository)
+    val businessProfileRepository = BusinessProfileRepository(database.businessProfileDao())
+    val brandSettingsRepository = BrandSettingsRepository(database.brandSettingsDao())
+    val productServiceRepository = ProductServiceRepository(database.productServiceDao())
+    val businessGoalRepository = BusinessGoalRepository(database.businessGoalDao())
+    val customerRepository = CustomerRepository(database.customerDao())
 
     val aiGeneratorService: AiGeneratorService =
         if (BuildConfig.AI4BIZ_BACKEND_URL.isNotBlank()) {

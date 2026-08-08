@@ -2,6 +2,7 @@ package com.ai4biz.app.data.repository
 
 import com.ai4biz.app.data.local.GeneratedDocumentDao
 import com.ai4biz.app.data.local.GeneratedDocumentEntity
+import com.ai4biz.app.data.local.WorkspaceDefaults
 import com.ai4biz.app.model.GeneratedDocument
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -42,6 +43,10 @@ class DocumentRepository(private val dao: GeneratedDocumentDao) {
         toolTitle = toolTitle,
         title = title,
         content = content,
-        createdAt = createdAt
+        createdAt = createdAt,
+        // GeneratedDocument (domain) doesn't carry a workspaceId yet -- see
+        // docs/PHASE2_ARCHITECTURE.md Sprint 2. Every document is attributed
+        // to the single default workspace until workspace-switching UI exists.
+        workspaceId = WorkspaceDefaults.DEFAULT_WORKSPACE_ID
     )
 }

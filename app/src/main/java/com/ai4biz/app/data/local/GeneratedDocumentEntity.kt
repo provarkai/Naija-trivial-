@@ -10,5 +10,9 @@ data class GeneratedDocumentEntity(
     val toolTitle: String,
     val title: String,
     val content: String,
-    val createdAt: Long
+    val createdAt: Long,
+    // Added in MIGRATION_1_2 (AppDatabase). Defaulted here too so any
+    // in-memory construction that omits it still compiles safely; the
+    // migration backfills existing rows via SQL DEFAULT, not this value.
+    val workspaceId: String = WorkspaceDefaults.DEFAULT_WORKSPACE_ID
 )
