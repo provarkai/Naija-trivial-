@@ -1,6 +1,6 @@
 # Privacy Policy for Business Edge AI (Ai4biz)
 
-**Last updated: [FILL IN DATE]**
+**Last updated: [08 Aug. 2026]**
 
 This policy describes what data Business Edge AI ("the app", "we", "us")
 collects and how it's used. It's written to match what the app's code
@@ -71,4 +71,4 @@ authentication, analytics, or billing), this page will be updated and the
 
 ## Contact
 
-Questions about this policy: [FILL IN SUPPORT EMAIL]
+Questions about this policy: [voltarisapps@gmail.com]
