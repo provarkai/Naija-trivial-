@@ -21,3 +21,8 @@ android/
 *.aab
 *.keystore
 *.jks
+
+# Unreviewed AI-drafted question batches (tools/generate_questions.py) —
+# working files for the review step, never committed directly; approved
+# questions get merged into data/questions/<category>.json instead.
+data/questions/drafts/

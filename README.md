@@ -21,14 +21,19 @@ scripts/
 data/
   categories.json      Category metadata (id, display name, icon, premium flag, unlock_level)
   questions/           One JSON file per category — see SCHEMA.md
+  questions/drafts/    Gitignored — unreviewed AI-drafted batches, see QUESTION_GENERATION.md
 assets/
   icons/               A placeholder SVG per category (see Polish below)
   audio/ fonts/ images/  Empty for now, .gitkeep placeholders — SFXManager synthesizes sound in code rather than loading files here
+tools/
+  generate_questions.py  Drafts new questions via Claude, using the existing bank as few-shot examples
+  merge_draft.py          Reviewed-draft -> live-file merge step, with its own validation pass
 docs/
   ADMOB_SETUP.md         Manual steps to wire a real AdMob plugin into AdManager
   PLAY_BILLING_SETUP.md  Manual steps to wire a real Play Billing plugin into IAPManager
   SHARE_SETUP.md         What already works with zero plugins (WhatsApp text share) vs. what needs one (image auto-attach)
   LEADERBOARD_SETUP.md   Firebase project + GodotFirebase addon setup for LeaderboardManager (lowest-confidence of the four — read this one first)
+  QUESTION_GENERATION.md  The AI-assisted content pipeline: draft -> human review -> merge
 ```
 
 ### Why screens are built in code, not the Godot editor
@@ -136,6 +141,8 @@ Questions live in `data/questions/<category_id>.json`, separate from game logic,
 | Pidgin & Proverbs | 33 |
 
 Every question here is a fact I'm reasonably confident about from general knowledge, but none of it has been checked against a live source or a domain expert — worth a review pass before shipping, particularly anything with a specific date, award, or record. One factual error caught and fixed while expanding this batch: an earlier sports question misattributed Yamile Aldama (who competed for Sudan, then Cuba, then Great Britain — never Nigeria, and never won Olympic gold) as a Nigerian gold medalist; replaced with a verified Chioma Ajunwa fact. Worth treating as a reminder to spot-check the rest, not just the newly-added questions.
+
+**Growing the bank further:** `tools/generate_questions.py` (see `docs/QUESTION_GENERATION.md`) drafts new questions per category using the existing ones as few-shot style examples via the Claude API, run entirely offline as a content-authoring aid — not a runtime feature of the app. Deliberately *not* an in-app "AI layer": an API key embedded in a shipped APK is extractable and abusable, it would break offline play (the brief's own target sessions are "waiting in traffic," exactly when connectivity is weakest), and — most importantly for a trivia game — it would put unreviewed model output directly in front of players with no human fact-check, which is how the Aldama-style error above gets caught in the first place. Drafts land in the gitignored `data/questions/drafts/`, get reviewed by a human, and only then get merged into the live files via `tools/merge_draft.py`.
 
 ## Known gaps & open decisions
 
