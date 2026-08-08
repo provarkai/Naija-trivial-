@@ -128,13 +128,33 @@ app.post("/api/verify-purchase", async (req, res) => {
 
     res.json(result);
   } catch (err) {
-    // A malformed/replayed/fake token surfaces here as a Google API error
-    // (typically 400/404) -- that's a real "not valid" signal, not a
-    // server bug, so it's reported as valid:false rather than a 5xx.
-    console.error("verify-purchase error", err?.response?.data || err.message);
+    const googleError = err?.response?.data?.error;
+    console.error("verify-purchase error", googleError || err.message);
+
     if (err.message?.includes("GOOGLE_SERVICE_ACCOUNT_JSON")) {
       return res.status(500).json({ error: "Server misconfigured: " + err.message });
     }
+
+    // Infra/auth/quota problems (API not enabled, bad credentials, Google
+    // outage, ...) are NOT evidence the purchase is invalid -- conflating
+    // them with a real "not a valid purchase" answer would silently deny
+    // premium to legitimate paying users the moment this backend has a
+    // bad day. Surface those loudly as a 502 instead.
+    const infraStatus = googleError?.status; // e.g. "PERMISSION_DENIED", "UNAUTHENTICATED"
+    const httpCode = googleError?.code;
+    const isInfraError =
+      ["PERMISSION_DENIED", "UNAUTHENTICATED", "UNAVAILABLE", "INTERNAL", "RESOURCE_EXHAUSTED"].includes(
+        infraStatus
+      ) || httpCode === 401 || httpCode === 403 || (typeof httpCode === "number" && httpCode >= 500);
+
+    if (isInfraError) {
+      return res.status(502).json({
+        error: "Verification backend error (not a purchase validity signal): " + (googleError?.message || err.message)
+      });
+    }
+
+    // A genuinely malformed/replayed/fake token surfaces as a Google API
+    // 400/404 here -- that's a real "not valid" signal.
     res.json({ valid: false });
   }
 });

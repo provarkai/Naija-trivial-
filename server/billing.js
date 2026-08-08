@@ -30,26 +30,34 @@ async function getAuthClient() {
 
 const androidpublisher = google.androidpublisher("v3");
 
+// Google removed `purchases.subscriptions.get` (the old v3 verification
+// call) from current client libraries -- purchases.subscriptionsv2.get is
+// the replacement and has a materially different shape (subscriptionState
+// instead of paymentState, no subscriptionId in the request at all since
+// one token can now cover multiple line items). Confirmed against the live
+// discovery doc, not assumed from memory, since this is easy to get wrong
+// with a stale mental model of the API.
+const ACTIVE_SUBSCRIPTION_STATES = ["SUBSCRIPTION_STATE_ACTIVE", "SUBSCRIPTION_STATE_IN_GRACE_PERIOD"];
+
 /**
  * Verifies a subscription purchase token against the Google Play Developer
  * API -- this is the real anti-tampering check; a client (even a patched
  * one) can't fabricate a token that passes this.
- *
- * paymentState: 0 = pending, 1 = received, 2 = free trial,
- * 3 = pending deferred upgrade/downgrade.
  */
 export async function verifySubscription(subscriptionId, purchaseToken) {
   const auth = await getAuthClient();
-  const { data } = await androidpublisher.purchases.subscriptions.get({
+  const { data } = await androidpublisher.purchases.subscriptionsv2.get({
     auth,
     packageName: PACKAGE_NAME,
-    subscriptionId,
     token: purchaseToken
   });
-  const expiryTimeMillis = data.expiryTimeMillis ? Number(data.expiryTimeMillis) : null;
-  const notExpired = expiryTimeMillis === null || expiryTimeMillis > Date.now();
-  const paymentOk = data.paymentState === 1 || data.paymentState === 2;
-  return { valid: Boolean(notExpired && paymentOk), expiryTimeMillis };
+
+  const valid = ACTIVE_SUBSCRIPTION_STATES.includes(data.subscriptionState);
+  const lineItem =
+    data.lineItems?.find((item) => item.productId === subscriptionId) ?? data.lineItems?.[0];
+  const expiryTimeMillis = lineItem?.expiryTime ? Date.parse(lineItem.expiryTime) : null;
+
+  return { valid, expiryTimeMillis, subscriptionState: data.subscriptionState };
 }
 
 /**
