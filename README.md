@@ -58,19 +58,28 @@ No DI framework — `AppContainer` (a small hand-rolled container created in
 Android app --(Bearer APP_SHARED_SECRET)--> /server --(OpenRouter key)--> OpenRouter --> model
 ```
 
-To turn it on:
+`/server` is deployed at **https://ai4biz-server.fly.dev** (Fly.io, scales
+to zero when idle — see `server/README.md` for redeploying). To point the
+app at it, in the Android project's `local.properties` (gitignored — see
+`local.properties.example`):
+
+```
+ai4biz.backend.url=https://ai4biz-server.fly.dev
+ai4biz.backend.secret=<the deployed APP_SHARED_SECRET>
+```
+
+Then rebuild. No UI or ViewModel code changes — everything downstream
+(forms, history, PDF export) depends only on the `AiGeneratorService`
+interface.
+
+To run/deploy your own instance instead:
 
 1. `cd server && npm install && cp .env.example .env`, fill in
    `OPENROUTER_API_KEY` (and pick a model — see `server/README.md`), then
    `npm start` (or deploy it — Render/Railway/Fly.io all work).
-2. In the Android project's `local.properties` (gitignored — see
-   `local.properties.example`), set:
-   ```
-   ai4biz.backend.url=http://10.0.2.2:3000   # emulator -> local server
-   ai4biz.backend.secret=<same value as APP_SHARED_SECRET>
-   ```
-3. Rebuild. No UI or ViewModel code changes — everything downstream (forms,
-   history, PDF export) depends only on the `AiGeneratorService` interface.
+2. Point `local.properties` at it the same way, e.g.
+   `ai4biz.backend.url=http://10.0.2.2:3000` for a local server reached
+   from the emulator.
 
 Cleartext HTTP is allowed only to `10.0.2.2`/`localhost` (see
 `network_security_config.xml`) for local dev; a deployed server should be

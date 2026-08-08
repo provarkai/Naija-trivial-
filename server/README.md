@@ -45,15 +45,37 @@ curl -X POST http://localhost:3000/api/generate \
 
 ## Deploying
 
-Any Node 18+ host works (`npm start` runs `index.js`). A few free/cheap
-options: Render, Railway, Fly.io, a Cloudflare Worker port, or a small VPS.
-Whichever you pick:
+Any Node 18+ host works (`npm start` runs `index.js`, and a `Dockerfile` is
+included). A few free/cheap options: Render, Railway, Fly.io, a Cloudflare
+Worker port, or a small VPS. Whichever you pick:
 
 1. Set `OPENROUTER_API_KEY`, `APP_SHARED_SECRET`, and (optionally)
-   `OPENROUTER_MODEL` as environment variables on the host -- don't bake
-   them into the image/repo.
+   `OPENROUTER_MODEL` / `OPENROUTER_MAX_TOKENS` as environment variables on
+   the host -- don't bake them into the image/repo.
 2. Point the Android app at the deployed URL (see the root README's
-   "Wiring in a real AI backend" section) via `local.properties`.
+   "Real AI backend" section) via `local.properties`.
+
+### Fly.io
+
+A `fly.toml` is included (app name `ai4biz-server`, scales to zero when
+idle). Currently deployed at **https://ai4biz-server.fly.dev**.
+
+```bash
+fly launch --no-deploy   # first time only, or reuse the included fly.toml
+fly secrets set OPENROUTER_API_KEY=... APP_SHARED_SECRET=... OPENROUTER_MODEL=anthropic/claude-sonnet-5 OPENROUTER_MAX_TOKENS=2000
+fly deploy
+```
+
+If `fly deploy`'s remote builder can't be reached from your network (e.g. a
+gRPC-unfriendly proxy), build and push locally instead and point Fly at the
+prebuilt image:
+
+```bash
+docker build -t registry.fly.io/ai4biz-server:latest .
+fly auth docker
+docker push registry.fly.io/ai4biz-server:latest
+fly deploy --image registry.fly.io/ai4biz-server:latest
+```
 
 ## Endpoints
 
