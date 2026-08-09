@@ -3,6 +3,7 @@ package com.ai4biz.app.data.local
 import androidx.room.TypeConverter
 import com.ai4biz.app.model.BrandTone
 import com.ai4biz.app.model.BusinessGoalType
+import com.ai4biz.app.model.MessageRole
 import com.ai4biz.app.model.ProductServiceType
 
 /**
@@ -29,4 +30,10 @@ class Converters {
 
     @TypeConverter
     fun stringToBusinessGoalType(value: String): BusinessGoalType = BusinessGoalType.valueOf(value)
+
+    @TypeConverter
+    fun messageRoleToString(value: MessageRole): String = value.name
+
+    @TypeConverter
+    fun stringToMessageRole(value: String): MessageRole = MessageRole.valueOf(value)
 }

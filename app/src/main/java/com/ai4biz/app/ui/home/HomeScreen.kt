@@ -99,12 +99,56 @@ fun HomeScreen(navController: NavHostController) {
                     modifier = Modifier.padding(top = 4.dp, bottom = 20.dp)
                 )
             }
+            item {
+                AssistantCard(onClick = { navController.navigate(Routes.ASSISTANT) })
+                Spacer(modifier = Modifier.height(20.dp))
+            }
             items(ToolType.mvpTools) { tool ->
                 ToolCard(
                     tool = tool,
                     onClick = { navController.navigate(Routes.generator(tool.id)) }
                 )
                 Spacer(modifier = Modifier.height(12.dp))
+            }
+        }
+    }
+}
+
+/**
+ * Entry point to the AI Assistant (Phase 2 Sprints 5-6, see
+ * docs/PHASE2_ARCHITECTURE.md) -- given its own prominent card rather
+ * than a 4th top-bar icon, since it's the product's headline feature, not
+ * a secondary utility on par with Workspace/Subscription/Profile.
+ */
+@Composable
+private fun AssistantCard(onClick: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+    ) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.Chat,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+            Column {
+                Text(
+                    text = "Ask your business AI...",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+                Text(
+                    text = "Get advice or find the right tool for what you need",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
             }
         }
     }

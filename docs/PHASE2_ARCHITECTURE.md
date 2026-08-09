@@ -242,27 +242,79 @@ instead of just adding a parallel context block would remove that
 redundancy, but touches `GeneratorScreen`'s input-state initialization and
 was left out of this slice to keep it to one clean seam.
 
-## 5a. Sprints 5-6 — AI Assistant (still not built)
+## 5a. Sprints 5-6 — AI Assistant (done)
 
-Everything below remains exactly as originally sketched — none of it
-exists yet:
+The conversational assistant: chats/advises and, when the conversation
+shows real intent, suggests one of the 5 existing generator tools with a
+tappable button. **It never generates a document directly from chat** —
+tapping a suggestion hands off to that tool's normal Generator screen,
+where the user fills in the real form. This matches the product spec's
+own example flow exactly ("Would you like a Sales Proposal, a WhatsApp
+message, or both? [buttons]"), and keeps `AiGeneratorService`/
+`/api/generate`/all 5 Generator screens completely untouched — the
+assistant is a new, parallel, fully additive surface.
 
-- **`BusinessAiAssistant`**: `suspend fun sendMessage(workspaceId, conversationId?, message): AssistantResponse`,
-  pipeline: save user message → `IntentRouter` classifies intent → context
-  retrieval (now available via `BusinessContextService`, built above) →
-  `ToolRegistry` picks a tool → `PromptBuilder` assembles
-  system+context+task+request → `AiGeneratorService` → validate → persist
-  → return.
-- **`ToolRegistry`**: this is the natural evolution of `ToolType.kt`, which
-  today is a fixed `enum` (good metadata shape — id/title/description/
-  fields — but enums can't grow at runtime). Also closes a real existing
-  gap: `server/tools.js` currently hand-duplicates `ToolType.kt`'s
-  metadata as a second, manually-synced source of truth. A registry
-  (client-driven or server-driven) should replace both.
-  New conversation persistence: `ai_conversation`/`ai_message` tables,
-  same Room conventions as Sprint 1.
-- New chat UI (`ui/assistant/`), new backend endpoint
-  (`/api/v1/assistant/message`, per Sprint 8 notes below).
+**What got built**:
+- `server/index.js`'s `POST /api/assistant/message` — request
+  `{message, history?, businessContext?}`, response
+  `{reply, suggestedTools: [{toolId, reason}]}` (always present, possibly
+  empty). System prompt built from `tools.js`'s `TOOLS` (so the id list
+  can't drift from a second hand-typed copy), instructs the model to
+  return a single JSON object and suggest a tool only on real intent.
+  Hallucinated tool ids get filtered server-side. A dedicated
+  `parseAssistantJson()` (fence-stripping + `JSON.parse` + shape
+  validation) in its own try/catch returns a specific
+  `502 {error: "...malformed response"}` — closing a gap `/api/generate`
+  itself still has (it only degrades to a generic 500 on non-JSON
+  content).
+- `model/Conversation.kt`/`model/Message.kt`, `data/local/ConversationEntity.kt`/
+  `MessageEntity.kt` (tables `ai_conversations`/`ai_messages`),
+  `ConversationDao`/`MessageDao`, `ConversationRepository`/`MessageRepository`
+  — same Room conventions as every prior sprint.
+  `Message.suggestedToolIds` is a nullable comma-joined TEXT column, not a
+  join table or embedded JSON (at most 5 possible values, never queried
+  by SQL, only ever round-tripped whole). `AppDatabase` migrated to
+  `version = 3` via `MIGRATION_2_3`.
+- `ai/AssistantService.kt` (own interface, not an `AiGeneratorService`
+  extension — the shapes are different enough that forcing it through
+  `Result<String>` would mean re-parsing stringly-encoded structure),
+  `ai/RemoteAssistantService.kt` (same OkHttp+`org.json` pattern as
+  `RemoteAiGeneratorService`), `ai/MockAssistantService.kt` (keyword-
+  overlap heuristic, keeps the app usable with zero backend configured),
+  `ai/AssistantRepository.kt` (orchestrates persistence + context +
+  the service call), `BusinessContextService.formatForAssistant()`
+  (general-purpose, since the assistant doesn't know intent ahead of
+  time the way `formatForPrompt` does for a specific `ToolType`).
+- `ui/assistant/AssistantViewModel.kt`/`AssistantScreen.kt` — chat UI,
+  `LazyColumn(reverseLayout = true)`, message bubbles, suggestion chips
+  that `navigate(Routes.generator(toolId))` with no `popUpTo` (fully
+  reversible — backing out of Generator returns to the conversation).
+  Entry point: a prominent "Ask your business AI..." card on `HomeScreen`
+  (not a 4th top-bar icon) — this is the product's headline feature, not
+  a secondary utility on par with Workspace/Subscription/Profile.
+
+**Deviations from the original sketch, documented not silent**:
+- **`/api/assistant/message` (unversioned)**, not the sketch's
+  `/api/v1/assistant/message` — Sprint 8 (API versioning) isn't built,
+  and every other route is unversioned; introducing `v1` on exactly one
+  route would be a worse inconsistency than following house style now.
+- **No `ToolRegistry`/`IntentRouter`/`PromptBuilder` class split** —
+  collapsed into one system prompt (server) + `AssistantRepository`
+  (client orchestration). `server/tools.js` vs `ToolType.kt` duplication
+  is now referenced by two consumers instead of one, which raises (does
+  not resolve) the case for a future registry.
+- **Single continuous conversation per workspace**, not a conversation
+  list/switcher UI. `Conversation` is still its own entity so a future
+  multi-conversation UI is additive, not another migration — but nothing
+  today lets a user start a second one or browse history.
+
+No Android emulator in this sandbox — chat rendering, `reverseLayout`
+scroll behavior, suggestion-chip taps, and the migration's real on-device
+behavior are compile-verified only, same residual-risk note as every
+prior sprint. Server-side, the endpoint was verified locally
+(`npm run dev` + `curl`) before any Android work depended on it;
+production deployment is a separate manual step (Docker + a fresh Fly API
+token), not assumed to happen automatically.
 
 ## 6. Sprint 7 — Structured AI responses
 

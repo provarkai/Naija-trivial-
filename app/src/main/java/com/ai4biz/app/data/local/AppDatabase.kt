@@ -16,9 +16,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         BrandSettingsEntity::class,
         ProductServiceEntity::class,
         BusinessGoalEntity::class,
-        CustomerEntity::class
+        CustomerEntity::class,
+        ConversationEntity::class,
+        MessageEntity::class
     ],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -31,6 +33,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun productServiceDao(): ProductServiceDao
     abstract fun businessGoalDao(): BusinessGoalDao
     abstract fun customerDao(): CustomerDao
+    abstract fun conversationDao(): ConversationDao
+    abstract fun messageDao(): MessageDao
 
     companion object {
         @Volatile
@@ -171,6 +175,43 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        /**
+         * Phase 2 Sprints 5-6 (docs/PHASE2_ARCHITECTURE.md): the AI
+         * Assistant's conversation/message tables. No seed data needed --
+         * unlike MIGRATION_1_2's default-workspace insert, an empty
+         * conversation list is a valid, expected state;
+         * ConversationRepository.getOrCreateForWorkspace bootstraps the
+         * first conversation lazily on first use, same lazy-bootstrap
+         * pattern WorkspaceRepository already uses for fresh installs.
+         */
+        private val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    """
+                    CREATE TABLE IF NOT EXISTS ai_conversations (
+                        id TEXT NOT NULL PRIMARY KEY,
+                        workspaceId TEXT NOT NULL,
+                        title TEXT NOT NULL,
+                        createdAt INTEGER NOT NULL,
+                        updatedAt INTEGER NOT NULL
+                    )
+                    """.trimIndent()
+                )
+                db.execSQL(
+                    """
+                    CREATE TABLE IF NOT EXISTS ai_messages (
+                        id TEXT NOT NULL PRIMARY KEY,
+                        conversationId TEXT NOT NULL,
+                        role TEXT NOT NULL,
+                        content TEXT NOT NULL,
+                        suggestedToolIds TEXT,
+                        createdAt INTEGER NOT NULL
+                    )
+                    """.trimIndent()
+                )
+            }
+        }
+
         fun getInstance(context: Context): AppDatabase =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: Room.databaseBuilder(
@@ -178,7 +219,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "ai4biz.db"
                 )
-                    .addMigrations(MIGRATION_1_2)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                     .build()
                     .also { INSTANCE = it }
             }

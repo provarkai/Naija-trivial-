@@ -5,6 +5,7 @@ object Routes {
     const val AUTH = "auth"
     const val BUSINESS_SETUP = "business_setup"
     const val HOME = "home"
+    const val ASSISTANT = "assistant"
     const val GENERATOR = "generator/{toolId}"
     const val RESULT = "result/{documentId}"
     const val WORKSPACE = "workspace"

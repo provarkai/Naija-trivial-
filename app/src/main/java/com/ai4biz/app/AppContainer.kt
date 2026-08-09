@@ -4,9 +4,13 @@ import android.content.Context
 import com.ai4biz.app.ads.InterstitialAdManager
 import com.ai4biz.app.ads.RewardedAdManager
 import com.ai4biz.app.ai.AiGeneratorService
+import com.ai4biz.app.ai.AssistantRepository
+import com.ai4biz.app.ai.AssistantService
 import com.ai4biz.app.ai.BusinessContextService
 import com.ai4biz.app.ai.MockAiGeneratorService
+import com.ai4biz.app.ai.MockAssistantService
 import com.ai4biz.app.ai.RemoteAiGeneratorService
+import com.ai4biz.app.ai.RemoteAssistantService
 import com.ai4biz.app.billing.BillingManager
 import com.ai4biz.app.billing.ClientOnlyPurchaseVerifier
 import com.ai4biz.app.billing.PurchaseVerifier
@@ -16,10 +20,12 @@ import com.ai4biz.app.data.repository.AuthRepository
 import com.ai4biz.app.data.repository.BrandSettingsRepository
 import com.ai4biz.app.data.repository.BusinessGoalRepository
 import com.ai4biz.app.data.repository.BusinessProfileRepository
+import com.ai4biz.app.data.repository.ConversationRepository
 import com.ai4biz.app.data.repository.CustomerRepository
 import com.ai4biz.app.data.repository.DeviceIdentityRepository
 import com.ai4biz.app.data.repository.DocumentRepository
 import com.ai4biz.app.data.repository.EntitlementRepository
+import com.ai4biz.app.data.repository.MessageRepository
 import com.ai4biz.app.data.repository.OnboardingRepository
 import com.ai4biz.app.data.repository.ProductServiceRepository
 import com.ai4biz.app.data.repository.UsageRepository
@@ -73,6 +79,25 @@ class AppContainer(context: Context) {
         } else {
             MockAiGeneratorService()
         }
+
+    // Phase 2 Sprints 5-6 (docs/PHASE2_ARCHITECTURE.md) -- the AI
+    // Assistant: conversation persistence + the assistant service itself.
+    val conversationRepository = ConversationRepository(database.conversationDao())
+    val messageRepository = MessageRepository(database.messageDao())
+
+    val assistantService: AssistantService =
+        if (BuildConfig.AI4BIZ_BACKEND_URL.isNotBlank()) {
+            RemoteAssistantService()
+        } else {
+            MockAssistantService()
+        }
+
+    val assistantRepository = AssistantRepository(
+        assistantService,
+        conversationRepository,
+        messageRepository,
+        businessContextService
+    )
 
     private val purchaseVerifier: PurchaseVerifier =
         if (BuildConfig.AI4BIZ_BACKEND_URL.isNotBlank()) {

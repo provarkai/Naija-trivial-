@@ -110,6 +110,131 @@ app.post("/api/generate", async (req, res) => {
   }
 });
 
+// Phase 2 Sprints 5-6 (docs/PHASE2_ARCHITECTURE.md): the conversational
+// assistant. Chats/advises and, when the conversation shows real intent,
+// suggests one of the 5 tools above by id -- it does NOT generate a
+// document itself. The client renders a suggestion as a button that
+// navigates to that tool's normal form; /api/generate is untouched.
+const ASSISTANT_TOOL_LIST = Object.entries(TOOLS)
+  .map(([id, tool]) => `- ${id}: ${tool.title}`)
+  .join("\n");
+
+const ASSISTANT_SYSTEM_PROMPT =
+  "You are Business Edge AI's assistant -- a concise, warm, businesslike " +
+  "advisor for entrepreneurs, freelancers, and SMEs. Chat naturally and " +
+  "give real advice.\n\n" +
+  "You have exactly these tools available to hand off to (reference them " +
+  "by id, never invent new ones):\n" +
+  ASSISTANT_TOOL_LIST +
+  "\n\nOnly suggest a tool when the conversation shows real intent to " +
+  "produce that kind of document -- most turns should suggest nothing at " +
+  "all, that's expected and fine.\n\n" +
+  "Respond with ONLY a single JSON object, no other text, no markdown " +
+  "fences, matching exactly this shape:\n" +
+  '{"reply": "your conversational response", "suggestedTools": ' +
+  '[{"toolId": "one_of_the_ids_above", "reason": "short reason"}]}\n' +
+  '"suggestedTools" may be an empty array.';
+
+const MAX_HISTORY_TURNS = 10;
+
+function parseAssistantJson(content) {
+  const fenceStripped = content
+    .replace(/^```(?:json)?\s*/i, "")
+    .replace(/```\s*$/i, "")
+    .trim();
+  const parsed = JSON.parse(fenceStripped); // throws on malformed JSON -- caller catches
+  if (typeof parsed.reply !== "string") {
+    throw new Error("Assistant response missing 'reply'");
+  }
+  const suggestedTools = Array.isArray(parsed.suggestedTools)
+    ? parsed.suggestedTools
+        .filter((t) => t && typeof t.toolId === "string" && TOOLS[t.toolId])
+        .map((t) => ({ toolId: t.toolId, reason: typeof t.reason === "string" ? t.reason : "" }))
+    : [];
+  return { reply: parsed.reply, suggestedTools };
+}
+
+app.post("/api/assistant/message", async (req, res) => {
+  try {
+    if (!OPENROUTER_API_KEY) {
+      return res.status(500).json({ error: "Server misconfigured: OPENROUTER_API_KEY is not set." });
+    }
+
+    const { message, history, businessContext } = req.body ?? {};
+    if (typeof message !== "string" || !message.trim()) {
+      return res.status(400).json({ error: "message is required" });
+    }
+    if (history !== undefined && !Array.isArray(history)) {
+      return res.status(400).json({ error: "history must be an array" });
+    }
+    const validatedHistory = (history ?? []).slice(-MAX_HISTORY_TURNS).map((turn) => {
+      if (
+        !turn ||
+        (turn.role !== "user" && turn.role !== "assistant") ||
+        typeof turn.content !== "string"
+      ) {
+        throw Object.assign(new Error("invalid history entry"), { statusCode: 400 });
+      }
+      return { role: turn.role, content: turn.content.slice(0, MAX_FIELD_LENGTH) };
+    });
+    if (businessContext !== undefined && typeof businessContext !== "string") {
+      return res.status(400).json({ error: "businessContext must be a string" });
+    }
+
+    const messages = [
+      { role: "system", content: ASSISTANT_SYSTEM_PROMPT },
+      ...(businessContext
+        ? [{ role: "system", content: `Business context:\n${businessContext.slice(0, MAX_FIELD_LENGTH)}` }]
+        : []),
+      ...validatedHistory,
+      { role: "user", content: message.slice(0, MAX_FIELD_LENGTH) }
+    ];
+
+    const upstream = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${OPENROUTER_API_KEY}`,
+        ...(OPENROUTER_SITE_URL ? { "HTTP-Referer": OPENROUTER_SITE_URL } : {}),
+        "X-Title": OPENROUTER_SITE_NAME
+      },
+      body: JSON.stringify({
+        model: OPENROUTER_MODEL,
+        max_tokens: OPENROUTER_MAX_TOKENS,
+        messages
+      })
+    });
+
+    if (!upstream.ok) {
+      const errorBody = await upstream.text();
+      console.error("OpenRouter error", upstream.status, errorBody);
+      return res.status(502).json({ error: `AI provider error (${upstream.status})` });
+    }
+
+    const data = await upstream.json();
+    const content = data?.choices?.[0]?.message?.content?.trim();
+    if (!content) {
+      return res.status(502).json({ error: "AI provider returned an empty response" });
+    }
+
+    let result;
+    try {
+      result = parseAssistantJson(content);
+    } catch (parseErr) {
+      console.error("Assistant response was not valid JSON", content, parseErr.message);
+      return res.status(502).json({ error: "AI provider returned a malformed response" });
+    }
+
+    res.json(result);
+  } catch (err) {
+    if (err.statusCode === 400) {
+      return res.status(400).json({ error: "history entries must be {role: 'user'|'assistant', content: string}" });
+    }
+    console.error(err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 app.post("/api/verify-purchase", async (req, res) => {
   try {
     const { productId, purchaseToken } = req.body ?? {};

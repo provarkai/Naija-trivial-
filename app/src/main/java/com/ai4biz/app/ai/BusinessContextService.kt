@@ -106,6 +106,35 @@ class BusinessContextService(
         return mapOf(CONTEXT_ENTRY_KEY to lines.joinToString("\n"))
     }
 
+    /**
+     * General-purpose formatting for the AI Assistant (Phase 2 Sprints
+     * 5-6), which doesn't know the user's intent ahead of time the way
+     * [formatForPrompt] does for a specific [ToolType] -- so this returns
+     * a broader (but still not exhaustive) summary rather than a
+     * tool-filtered one. Returns null if there's no
+     * [com.ai4biz.app.model.BusinessProfile] yet.
+     */
+    fun formatForAssistant(context: BusinessContext): String? {
+        val profile = context.businessProfile ?: return null
+        val lines = mutableListOf<String>()
+
+        lines += "Business: ${profile.businessName} (${profile.industry}, ${profile.businessType})"
+        context.brandSettings?.let { brand ->
+            val toneLabel = brand.tone.name.lowercase().replaceFirstChar(Char::uppercase)
+            lines += "Brand tone: $toneLabel" + if (brand.tagline.isNotBlank()) " -- \"${brand.tagline}\"" else ""
+        }
+        if (profile.description.isNotBlank()) lines += "Target customers: ${profile.description}"
+        if (context.products.isNotEmpty()) {
+            lines += "Products/services: " + context.products.joinToString(", ") { it.name }
+        }
+        if (context.goals.isNotEmpty()) {
+            lines += "Goals: " + context.goals.sortedBy { it.priority }
+                .joinToString(", ") { it.goalType.name.lowercase().replace('_', ' ') }
+        }
+
+        return lines.joinToString("\n")
+    }
+
     private fun location(profile: BusinessProfile): String? {
         val parts = listOf(profile.city, profile.state, profile.country).filter { it.isNotBlank() }
         return parts.joinToString(", ").ifBlank { null }

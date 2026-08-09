@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.ai4biz.app.ui.assistant.AssistantScreen
 import com.ai4biz.app.ui.auth.AuthScreen
 import com.ai4biz.app.ui.businesssetup.BusinessSetupScreen
 import com.ai4biz.app.ui.generator.GeneratorScreen
@@ -24,6 +25,7 @@ fun Ai4bizNavHost(navController: NavHostController = rememberNavController()) {
         composable(Routes.AUTH) { AuthScreen(navController) }
         composable(Routes.BUSINESS_SETUP) { BusinessSetupScreen(navController) }
         composable(Routes.HOME) { HomeScreen(navController) }
+        composable(Routes.ASSISTANT) { AssistantScreen(navController) }
         composable(
             Routes.GENERATOR,
             arguments = listOf(navArgument("toolId") { type = NavType.StringType })

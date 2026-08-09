@@ -85,6 +85,15 @@ fly deploy --image registry.fly.io/ai4biz-server:latest
   Requires `Authorization: Bearer <APP_SHARED_SECRET>` if that env var is
   set (leaving it unset disables auth -- fine for local dev, not for a
   public deployment).
+- `POST /api/assistant/message` -- body
+  `{ "message": string, "history"?: [{ "role": "user"|"assistant", "content": string }], "businessContext"?: string }`,
+  returns `{ "reply": string, "suggestedTools": [{ "toolId": string, "reason": string }] }`
+  (`suggestedTools` is always present, possibly empty). Same
+  `APP_SHARED_SECRET` auth as `/api/generate`. `history` is capped to the
+  last 10 turns server-side regardless of what's sent. Powers the AI
+  Assistant chat screen -- it never generates a document itself, only
+  chats and (when the conversation shows real intent) suggests one of the
+  5 tool ids above for the client to hand off to.
 - `POST /api/verify-purchase` -- body `{ "productId": string, "purchaseToken": string }`
   (`productId` must be one of `ai4biz_monthly`, `ai4biz_annual`,
   `ai4biz_lifetime`), returns `{ "valid": boolean, "expiryTimeMillis"?: number }`.
@@ -102,4 +111,16 @@ curl -X POST http://localhost:3000/api/verify-purchase \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $APP_SHARED_SECRET" \
   -d '{"productId": "ai4biz_monthly", "purchaseToken": "<token from the app>"}'
+```
+
+Test the assistant:
+
+```bash
+curl -X POST http://localhost:3000/api/assistant/message \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $APP_SHARED_SECRET" \
+  -d '{
+    "message": "I need to send a client a proposal for a website redesign",
+    "businessContext": "Business: Lagos Fresh Foods (Food & beverage, Sole proprietor)"
+  }'
 ```
